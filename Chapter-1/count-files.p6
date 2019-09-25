@@ -3,7 +3,6 @@
 use v6;
 
 sub MAIN( $dir = '.' ) {
-    my @recipes;
     say tree( $dir )».List.flat.elems;
 }
 
