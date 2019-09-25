@@ -3,7 +3,7 @@
 use v6;
 
 sub MAIN( $dir = '.' ) {
-    say tree( $dir )».List.flat.elems;
+    say "There are ", tree( $dir )».List.flat.elems, " recipes";
 }
 
 sub tree( $dir ) {
