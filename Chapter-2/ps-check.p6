@@ -1,6 +1,7 @@
 #!/usr/bin/env raku
 
-# Run watch "ps -e | tail --lines=+2 >> /tmp/ps.log" before
+# Run
+# $ watch "ps -e | tail --lines=+2 >> /tmp/ps.log" before
 my $proc = Proc::Async.new: 'tail', '-f', '/tmp/ps.log';
 
 $proc.stdout.tap(-> $v {
