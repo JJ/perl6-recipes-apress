@@ -2,16 +2,12 @@
 
 my Blob $image = slurp( $*ARGS[0] // "../recipes-images/rice.jpg", :bin);
 
-my @list = $image.list;
-my $index = 0;
 # From here https://stackoverflow.com/a/43313299/891440 by user6096479
-until @list[$index] == 255 and @list[$index+1] == any( 0xC0, 0xC2 ) {
+my $index = 0;
+until $image[$index] == 255 and $image[$index+1] == any( 0xC0, 0xC2 ) {
     $index++;
 }
 
-say "Height ", @list[$index+5]*256 + @list[$index+6];
-say "Width ", @list[$index+7]*256 + @list[$index+8];
-    
-# my $marker = $image.list.kvs.
+say "Height ", $image[$index+5]*256 + $image[$index+6];
+say "Width ", $image[$index+7]*256 + $image[$index+8];
 
-say $image;
