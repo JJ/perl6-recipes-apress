@@ -5,7 +5,10 @@ my $dir = $*ARGS[0] // 'recipes';
 my $dir-watch-supply= IO::Notification.watch-path($dir);
 
 $dir-watch-supply.tap: -> $change {
-    say $change.raku if $change.event ~~ FileChanged;
+    given $change.event {
+        when FileChanged { say "{$change.path} has changed"}
+        when FileRenamed { say "{$change.path} has been renamed" }
+    }
 };
 
-await Promise.in(20).then: { say "Finished watch"; };
+await Promise.in(30).then: { say "Finished watch"; };
