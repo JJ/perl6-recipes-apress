@@ -15,13 +15,8 @@ my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", ke
 say %calories{ @non-dairy-ingredients}.map: { parse-measure( $_<Unit> ) };
 
 sub parse-measure ( $description ) {
-    my $unit;
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
-    with $<unit> {
-	$unit = $<unit>;
-    } else {
-	$unit = 1;
-    }
+    my $unit = $<unit> // 1;
     return ($unit,$<measure>);
 }
 
