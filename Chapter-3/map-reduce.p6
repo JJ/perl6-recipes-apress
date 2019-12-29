@@ -2,7 +2,13 @@
 
 use Text::CSV;
 
-my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs.map: { $_.value<Ingredient>:delete; $_ };
+my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" )
+    .pairs
+    .map( {
+       $_.value<Ingredient>:delete;
+       $_.value<parse-measures> = parse-measure( $_.value<Unit> );
+       $_
+    } );
 
 say %calories;
 
