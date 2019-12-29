@@ -2,7 +2,7 @@
 
 use Text::CSV;
 
-my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs.map: { $_.key => $_.value<Calories Unit> };
+my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs.map: { $_.value<Ingredient>:delete; $_ };
 
 say %calories;
 
