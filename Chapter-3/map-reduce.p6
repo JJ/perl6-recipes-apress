@@ -2,17 +2,9 @@
 
 use Text::CSV;
 
-my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" );
+my %calories = csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs.map: { $_.key => $_.value<Calories Unit> };
 
-%calories.keys
-    ==> map( { %calories{$_}<Ingredient>:delete } )
-    ==> grep( { %calories{$_}<Dairy> eq 'No'} )
-    ==> my @non-dairy-ingredients;
-
-%calories.keys 
-    ==> map( { %calories{$_}<Dairy>:delete } );
-
-say %calories{ @non-dairy-ingredients}.map: { parse-measure( $_<Unit> ) };
+say %calories;
 
 sub parse-measure ( $description ) {
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
