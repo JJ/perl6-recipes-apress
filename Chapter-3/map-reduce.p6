@@ -17,7 +17,11 @@ for dir("data/recipes/", test => /\.csv$/) -> $r {
     
 }
 
-say "Your non-caloric recipes add up to {[+] (@recipes.map( { get-calories( $_ ) } ) ==> grep( * < 1600 ) )} calories";
+say qq:to/END/;
+Your non-caloric recipes add up to
+{[+] (@recipes ==> map( { get-calories( $_ ) } ) ==> grep( * < 1600 ) )}
+calories
+END
 
 sub parse-measure ( $description ) {
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
