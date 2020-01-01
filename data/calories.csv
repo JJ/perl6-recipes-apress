@@ -1,13 +1,16 @@
-Ingredient;Unit;Calories;Dairy;Vegan
-Rice;100g;130;No;Yes
-Chickpeas;100g;364;No;Yes
-Lentils;100g;116;No;Yes
-Egg;Unit;78;No;No
-Apple;Unit;52;No;Yes
-Beer;⅓ liter;216;No;Yes
-Tuna;100g;130;No;Yes
-Cheese;100g;128;Yes;No
-Chorizo;100g;455;No;No
-Potatoes;100g;82;No;Yes
-Tomato;100g;24;No;Yes
-Olive Oil;1 tablespoon;119;No;Yes
+Ingredient;Unit;Calories;Dairy;Vegan;Main;Side
+Rice;100g;130;No;Yes;Yes;Yes
+Chickpeas;100g;364;No;Yes;Yes;Yes
+Lentils;100g;116;No;Yes;Yes;Yes
+Egg;Unit;78;No;No;Yes;No
+Apple;Unit;52;No;Yes;No;No
+Beer;⅓ liter;216;No;Yes;No;No
+Tuna;100g;130;No;Yes;Yes;No
+Cheese;100g;128;Yes;No;No;No
+Chorizo;100g;455;No;No;Yes;No
+Potatoes;100g;82;No;Yes;No;Yes
+Tomato;100g;24;No;Yes;No;Yes
+Olive Oil;1 tablespoon;119;No;Yes;No;No
+Pasta;100g;131;No;No;Yes;Yes
+Chicken breast;100g;101;No;No;Yes;No
+
