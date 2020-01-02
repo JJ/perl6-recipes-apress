@@ -10,4 +10,6 @@ jobs:
       uses: actions/checkout@v1
     - name: Runs tests
       id: tests
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       uses: docker://docker.pkg.github.com/jj/perl6-recipes-apress/rakurecipes:latest
