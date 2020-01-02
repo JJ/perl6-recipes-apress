@@ -10,7 +10,7 @@
         "Raku::Recipes": "lib/Raku/Recipes.pm6"
     },
     "tags" : [
-	"book","Apress", "Raku", "examples"
+	"book","Apress", "Raku", "examples", "recipes"
     ],
     "depends" : [ "Text::Markdown","Text::CSV" ],
     "version" : "0.0.1"
