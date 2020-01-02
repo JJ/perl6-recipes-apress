@@ -11,7 +11,7 @@ jobs:
     - name: Runs tests
       id: tests
       env:
-        GH_REGISTRY_TOKEN: {{secrets.GH_REGISTRY_TOKEN}}
+        GH_REGISTRY_TOKEN: ${{ secrets.GH_REGISTRY_TOKEN }}
       run: |
         docker login docker.pkg.github.com -u JJ -p $GH_REGISTRY_TOKEN
         docker run -t -v $PWD:/test docker.pkg.github.com/jj/perl6-recipes-apress/rakurecipes:latest
