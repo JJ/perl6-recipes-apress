@@ -13,7 +13,7 @@ jobs:
     - name: Downloads image
       run: |
         wget https://raw.githubusercontent.com/JJ/raku-container-action/master/raku-install.Dockerfile
-    - name: Publica imagen al GPR
+    - name: Builds and publishes to GPR
       uses: JJ/gpr-docker-publish@master
       with:
         IMAGE_NAME: 'rakurecipes'
