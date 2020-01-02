@@ -11,4 +11,4 @@ jobs:
     - name: Runs tests
       id: tests
       run: |
-        docker run -t -v `PWD`:/test docker.pkg.github.com/jj/perl6-recipes-apress/rakurecipes:latest
+        docker run -t -v $PWD:/test docker.pkg.github.com/jj/perl6-recipes-apress/rakurecipes:latest
