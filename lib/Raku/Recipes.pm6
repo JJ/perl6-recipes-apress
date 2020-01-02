@@ -5,7 +5,6 @@ unit module Raku::Recipes;
 
 # Parses measure to return an array with components
 sub parse-measure ( $description ) {
-    say "Description → $description";
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
     my $unit = +$<unit>??+$<unit>!!1;
     return ($unit,~$<measure>);
