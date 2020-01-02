@@ -1,0 +1,24 @@
+name: Builds a container when needed and publishes it to registry
+on:
+  push:
+    paths: 'META6.json'
+    
+jobs:
+  build:
+    runs-on: ubuntu-latest 
+    steps:
+    - name: Check out files
+      uses: actions/checkout@master
+
+    - name: Downloads image
+      run: |
+        wget https://raw.githubusercontent.com/JJ/raku-container-action/master/raku-install.Dockerfile
+    - name: Publica imagen al GPR
+      uses: JJ/gpr-docker-publish@master
+      with:
+        IMAGE_NAME: 'rakurecipes'
+        TAG: 'latest'
+        DOCKERFILE_PATH: 'raku-install.Dockerfile'
+        BUILD_CONTEXT: '.'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
