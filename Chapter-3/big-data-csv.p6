@@ -4,5 +4,5 @@
 
 .say for "/home/jmerelo/Documentos/Nutrients.csv".IO.lines.grep: {
     my @data = $_.split('","');
-    $_ if @data[2] eq "Protein" and @data[4] > 70
+    $_ if @data[2] eq "Protein" and @data[4] > 70 and @data[5] ~~ /^g/
 }
