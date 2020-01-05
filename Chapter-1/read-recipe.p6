@@ -3,11 +3,11 @@
 use Text::Markdown;
 
 sub MAIN( $file ) {
-    with $file.IO.e {
+    if $file.IO.e {
         my $md = parse-markdown-from-file($file);
-        say "Recipes: "
+        say "Recipe title: ", $_.text
                 for $md.document.items
-                .grep( * ~~ Text::Markdown::Heading )
-                .grep( { $_.level == 1 } );
+                  .grep( Text::Markdown::Heading )
+                  .grep( { $_.level == 1 } );
     }
 }
