@@ -1,29 +1,22 @@
 #!/usr/bin/env raku
 
+use Array::Shaped::Console;
+
 sub mandelbrot( Complex $c --> Seq ) {
     0, *²+$c ... *.abs > 2;
 }
 
-my @mandelbrot[81;81];
-for -40..40 X -40..40 -> ( $re, $im ) {
-    my $mandel-seq := mandelbrot( Complex.new( $re/40, $im/40 ) );
-    with $mandel-seq[100] {
-        @mandelbrot[40+$re;40+$im] = '■';
-    } else {
-        @mandelbrot[40+$re;40+$im] = chr( 0x25A1 + $mandel-seq.elems/10 );
-    }
+my $min-x = -40;
+my $max-x = 40;
+my $min-y = -60;
+my $max-y = 20;
+my $scale = 1/40;
+my $limit = 100;
+my @mandelbrot[$max-y - $min-y + 1; $max-x - $min-x + 1];
+for $min-y..$max-y X $min-x..$max-x -> ( $re, $im ) {
+    my $mandel-seq := mandelbrot( Complex.new( $re*$scale, $im*$scale) );
+    @mandelbrot[$re-$min-y;$im-$min-x] = $mandel-seq[$limit].defined??
+          ∞ !! $mandel-seq.elems;
 }
-print-shaped(@mandelbrot);
-
-
-sub print-shaped( @array where @array.shape.elems == 2  ) {
-    my @shape = @array.shape;
-    for ^@shape[0] -> $i {
-        my $row;
-        for ^@shape[1] -> $j {
-            $row ~= @array[$i;$j];
-        }
-        $row.say;
-    }
-}
+say printed(@mandelbrot);
 
