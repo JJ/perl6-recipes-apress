@@ -5,30 +5,32 @@ use Raku::Recipes;
 my %calories-table = calories-table;
 my @products = %calories-table.keys;
 my @recipes;
-my $max-calories = 2000;
+my $max-calories = 1000;
 
 multi sub recipes( 0, $ ) { return [] };
 
+multi sub recipes( $index,
+                   $weight  where  %calories-table{@products[$index]}<Calories> > $weight ) {
+    return recipes( $index - 1, $weight );
+}
+
 multi sub recipes( $index, $weight ) {
-    if %calories-table{@products[$index]}<Calories> > $weight {
-        return recipes( $index - 1, $weight );
+    my $lhs = proteins(recipes( $index - 1, $weight ));
+    my @recipes = recipes( $index - 1,
+                           $weight -  %calories-table{@products[$index]}<Calories> );
+    my $rhs = %calories-table{@products[$index]}<Protein> +  proteins( @recipes );
+    if $rhs > $lhs {
+        return @recipes.append: @products[$index];
     } else {
-        my $lhs = proteins(recipes( $index - 1, $weight ));
-        my @recipes = recipes( $index - 1,
-                               $weight -  %calories-table{@products[$index]}<Calories> );
-        my $rhs = %calories-table{@products[$index]}<Protein> +  proteins( @recipes );
-        if $rhs > $lhs {
-            return @recipes.append: @products[$index];
-        } else {
-            return @recipes;
-        }
+        return @recipes;
     }
 }
 
-say recipes( @products.elems -1 , $max-calories );
+my @ingredients = recipes( @products.elems -1 , $max-calories );
+say @ingredients, " with ", proteins( @ingredients ), "g protein";
 
 
-sub proteins( @products ) {
-    return [+] %calories-table{@recipes}.map: *<Protein>;
+sub proteins( @items ) {
+    return [+] %calories-table{@items}.map: *<Protein>;
 }
 
