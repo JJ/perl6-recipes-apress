@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress"
     ],
-    "depends" : [ "Array::Shaped::Console"],
+    "depends" : [ "Array::Shaped::Console", "Math::Matrix"],
     "version" : "0.0.1"
 }
