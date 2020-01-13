@@ -3,9 +3,9 @@
 use Raku::Recipes;
 
 my %calories-table = calories-table;
+my @products = %calories-table.keys;
 
-
-multi sub recipes( 0, $ ) { return [] };
+multi sub recipes( -1, $ ) { return [] };
 
 multi sub recipes( $index,
                    $weight  where  %calories-table{@products[$index]}<Calories> > $weight ) {
@@ -25,7 +25,6 @@ multi sub recipes( $index, $weight ) {
 }
 
 my $max-calories = 1000;
-my @products = %calories-table.keys;
 my @ingredients = recipes( @products.elems -1 , $max-calories );
 say @ingredients, " with ", proteins( @ingredients ), "g protein";
 
