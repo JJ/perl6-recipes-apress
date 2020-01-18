@@ -41,6 +41,8 @@ multi sub optimal-ingredients( $index, $weight )  is export  {
     }
 }
 
-sub proteins( @items )  is export  {
+multi proteins( [] ) is export { 0 }
+
+multi proteins( @items )  is export  {
     return [+] %calories-table{@items}.map: *<Protein>;
 }
