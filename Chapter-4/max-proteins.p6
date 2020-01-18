@@ -2,8 +2,8 @@
 
 use Raku::Recipes;
 
-my %calories-table = calories-table;
-my @products = %calories-table.keys;
+%calories-table = calories-table;
+@products = %calories-table.keys;
 
 multi sub recipes( -1, $ ) { return [] };
 

@@ -3,6 +3,9 @@ use Text::CSV;
 # Utility functions for the Raku Recipes book
 unit module Raku::Recipes;
 
+our %calories-table is export;
+our @products is export;
+
 # Parses measure to return an array with components
 sub parse-measure ( $description ) {
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
@@ -16,6 +19,29 @@ sub calories-table( $dir = "." ) is export {
     ==> map( {
        $_.value<Ingredient>:delete;
        $_.value<parsed-measures> = parse-measure( $_.value<Unit> );
-       $_ } );
+       $_ } )
+    ==> %calories-table;
+}
 
+multi sub optimal-ingredients( -1, $ ) { return [] };
+
+multi sub optimal-ingredients( $index,
+			       $weight  where  %calories-table{@products[$index]}<Calories> > $weight ) {
+    return optimal-ingredients( $index - 1, $weight );
+}
+
+multi sub optimal-ingredients( $index, $weight ) {
+    my $lhs = proteins(optimal-ingredients( $index - 1, $weight ));
+    my @recipes = optimal-ingredients( $index - 1,
+                           $weight -  %calories-table{@products[$index]}<Calories> );
+    my $rhs = %calories-table{@products[$index]}<Protein> +  proteins( @recipes );
+    if $rhs > $lhs {
+        return @recipes.append: @products[$index];
+    } else {
+        return @recipes;
+    }
+}
+
+sub proteins( @items ) {
+    return [+] %calories-table{@items}.map: *<Protein>;
 }
