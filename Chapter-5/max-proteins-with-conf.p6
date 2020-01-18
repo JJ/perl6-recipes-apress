@@ -16,7 +16,7 @@ my @results = gather for ^%conf<repetitions> {
     say @ingredients, " with $proteins g protein";
     take @ingredients => $proteins;
 }
-
-say "Best ", @results.maxpairs;
+say @results.Hash;
+say "Best ", @results.Hash.maxpairs;
 
 
