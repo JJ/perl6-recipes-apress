@@ -13,10 +13,10 @@ multi sub recipes( $index,
 }
 
 multi sub recipes( $index, $weight ) {
-    my $lhs = proteins(recipes( $index - 1, $weight ));
+    my $lhs = total-proteins(recipes( $index - 1, $weight ));
     my @recipes = recipes( $index - 1,
                            $weight -  %calories-table{@products[$index]}<Calories> );
-    my $rhs = %calories-table{@products[$index]}<Protein> +  proteins( @recipes );
+    my $rhs = %calories-table{@products[$index]}<Protein> +  total-proteins( @recipes );
     if $rhs > $lhs {
         return @recipes.append: @products[$index];
     } else {
@@ -26,10 +26,10 @@ multi sub recipes( $index, $weight ) {
 
 my $max-calories = 1000;
 my @ingredients = recipes( @products.elems -1 , $max-calories );
-say @ingredients, " with ", proteins( @ingredients ), "g protein";
+say @ingredients, " with ", total-proteins( @ingredients ), "g protein";
 
 
-sub proteins( @items ) {
+sub total-proteins( @items ) {
     return [+] %calories-table{@items}.map: *<Protein>;
 }
 
