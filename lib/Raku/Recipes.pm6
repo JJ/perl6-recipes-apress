@@ -19,18 +19,17 @@ sub calories-table( $dir = "." ) is export {
     ==> map( {
        $_.value<Ingredient>:delete;
        $_.value<parsed-measures> = parse-measure( $_.value<Unit> );
-       $_ } )
-    ==> %calories-table;
+       $_ } );
 }
 
-multi sub optimal-ingredients( -1, $ ) { return [] };
+multi sub optimal-ingredients( -1, $ )  is export  { return [] };
 
 multi sub optimal-ingredients( $index,
-			       $weight  where  %calories-table{@products[$index]}<Calories> > $weight ) {
+			       $weight  where  %calories-table{@products[$index]}<Calories> > $weight )  is export  {
     return optimal-ingredients( $index - 1, $weight );
 }
 
-multi sub optimal-ingredients( $index, $weight ) {
+multi sub optimal-ingredients( $index, $weight )  is export  {
     my $lhs = proteins(optimal-ingredients( $index - 1, $weight ));
     my @recipes = optimal-ingredients( $index - 1,
                            $weight -  %calories-table{@products[$index]}<Calories> );
@@ -42,6 +41,6 @@ multi sub optimal-ingredients( $index, $weight ) {
     }
 }
 
-sub proteins( @items ) {
+sub proteins( @items )  is export  {
     return [+] %calories-table{@items}.map: *<Protein>;
 }
