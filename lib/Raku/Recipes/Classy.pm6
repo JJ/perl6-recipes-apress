@@ -13,6 +13,15 @@ method new( $dir = "." ) {
        $_.value<Ingredient>:delete;
        $_.value<parsed-measures> = parse-measure( $_.value<Unit> );
        $_ } );
+
+    for %calories-table.kv -> $, %ingredient {
+        for %ingredient.keys -> $k {
+            given  %ingredient{$k} {
+                when "Yes" { %ingredient{$k} = True }
+                when "No"  { %ingredient{$k} = False };
+            }
+        }
+    };
     @products = %calories-table.keys;
     self.bless( :%calories-table, :@products );
 }
