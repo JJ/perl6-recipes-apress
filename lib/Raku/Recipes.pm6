@@ -15,7 +15,7 @@ sub parse-measure ( $description ) is export {
 
 # Returns the table of calories in the CSV file
 sub calories-table( $dir = "." ) is export {
-    csv(in => "data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs
+    csv(in => "$dir/data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs
     ==> map( {
        $_.value<Ingredient>:delete;
        $_.value<parsed-measures> = parse-measure( $_.value<Unit> );

@@ -2,7 +2,7 @@ use Test; # -*- mode: perl6 -*-
 
 use Raku::Recipes;
 
-%calories-table = calories-table( "data" );
+%calories-table = calories-table( "." );
 @products = %calories-table.keys;
 
 cmp-ok( @products.elems, ">", 1, "Many elements in the table" );
