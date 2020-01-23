@@ -7,7 +7,8 @@
     "name" : "Perl 6 Recipes examples",
     "perl" : "6.d",
     "provides" : {
-        "Raku::Recipes": "lib/Raku/Recipes.pm6"
+        "Raku::Recipes": "lib/Raku/Recipes.pm6",
+        "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6"
     },
     "tags" : [
 	"book","Apress", "Raku", "examples", "recipes", "cooking"
