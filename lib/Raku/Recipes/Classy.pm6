@@ -53,3 +53,18 @@ multi method proteins( @items )   {
 
 method products () { return @!products };
 method calories-table() { return %!calories-table };
+
+method filter-ingredients( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side, Bool :$Dessert ) {
+    
+    my @flags;
+    for <Dairy Vegan Main Side Dessert> -> $f {
+        @flags.push($f) with ::{"\$$f"};
+    }
+    my @filtered = %!calories-table.keys.grep: -> $i {
+        my @checks =  @flags.map: -> $k {
+            %!calories-table{$i}{$k} eq ::{"\$$k"}
+        }
+        so @checks.all;
+    }
+    return @filtered;
+}
