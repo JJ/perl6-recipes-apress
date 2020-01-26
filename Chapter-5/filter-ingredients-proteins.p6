@@ -16,6 +16,5 @@ multi sub MAIN(Bool :$Dairy, Bool :$Vegan, Bool :$Main,
     my $rr =  Raku::Recipes::Classy.new;
     my @filtered = $rr.filter-ingredients( :$Dairy, :$Vegan, :$Main,  :$Side,  :$Dessert );
     my %ingredients = $rr.calories-table;
-    say %ingredients;
     say @filtered.grep: { %ingredients{$_}<Protein> > $min-proteins };
 }
