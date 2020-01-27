@@ -8,7 +8,16 @@ has %.calories-table;
 has @.products;
 
 method new( $dir = "." ) {
-    my %calories-table = csv(in => "$dir/data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs
+    my $calorie-table-file;
+    with %*ENV<CALORIE_TABLE_FILE> {
+        $calorie-table-file = $_;
+    } else {
+        $calorie-table-file = "$dir/data/calories.csv";
+    }
+    my %calories-table = csv(in => $calorie-table-file,
+                             sep => ';',
+                             headers => "auto",
+                             key => "Ingredient" ).pairs
     ==> map( {
        $_.value<Ingredient>:delete;
        $_.value<parsed-measures> = parse-measure( $_.value<Unit> );
