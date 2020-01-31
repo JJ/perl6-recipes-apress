@@ -9,5 +9,5 @@ ADD data/calories.csv data
 RUN apk update && apk upgrade && zef install . \
     && chmod +x filter-ingredients-proteins.p6
 
-ENTRYPOINT ./filter-ingredients-proteins.p6
+ENTRYPOINT [ "./filter-ingredients-proteins.p6" ]
 
