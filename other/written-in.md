@@ -12,5 +12,7 @@
 * Flight IB 3175 LHR-MAD
 * AVE Granada-Madrid
 * AVE Madrid-Granada
+* ULB Solbosch, Brussels
+* NH Collection Grand Sablon, Brussels.
 
 
