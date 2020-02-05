@@ -8,11 +8,13 @@
     "perl" : "6.d",
     "provides" : {
         "Raku::Recipes": "lib/Raku/Recipes.pm6",
-        "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6"
+        "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6",
+	"Raku::Recipes::Roly": "lib/Raku/Recipes/Roly.pm6"
+	
     },
     "tags" : [
 	"book","Apress", "Raku", "examples", "recipes", "cooking"
     ],
     "depends" : [ "Text::Markdown","Text::CSV" ],
-    "version" : "0.0.1"
+    "version" : "0.0.2"
 }

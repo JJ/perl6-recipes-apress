@@ -1,39 +1,9 @@
 use Text::CSV;
 use Raku::Recipes;
+use Raku::Recipes::Roly;
 
 # Utility functions for the Raku Recipes book
-unit class Raku::Recipes::Classy;
-
-has %.calories-table;
-has @.products;
-
-method new( $dir = "." ) {
-    my $calorie-table-file;
-    with %*ENV<CALORIE_TABLE_FILE> {
-        $calorie-table-file = $_;
-    } else {
-        $calorie-table-file = "$dir/data/calories.csv";
-    }
-    my %calories-table = csv(in => $calorie-table-file,
-                             sep => ';',
-                             headers => "auto",
-                             key => "Ingredient" ).pairs
-    ==> map( {
-       $_.value<Ingredient>:delete;
-       $_.value<parsed-measures> = parse-measure( $_.value<Unit> );
-       $_ } );
-
-    for %calories-table.kv -> $, %ingredient {
-        for %ingredient.keys -> $k {
-            given  %ingredient{$k} {
-                when "Yes" { %ingredient{$k} = True }
-                when "No"  { %ingredient{$k} = False };
-            }
-        }
-    };
-    @products = %calories-table.keys;
-    self.bless( :%calories-table, :@products );
-}
+unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
 multi method optimal-ingredients( -1, $ )  is export  { return [] };
 
@@ -59,9 +29,6 @@ multi method proteins( [] ) { 0 }
 multi method proteins( @items )   {
     return [+] %!calories-table{@items}.map: *<Protein>;
 }
-
-method products () { return @!products };
-method calories-table() { return %!calories-table };
 
 method filter-ingredients( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side, Bool :$Dessert ) {
     
