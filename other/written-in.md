@@ -15,4 +15,5 @@
 * ULB Solbosch, Brussels
 * NH Collection Grand Sablon, Brussels.
 * IB 3203 BRU-MAD
+* BT 678 AGP-RIX
 
