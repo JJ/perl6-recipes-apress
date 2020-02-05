@@ -1,7 +1,7 @@
 use Text::CSV;
 use Raku::Recipes;
 
-# Utility functions for the Raku Recipes book
+# Basic file-loading role
 unit role Raku::Recipes::Roly;
 
 has %.calories-table;
