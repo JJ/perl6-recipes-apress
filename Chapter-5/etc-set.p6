@@ -2,12 +2,17 @@
 
 my $can-haz-etcdctl = shell "etcdctl --version", :out;
 
-die "Can't find etcdctl" unless $can-haz-etcdctl.out.slurp ~~ /"etcdctl version"/;
+my $output = $can-haz-etcdctl.out.slurp;
+die "Can't find etcdctl" unless $output ~~ /"etcdctl version"/;
+
+my $version = ($output ~~ / "API version: " (\d+) /);
+
+my $setter = $version[0] ~~ /2/ ?? "set" !! "put";
+    
 
 sub MAIN( $key, $value ) {
-    my $output = shell "etcdctl set $key $value", :out;
+    my $output = shell "etcdctl $setter $key $value", :out;
     my $set-value = $output.out.slurp.trim;
-    say "--$value-- --$set-value--";
     if $value eq $set-value {
         say "🔑 $key has been set to $value";
     } else {
