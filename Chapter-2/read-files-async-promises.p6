@@ -4,7 +4,7 @@ use Text::Markdown;
 
 sub MAIN( $dir = '.' ) {
     my @promises = do for tree( $dir ).List.flat -> $f {
-        start extra-titles( $f )
+        start extract-titles( $f )
     }
 
     my @results = await @promises;
@@ -23,7 +23,7 @@ sub tree( $dir ) {
     return @files;
 }
 
-sub extra-titles ( $f ) {
+sub extract-titles ( $f ) {
     my @titles;
     if $f.IO.e {
         my $md = parse-markdown($f[0].slurp);
