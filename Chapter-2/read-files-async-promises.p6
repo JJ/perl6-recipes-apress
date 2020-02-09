@@ -28,7 +28,7 @@ sub extra-titles ( $f ) {
     if $f.IO.e {
         my $md = parse-markdown($f[0].slurp);
         @titles = $md.document.items
-        .grep( * ~~ Text::Markdown::Heading )
+        .grep( Text::Markdown::Heading )
         .grep( { $_.level == 1 } );
     }
     @titles;
