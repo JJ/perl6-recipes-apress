@@ -18,6 +18,6 @@ $proc.stdout.tap(-> $v {
     }
 });
 
-say "Listening to /var/log/syslog";
+say "Listening to /tmp/ps.log";
 await $proc.start;
 say "Finished";
