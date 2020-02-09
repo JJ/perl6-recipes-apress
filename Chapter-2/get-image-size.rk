@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-my Blob $image = slurp( $*ARGS[0] // "../recipes-images/rice.jpg", :bin);
+my Blob $image = slurp( @*ARGS[0] // "../recipes-images/rice.jpg", :bin);
 
 # From here https://stackoverflow.com/a/43313299/891440 by user6096479
 my $index = 0;

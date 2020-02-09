@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-my $dir = $*ARGS[0] // 'recipes';
+my $dir = @*ARGS[0] // 'recipes';
 
 my $dir-watch-supply= $dir.IO.watch;
 my $ctrl-c = Promise.new;

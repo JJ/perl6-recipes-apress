@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-my $dir = $*ARGS[0] // 'recipes';
+my $dir = @*ARGS[0] // 'recipes';
 
 my $dir-watch-supply= IO::Notification.watch-path($dir);
 

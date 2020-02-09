@@ -1,6 +1,6 @@
 #!/usr/bin/env raku
 
-my $find-proc = Proc::Async.new: 'find', $*ARGS[0] // "recipes", "-name", "*.md";
+my $find-proc = Proc::Async.new: 'find', @*ARGS[0] // "recipes", "-name", "*.md";
 my $wc-proc = Proc::Async.new: ‘wc’;
 
 $wc-proc.bind-stdin: $find-proc.stdout;
