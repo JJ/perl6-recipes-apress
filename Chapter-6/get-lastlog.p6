@@ -2,5 +2,8 @@
 
 
 use Sys::Lastlog;
-say Sys::Lastlog.new().list.map( .has-logged-in );
+
+for Sys::Lastlog.new().list.grep: *.entry.time > 0 -> $e {
+    say $e.user.username;
+}
 
