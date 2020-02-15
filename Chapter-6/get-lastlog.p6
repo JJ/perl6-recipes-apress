@@ -3,7 +3,7 @@
 
 use Sys::Lastlog;
 
-for Sys::Lastlog.new().list.grep: *.entry.time > 0 -> $e {
-    say $e.user.username;
-}
+say .user.username, ", ", .entry.timestamp for Sys::Lastlog.new().list.grep: *.entry.time > 0;
+
+
 
