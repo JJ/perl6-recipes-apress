@@ -1,6 +1,9 @@
 #!/usr/bin/env raku
 
-use Term::Choose::Util;
+use Term::Choose :choose;
 
-my $file = choose-a-file( :init-dir("/var/log") );
+my @dir = dir( "/var/log" );
+
+my $file = choose( @dir.map( *.Str ) );
+
 say $file.Str;
