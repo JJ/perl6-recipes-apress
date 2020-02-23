@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress", "System"
     ],
-    "depends" : [ "Sys::Lastlog", "Docker::API", "Syslog::Parse", "Git::Log", "Term::Choose", "Term::TablePrint"],
+    "depends" : [ "Sys::Lastlog", "Docker::API", "Syslog::Parse", "Git::Log", "Term::Choose", "Term::TablePrint", "Libarchive::Simple"],
     "version" : "0.0.1"
 }
