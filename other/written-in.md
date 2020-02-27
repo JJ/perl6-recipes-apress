@@ -18,3 +18,5 @@
 * BT 678 AGP-RIX
 * D8 5953 ARL-AGP
 * VLG 20CG GRX-BCN
+* Sala VIP zona internacional, BCN
+* VLG 7723 BCN-DBV
