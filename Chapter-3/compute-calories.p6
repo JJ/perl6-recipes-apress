@@ -13,14 +13,14 @@ $xl-er.select_sheet(0);
 
 my $total-calories = 0;
 for 1..^$xl-er.sheet_dimensions[0] -> $r {
-    my ($q, $unit )= extract-measure($xl-er.get_cell($r,1).value);
-    say $q, $unit;
     my $ingredient = $xl-er.get_cell($r,0).value;
-    if %ingredients{$ingredient}
-       && %ingredients{$ingredient}.key eq $unit  {
-	$total-calories += $xl-er.get_cell($r,2).value
+    if %ingredients{$ingredient} {
+       my ($q, $unit )= extract-measure($xl-er.get_cell($r,1).value);
+       if %ingredients{$ingredient}.key eq $unit  {
+	   $total-calories += $xl-er.get_cell($r,2).value
 	                   * %ingredients{$ingredient}.value / $q;
-    }
+       }
+   } 
 }
 
 say "Total calories ⇒ $total-calories";
