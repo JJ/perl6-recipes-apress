@@ -12,12 +12,10 @@ $xl-er.open("data/calories.xls");
 $xl-er.select_sheet(0);
 my %calories;
 for 1..^$xl-er.sheet_dimensions[0] -> $r {
-    $xl-er.get_cell($r,1).value ~~ /$<q>=(\d+)\s*$<unit>=(\S+)/;
-    with $<unit> {
-        %calories{$xl-er.get_cell($r,0).value} = { unit => ~$<unit>,
-                                                   q => +$<q>,
-                                                   calories => $xl-er.get_cell($r,2).value };
-    }
+    my ($q, $unit )= extract-measure($xl-er.get_cell($r,1).value);
+    %calories{$xl-er.get_cell($r,0).value} = { unit => $unit,
+                                               q => $q,
+                                               calories => $xl-er.get_cell($r,2).value };
 }
 my $total-calories = 0;
 
@@ -29,4 +27,8 @@ for %ingredients.keys -> $i {
 }
 
 say "Total calories ⇒ $total-calories";
-        
+
+sub extract-measure( $str ) {
+    $str ~~ /$<q>=(\d*)\s*$<unit>=(\S+)/;
+    return (+$<q>,~$<unit>)
+}
