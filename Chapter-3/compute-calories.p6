@@ -14,6 +14,7 @@ $xl-er.select_sheet(0);
 my $total-calories = 0;
 for 1..^$xl-er.sheet_dimensions[0] -> $r {
     my ($q, $unit )= extract-measure($xl-er.get_cell($r,1).value);
+    say $q, $unit;
     my $ingredient = $xl-er.get_cell($r,0).value;
     if %ingredients{$ingredient}
        && %ingredients{$ingredient}.key eq $unit  {
@@ -25,6 +26,7 @@ for 1..^$xl-er.sheet_dimensions[0] -> $r {
 say "Total calories ⇒ $total-calories";
 
 sub extract-measure( $str ) {
-    $str ~~ /$<q>=(\d*)\s*$<unit>=(\S+)/;
-    return (+$<q>,~$<unit>)
+    $str ~~ /^^ $<q> = ( <:N>* ) \s* $<unit>=(\w+)/;
+    my $value = val( ~$<q> ) // unival( $<q> );
+    return ($value,~$<unit>)
 }
