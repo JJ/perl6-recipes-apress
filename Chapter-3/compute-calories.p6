@@ -13,7 +13,8 @@ $xl-er.select_sheet(0);
 my %calories;
 for 1..^$xl-er.sheet_dimensions[0] -> $r {
     my ($q, $unit )= extract-measure($xl-er.get_cell($r,1).value);
-    %calories{$xl-er.get_cell($r,0).value} = { unit => $unit,
+    my $ingredient = $xl-er.get_cell($r,0).value;
+    %calories{$ingredient} = { unit => $unit,
                                                q => $q,
                                                calories => $xl-er.get_cell($r,2).value };
 }
