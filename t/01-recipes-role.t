@@ -18,7 +18,7 @@ subtest {
 }, "Calories table";
 
 subtest {
-    say Raku::Recipes::Roly.new.WHY;
+    say Raku::Recipes::Roly.WHY;
     for <new products calories-table> -> $m {
 	ok Raku::Recipes::Roly.{$m}.WHY, "Pod comments work";
     }
