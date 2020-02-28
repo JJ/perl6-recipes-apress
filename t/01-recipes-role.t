@@ -17,4 +17,11 @@ subtest {
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
 }, "Calories table";
 
+subtest {
+    say Raku::Recipes::Roly.new.WHY;
+    for <new products calories-table> -> $m {
+	ok Raku::Recipes::Roly.{$m}.WHY, "Pod comments work";
+    }
+}
+
 done-testing;
