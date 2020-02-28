@@ -2,7 +2,7 @@ use Text::CSV;
 use Raku::Recipes;
 use Raku::Recipes::Roly;
 
-# Utility functions for the Raku Recipes book
+#! Utility functions for the Raku Recipes book
 unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
 multi method optimal-ingredients( -1, $ )  is export  { return [] };
