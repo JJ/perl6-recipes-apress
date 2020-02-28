@@ -2,9 +2,10 @@ use Text::CSV;
 use Raku::Recipes;
 use Raku::Recipes::Roly;
 
-#! Utility functions for the Raku Recipes book
+#| Utility functions for the Raku Recipes book
 unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
+#| Compute optimal ingredients, knapsack style
 multi method optimal-ingredients( -1, $ )  is export  { return [] };
 
 multi method optimal-ingredients( $index,
@@ -26,10 +27,12 @@ multi method optimal-ingredients( $index, $weight )  {
 
 multi method proteins( [] ) { 0 }
 
+#| Adds up the amount of protein for the items in the argument.
 multi method proteins( @items )   {
     return [+] %!calories-table{@items}.map: *<Protein>;
 }
 
+#| Filters ingredients by type
 method filter-ingredients( Bool :$Dairy, Bool :$Vegan, Bool :$Main, Bool :$Side, Bool :$Dessert ) {
     
     my @flags;

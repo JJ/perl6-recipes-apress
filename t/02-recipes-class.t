@@ -21,5 +21,7 @@ like @optimal[0], /\w+/, "Optimal protein combo";
 cmp-ok $rr.filter-ingredients( :Dairy ).elems, ">", 0, "Enough dairy ingredients";
 cmp-ok $rr.filter-ingredients( :!Dairy, :Vegan ).elems, ">", 5, "Enough non-dairy, vegan ingredients";
 
-
+subtest "Test declarator blocks",{
+    ok Raku::Recipes::Classy.WHY, "Class described";
+}
 done-testing;
