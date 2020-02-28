@@ -23,5 +23,6 @@ cmp-ok $rr.filter-ingredients( :!Dairy, :Vegan ).elems, ">", 5, "Enough non-dair
 
 subtest "Test declarator blocks",{
     ok Raku::Recipes::Classy.WHY, "Class described";
+    ok Raku::Recipes::Classy.new.^lookup('filter-ingredients').WHY, "Declarator blocks retrieved";
 }
 done-testing;
