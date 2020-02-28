@@ -1,6 +1,6 @@
 use Text::CSV;
 
-# Utility functions for the Raku Recipes book
+#| Utility functions for the Raku Recipes book
 unit module Raku::Recipes;
 
 our %calories-table is export;
