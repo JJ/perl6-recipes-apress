@@ -5,6 +5,9 @@ use Raku::Recipes::Roly;
 #| Utility functions for the Raku Recipes book
 unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
+#| Uses the knapsack algorithms to compute the ingredients that maximize protein content.
+proto method optimal-ingredients (::T : |) {*}
+
 #| Compute optimal ingredients, knapsack style, base case
 multi method optimal-ingredients( -1, $ )  is export  { return [] };
 
