@@ -45,6 +45,7 @@ method new( $dir = "." ) {
 
 #| Basic getter for products
 method products () { return @!products };
+#= → Returns an array with the existing products.
 
 #| Basic getter for the calorie table
 method calories-table() { return %!calories-table };
