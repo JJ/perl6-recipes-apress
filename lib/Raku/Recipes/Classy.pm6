@@ -5,14 +5,16 @@ use Raku::Recipes::Roly;
 #| Utility functions for the Raku Recipes book
 unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
-#| Compute optimal ingredients, knapsack style
+#| Compute optimal ingredients, knapsack style, base case
 multi method optimal-ingredients( -1, $ )  is export  { return [] };
 
+#| Compute optimal ingredients, knapsack style, when weight is higher than total weight
 multi method optimal-ingredients( $index,
 			          $weight  where  %!calories-table{@!products[$index]}<Calories> > $weight )   {
     return self.optimal-ingredients( $index - 1, $weight );
 }
 
+#| Compute optimal ingredients, general case.
 multi method optimal-ingredients( $index, $weight )  {
     my $lhs = self.proteins(self.optimal-ingredients( $index - 1, $weight ));
     my @recipes = self.optimal-ingredients( $index - 1,
