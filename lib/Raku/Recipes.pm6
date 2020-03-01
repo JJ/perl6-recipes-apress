@@ -4,9 +4,10 @@ use Text::CSV;
 unit module Raku::Recipes;
 
 our %calories-table is export;
+
 our @products is export;
 
-# Parses measure to return an array with components
+#| Parses measure to return an array with components
 sub parse-measure ( $description ) is export {
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
     my $unit = +$<unit>??+$<unit>!!1;
