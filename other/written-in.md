@@ -22,3 +22,4 @@
 * VLG 7723 BCN-DBV
 * Ulica Stulina 3, Dubrovnik
 * DBV, Dubrovnik airport.
+* VLG 7724 DBV-BCN
