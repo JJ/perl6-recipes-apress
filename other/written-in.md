@@ -23,3 +23,5 @@
 * Ulica Stulina 3, Dubrovnik
 * DBV, Dubrovnik airport.
 * VLG 7724 DBV-BCN
+* Pablo Picasso Lounge, BCN
+* VLG 2016 BCN-GRX
