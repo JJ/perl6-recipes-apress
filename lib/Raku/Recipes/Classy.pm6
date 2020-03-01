@@ -2,7 +2,7 @@ use Text::CSV;
 use Raku::Recipes;
 use Raku::Recipes::Roly;
 
-#| Utility functions for the Raku Recipes book
+#| Utility class for the Raku Recipes book
 unit class Raku::Recipes::Classy does Raku::Recipes::Roly;
 
 #| Uses the knapsack algorithms to compute the ingredients that maximize protein content.
