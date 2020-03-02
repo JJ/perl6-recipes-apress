@@ -22,7 +22,7 @@ multi method optimal-ingredients( $index, $weight )  {
     my $lhs = self.proteins(self.optimal-ingredients( $index - 1, $weight ));
     my @recipes = self.optimal-ingredients( $index - 1,
                                             $weight -  %!calories-table{@!products.[$index]}<Calories> );
-    my $rhs = %!calories-table{@!products[$index]}<Protein> +  self.proteins( @recipes );e
+    my $rhs = %!calories-table{@!products[$index]}<Protein> +  self.proteins( @recipes );
     if $rhs > $lhs {
         return @recipes.append: @!products[$index];
     } else {
