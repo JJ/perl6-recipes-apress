@@ -1,8 +1,35 @@
 use Text::CSV;
 use Raku::Recipes;
 
+=begin pod
+
+=head1 NAME
+
+Raku::Recipes::Roly - Example of a Role, which includes also utility functions for Raku Recipes book (by Apress)
+
+=head1 SYNOPSIS
+
+=begin code
+use Raku::Recipes::Roly;
+
+my $rrr = Raku::Recipes::Roly.new; # "Puns" role with the default data dir
+
+say $rrr.calories-table; # Prints the loaded calorie table
+say $rrr.products;       # Prints the products that form the set of ingredients
+=end code
+
+=head1 DESCRIPTION
+
+Simple data-loading role that can be composed into classes that will deal with tables of ingredients, every one with tabular data.
+
+                                                                                                       =head1 CAVEATS
+
+The file needs to be called C<calories.csv> and be placed in a C<data/> subdirectory.
+
+=end pod
+
 #| Basic file-loading role
-unit role Raku::Recipes::Roly;
+unit role Raku::Recipes::Roly:ver<0.0.2>;
 
 #| Contains the table of calories
 has %.calories-table;
