@@ -2,6 +2,7 @@
     "authors" : [
 	"JJ Merelo"
     ],
+    "auth": "github:JJ",
     "description" : "Raku Recipes, modules and examples",
     "license" : "Artistic-2.0",
     "name" : "Raku Recipes examples",
@@ -16,5 +17,6 @@
     ],
     "depends" : [ "Text::Markdown",
                   "Text::CSV" ],
+    "source-url" : "https://github.com/JJ/raku-recipes-apress",
     "version" : "0.0.2"
 }
