@@ -5,7 +5,7 @@
     "auth": "github:JJ",
     "description" : "Raku Recipes, modules and examples",
     "license" : "Artistic-2.0",
-    "name" : "Raku Recipes examples",
+    "name" : "Raku::Recipes",
     "perl" : "6.d",
     "provides" : {
         "Raku::Recipes": "lib/Raku/Recipes.pm6",
