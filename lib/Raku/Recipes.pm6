@@ -14,6 +14,16 @@ sub parse-measure ( $description ) is export {
     return ($unit,~$<measure>);
 }
 
+multi sub unit-measure ( $description where /^<:N>/ ) is export {
+    $description ~~ / $<unit>=(<:N>+) \s* $<measure>=(\S+) /;
+    return ( ~$<unit>, ~$<measure> );
+}
+
+multi sub unit-measure ( $description where /^<alpha>/ ) is export {
+    $description ~~ / $<measure>=(\S+) /;
+    return ( 1, ~$<measure> );
+}
+
 # Returns the table of calories in the CSV file
 sub calories-table( $dir = "." ) is export {
     csv(in => "$dir/data/calories.csv",  sep => ';', headers => "auto", key => "Ingredient" ).pairs

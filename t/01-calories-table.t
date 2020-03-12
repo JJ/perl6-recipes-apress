@@ -16,4 +16,8 @@ is @products[0], "Apple", "Sorted products";
 my @optimal = optimal-ingredients( @products.elems -1 , 500 );
 is @optimal[0], "Rice", "Optimal protein combo";
 
+is unit-measure( "100g" ), (100,"g"), "Unit with number";
+is unit-measure( "⅓ liter" )[1], "liter", "Space and unicode";
+is unit-measure( "unit" ), (1,"unit"), "No number here";
+
 done-testing;
