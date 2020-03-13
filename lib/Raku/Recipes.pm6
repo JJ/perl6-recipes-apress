@@ -16,7 +16,7 @@ sub parse-measure ( $description ) is export {
 
 multi sub unit-measure ( $description where /^<:N>/ ) is export {
     $description ~~ / $<unit>=(<:N>+) \s* $<measure>=(\S+) /;
-    my $value = val( ~$<unit> ) // unival( $<unit> );
+    my $value = +val( ~$<unit>  ) // unival( ~$<unit> );
     return ( $value, ~$<measure> );
 }
 

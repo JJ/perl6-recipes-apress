@@ -21,7 +21,7 @@ is unit-measure( "100g" ), (100,"g"), "Unit with number";
 my ($unit, $measure) = unit-measure( "⅓ liter" );
 is $measure, "liter", "Space and unicode";
 is-approx $unit, ⅓, "Space and unicode - unit";
-                     
+
 is unit-measure( "unit" ), (1,"unit"), "No number here";
 
 done-testing;
