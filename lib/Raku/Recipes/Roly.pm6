@@ -56,7 +56,7 @@ method new( $dir = "." ) {
        $_.value<parsed-measures> = parse-measure( $_.value<Unit> );
        $_ } );
 
-    for %calories-table.kv -> $, %ingredient {
+    for %calories-table.values -> %ingredient {
         for %ingredient.keys -> $k {
             given  %ingredient{$k} {
                 when "Yes" { %ingredient{$k} = True }
