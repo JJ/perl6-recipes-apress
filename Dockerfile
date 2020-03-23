@@ -1,5 +1,5 @@
-FROM jjmerelo/alpine-perl6:latest
-LABEL version="0.0.1" maintainer="JJ Merelo <jjmerelo@GMail.com>"
+FROM jjmerelo/alpine-raku:latest
+LABEL version="0.0.2" maintainer="JJ Merelo <jjmerelo@GMail.com>"
 
 ADD META6.json Chapter-5/filter-ingredients-proteins.p6 ./
 RUN mkdir lib && mkdir data
