@@ -11,7 +11,7 @@ my $max-calories = %conf<calories>;
 
 my @results = gather for ^%conf<repetitions> {
     @products = @products.pick(*);
-    my @ingredients = optimal-ingredients( @products.elems -1 , $max-calories );
+    my @ingredients = optimal-ingredients( @products.end , $max-calories );
     my $proteins = proteins( @ingredients );
     say @ingredients, " with $proteins g protein";
     take @ingredients => $proteins;
