@@ -22,7 +22,7 @@ say $rrr.products;       # Prints the products that form the set of ingredients
 
 Simple data-loading role that can be composed into classes that will deal with tables of ingredients, every one with tabular data.
 
-                                                                                   =head1 CAVEATS
+                                                                                =head1 CAVEATS
 
 The file needs to be called C<calories.csv> and be placed in a C<data/> subdirectory.
 
@@ -45,12 +45,8 @@ the current directory by default. The file will be in a subdirectory data,
 and will be called calories.csv
 ]
 method new( $dir = "." ) {
-    my $calorie-table-file;
-    with %*ENV<CALORIE_TABLE_FILE> {
-        $calorie-table-file = $_;
-    } else {
-        $calorie-table-file = "$dir/data/calories.csv";
-    }
+    my $calorie-table-file = %*ENV<CALORIE_TABLE_FILE>
+       // "$dir/data/calories.csv";
     my %calories-table = csv(in => $calorie-table-file,
                              sep => ';',
                              headers => "auto",
