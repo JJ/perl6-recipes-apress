@@ -3,7 +3,7 @@
 use Raku::Recipes;
 use JSON::Fast;
 
-my %conf = from-json( (@*ARGS[0].IO.e ?? @*ARGS[0].IO !! "config.json".IO ).slurp );
+my %conf = from-json( slurp(@*ARGS[0] // "config.json" ) );
 %calories-table = calories-table( %conf<dir> );
 @products = %calories-table.keys;
 
