@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress"
     ],
-    "depends" : [ "JSON::Fast", "Config::INI"],
+    "depends" : [ "JSON::Fast", "Config::INI", "YAML"],
     "version" : "0.0.1"
 }
