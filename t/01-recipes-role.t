@@ -22,4 +22,11 @@ subtest "There's documentation for the module", {
 
 };
 
+subtest "Food types are correct", {
+    ok $rr.check-type( "Tuna", "Main"), "Tuna is main";
+    ok $rr.check-type( "Rice", "Vegan" ), "Rice is vegan";
+    ok $rr.check-type( "Apple", "Dessert"), "Apple is dessert";
+    ok $rr.check-type( "Egg", "Dairy"); "Apple is dairy";
+}
+
 done-testing;

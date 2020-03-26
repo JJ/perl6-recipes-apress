@@ -74,3 +74,10 @@ method products () { return @!products };
 
 #| Basic getter for the calorie table
 method calories-table() { return %!calories-table };
+
+#| Check type of ingredient
+method check-type( Str $ingredient where $ingredient ∈ %!calories-table.keys,
+		   Str $type where $type ∈ @food-types --> Bool ) {
+    
+    return %!calories-table{$ingredient}{$type};
+}
