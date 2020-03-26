@@ -10,3 +10,13 @@ class X::Raku::Recipes::WrongType is Exception {
 	return "Object seems to be of type $!actual-type while we were expecting $!desired-type";
     }
 }
+
+class X::Raku::Recipes::MissingPart is Exception {
+    has $!part is required;
+
+    submethod BUILD( :$!part ) {}
+
+    method message() {
+	return "An essential part of the meal is missing:  $!part";
+    }
+}
