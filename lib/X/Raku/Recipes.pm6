@@ -5,6 +5,7 @@ class X::Raku::Recipes::WrongType is Exception {
     has $!desired-type is required;
 
     submethod BUILD( :$!actual-type, :$!desired-type) {}
+
     method message() {
 	return "Object seems to be of type $!actual-type while we were expecting $!desired-type";
     }
