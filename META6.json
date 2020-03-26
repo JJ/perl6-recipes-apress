@@ -10,7 +10,9 @@
     "provides" : {
         "Raku::Recipes": "lib/Raku/Recipes.pm6",
         "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6",
-	"Raku::Recipes::Roly": "lib/Raku/Recipes/Roly.pm6"
+	"Raku::Recipes::Roly": "lib/Raku/Recipes/Roly.pm6",
+	"X::Raku::Recipes" : "lib/X/Raku/Recipes.pm6",
+	"X::Raku::Recipes" : "lib/X/Raku/Recipes.pm6"
     },
     "tags" : [
 	"book","Apress", "Raku", "examples", "recipes", "cooking"
