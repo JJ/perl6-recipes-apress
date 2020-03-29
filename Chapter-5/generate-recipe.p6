@@ -11,8 +11,6 @@ my %conf = load-yaml( $conf );
 
 for <main side> -> $part {
     %conf{$part} // X::Raku::Recipes::MissingPart.new( :$part ).throw();
-    $recipes.check-type( $conf{$part}, $part )
-    // X::Raku::Recipes::WrongType.new(
-	:desired-type( :desired-type($part) } ).throw();
+    $recipes.check-type( %conf{$part}, $part.tc ) || X::Raku::Recipes::WrongType.new( :desired-type( $part )).throw();
 }
 
