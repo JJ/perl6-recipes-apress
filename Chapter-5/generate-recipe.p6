@@ -13,7 +13,6 @@ for <main side> -> $part {
     %conf{$part} // X::Raku::Recipes::MissingPart.new( :$part ).throw();
     $recipes.check-type( $conf{$part}, $part )
     // X::Raku::Recipes::WrongType.new(
-	:actual-type( $recipes.calories-table(){$conf{$part}} ).throw();
-		 
+	:desired-type( :desired-type($part) } ).throw();
 }
 
