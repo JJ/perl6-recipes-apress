@@ -9,18 +9,20 @@ my $recipes = Raku::Recipes::Roly.new;
 
 my %conf = load-yaml( $conf );
 
+constant @conf-keys = <main side calories>;
+
+die "There are unknown keys in the configuration file"
+        if %conf.keys ⊖ @conf-keys ≠ ∅;
 
 for <main side> -> $part {
     without %conf{$part} { X::Raku::Recipes::MissingPart.new( :$part ).throw() };
     given %conf{$part} {
-when %conf{$part} ∉ $recipes.products {
-    X::Raku::Recipes::ProductMissing.new( :product(%conf{$part}) ).throw()
-}
-
-when not $recipes.check-type( %conf{$part}, $part.tc ) {
-    X::Raku::Recipes::WrongType.new( :desired-type( $part )).throw() ;
-}
-    
-}
+        when %conf{$part} ∉ $recipes.products {
+            X::Raku::Recipes::ProductMissing.new( :product(%conf{$part}) ).throw()
+        }
+        when not $recipes.check-type( %conf{$part}, $part.tc ) {
+            X::Raku::Recipes::WrongType.new( :desired-type( $part )).throw() ;
+        }
+    }
 }
 

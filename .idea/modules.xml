@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/perl6-recipes-apress.iml" filepath="$PROJECT_DIR$/.idea/perl6-recipes-apress.iml" />
+      <module fileurl="file://$PROJECT_DIR$/raku-recipes-apress.iml" filepath="$PROJECT_DIR$/raku-recipes-apress.iml" />
     </modules>
   </component>
 </project>
