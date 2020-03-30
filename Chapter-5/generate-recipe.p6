@@ -14,6 +14,7 @@ constant @conf-keys = <main side calories>;
 die "There are unknown keys in the configuration file"
         if %conf.keys ⊖ @conf-keys ≠ ∅;
 
+my @recipe;
 for <main side> -> $part {
     without %conf{$part} { X::Raku::Recipes::MissingPart.new( :$part ).throw() };
     given %conf{$part} {
@@ -24,5 +25,12 @@ for <main side> -> $part {
             X::Raku::Recipes::WrongType.new( :desired-type( $part )).throw() ;
         }
     }
+    my %this-product = $recipes.calories-table{%conf{$part}};
+    my $portion = %conf<calories>/( 2 * %this-product<Calories>);
+    @recipe.push: $portion *  %this-product<parsed-measures>[0] ~ " " ~
+            %this-product<parsed-measures>[1] ~ " of " ~  %conf{$part}.lc;
 }
+
+say "Use ", @recipe.join(" and ");
+
 
