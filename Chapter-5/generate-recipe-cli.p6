@@ -1,7 +1,6 @@
 #!/usr/bin/env raku
 
 use Raku::Recipes::Roly;
-use X::Raku::Recipes;
 
 my $recipes = Raku::Recipes::Roly.new;
 
