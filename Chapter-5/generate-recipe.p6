@@ -8,6 +8,7 @@ my $conf = slurp( @*ARGS[0] // "Chapter-5/recipe.yaml" );
 my $recipes = Raku::Recipes::Roly.new;
 
 my %conf = load-yaml( $conf );
+%conf<calories> //= 500;
 
 constant @conf-keys = <main side calories>;
 
