@@ -1,24 +1,30 @@
 {
-    "authors" : [
-	"JJ Merelo"
-    ],
-    "auth": "github:JJ",
-    "description" : "Raku Recipes, modules and examples",
-    "license" : "Artistic-2.0",
-    "name" : "Raku::Recipes",
-    "perl" : "6.d",
-    "provides" : {
-        "Raku::Recipes": "lib/Raku/Recipes.pm6",
-        "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6",
-	"Raku::Recipes::Roly": "lib/Raku/Recipes/Roly.pm6",
-	"X::Raku::Recipes" : "lib/X/Raku/Recipes.pm6",
-	"X::Raku::Recipes" : "lib/X/Raku/Recipes.pm6"
-    },
-    "tags" : [
-	"book","Apress", "Raku", "examples", "recipes", "cooking"
-    ],
-    "depends" : [ "Text::Markdown",
-                  "Text::CSV" ],
-    "source-url" : "https://github.com/JJ/raku-recipes-apress",
-    "version" : "0.0.2"
+  "name": "Raku::Recipes",
+  "description": "Raku Recipes, modules and examples",
+  "version": "0.0.2",
+  "perl": "6.d",
+  "authors": [
+    "JJ Merelo"
+  ],
+  "auth": "github:JJ",
+  "depends": [
+    "Text::Markdown",
+    "Text::CSV"
+  ],
+  "provides": {
+    "Raku::Recipes": "lib/Raku/Recipes.pm6",
+    "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6",
+    "Raku::Recipes::Roly": "lib/Raku/Recipes/Roly.pm6",
+    "X::Raku::Recipes": "lib/X/Raku/Recipes.pm6"
+  },
+  "license": "Artistic-2.0",
+  "tags": [
+    "book",
+    "Apress",
+    "Raku",
+    "examples",
+    "recipes",
+    "cooking"
+  ],
+  "source-url": "https://github.com/JJ/raku-recipes-apress"
 }
