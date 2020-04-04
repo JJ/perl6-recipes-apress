@@ -22,7 +22,7 @@ say $rrr.products;       # Prints the products that form the set of ingredients
 
 Simple data-loading role that can be composed into classes that will deal with tables of ingredients, every one with tabular data.
 
-=head1 CAVEATS
+git=head1 CAVEATS
 
 The file needs to be called C<calories.csv> and be placed in a C<data/> subdirectory.
 

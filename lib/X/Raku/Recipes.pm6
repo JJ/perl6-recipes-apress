@@ -6,7 +6,7 @@ class X::Raku::Recipes::WrongType is Exception {
     submethod BUILD( :$!desired-type) {}
 
     method message() {
-	return "Object does not seem to be $!desired-type";
+	    return "Object does not seem to be $!desired-type";
     }
 }
 
@@ -16,7 +16,7 @@ class X::Raku::Recipes::ProductMissing is Exception {
     submethod BUILD( :$!product) {}
 
     method message() {
-	return "We don't seem to have information about  $!product";
+	    return "We don't seem to have information about  $!product";
     }
 }
 
@@ -26,6 +26,6 @@ class X::Raku::Recipes::MissingPart is Exception {
     submethod BUILD( :$!part ) {}
 
     method message() {
-	return "An essential part of the meal is missing:  $!part";
+	    return "An essential part of the meal is missing:  $!part";
     }
 }
