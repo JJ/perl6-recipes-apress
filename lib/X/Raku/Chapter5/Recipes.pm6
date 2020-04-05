@@ -6,7 +6,7 @@ class X::Raku::Recipes::WrongType:api<0> {
         X::Obsolete.new(old => "X::Raku::Recipes::WrongType:api<0>",
                     replacement => "X::Raku::Recipes::WrongType:api<1> in
 Raku::Recipes",
-                when => "using Raku::Recipes"
+                    when => "using Raku::Recipes"
                     ).throw;
     }
 }
