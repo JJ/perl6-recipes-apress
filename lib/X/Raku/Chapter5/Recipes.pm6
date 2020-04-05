@@ -1,11 +1,10 @@
 use Raku::Recipes;
 
-class X::Raku::Recipes::WrongType:api<0> is X::Obsolete {
-    has $!desired-type is required;
+class X::Raku::Recipes::WrongType:api<0> {
 
-    submethod BUILD( :$!desired-type = Mu) {
+    submethod BUILD() {
         X::Obsolete.new(old => "X::Raku::Recipes::WrongType:api<0>",
-                    new => "X::Raku::Recipes::WrongType:api<1> in
+                    replacement => "X::Raku::Recipes::WrongType:api<1> in
 Raku::Recipes",
                 when => "using Raku::Recipes"
                     ).throw;

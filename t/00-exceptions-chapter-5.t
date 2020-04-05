@@ -5,7 +5,7 @@ use X::Raku::Chapter5::Recipes;
 throws-like { X::Raku::Recipes::WrongType.new( desired-type => "Main" ) },
         X::Obsolete, message => /api/,  "Obsolete OK";
 
-my $x =  X::Raku::Recipes::MissingPart.new( part => "course", name => "main" );
+my $x =  X::Raku::Recipes::MissingPart.new( part => "course" );
 isa-ok $x, X::Raku::Recipes::MissingPart, "Type OK";
 throws-like { $x.throw },  X::Raku::Recipes::MissingPart, message => /course/,  "Throws OK";
 
