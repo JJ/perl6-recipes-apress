@@ -20,6 +20,16 @@ class X::Raku::Recipes::ProductMissing is Exception {
     }
 }
 
+class X::Raku::Recipes::MissingPart is Exception {
+    has $!part is required;
+
+    submethod BUILD( :$!part ) {}
+
+    method message() {
+        return "An essential part of the meal is missing:  $!part";
+    }
+}
+
 class X::Raku::Recipes::Missing is Exception {
     has $!part is required;
     has $!name is required;
