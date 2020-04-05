@@ -1,5 +1,6 @@
 use Text::CSV;
 use Raku::Recipes;
+use X::Raku::Recipes::Missing;
 
 =begin pod
 
@@ -47,6 +48,8 @@ and will be called calories.csv
 method new( $dir = "." ) {
     my $calorie-table-file = %*ENV<CALORIE_TABLE_FILE>
        // "$dir/data/calories.csv";
+    X::Raku::Recipes::Missing::File.new(:name($calorie-table-file)).throw
+            unless $calorie-table-file.IO.e;
     my %calories-table = csv(in => $calorie-table-file,
                              sep => ';',
                              headers => "auto",
