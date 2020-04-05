@@ -1,4 +1,5 @@
 use Test; # -*- mode: perl6 -*-
+use Raku::Recipes::Roly;
 use X::Raku::Recipes;
 use X::Raku::Recipes::Missing;
 
@@ -21,8 +22,12 @@ throws-like { $x.throw },  X::Raku::Recipes::Missing::Part, message =>
 
 $x =  X::Raku::Recipes::Missing::Product.new( name => "cardboard" );
 isa-ok $x, X::Raku::Recipes::Missing::Product, "Type OK";
-throws-like { $x.throw },  X::Raku::Recipes::Missing::Product, message =>
-        /cardboard/,
+throws-like { $x.throw },  X::Raku::Recipes::Missing::Product,
+        message => /cardboard/,
         "Throws OK";
+
+throws-like { my $will-blow = Raku::Recipes::Roly.new("does-not-exist.csv") },
+    X::Raku::Recipes::Missing::File, message => /"not-exist"/,
+        "Checks unexistent file";
 
 done-testing;
