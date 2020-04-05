@@ -10,7 +10,7 @@ class X::Raku::Recipes::WrongType:api<1> is Exception {
     }
 }
 
-class X::Raku::Recipes::Missing:api<1> is Exception {
+role X::Raku::Recipes::Missing:api<1> is Exception {
     has $!part is required;
     has $!name is required;
 
