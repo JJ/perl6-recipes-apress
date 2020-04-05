@@ -1,12 +1,14 @@
 use Raku::Recipes;
 
-class X::Raku::Recipes::WrongType:api<0> is Exception {
+class X::Raku::Recipes::WrongType:api<0> is X::Obsolete {
     has $!desired-type is required;
 
-    submethod BUILD( :$!desired-type) {}
-
-    method message() {
-	    return "Object does not seem to be $!desired-type";
+    submethod BUILD( :$!desired-type = Mu) {
+        X::Obsolete.new(old => "X::Raku::Recipes::WrongType:api<0>",
+                    new => "X::Raku::Recipes::WrongType:api<1> in
+Raku::Recipes",
+                when => "using Raku::Recipes"
+                    ).throw;
     }
 }
 
