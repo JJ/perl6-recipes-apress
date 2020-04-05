@@ -2,7 +2,7 @@
 
 A relatively simple version of this rich, creamy dish of Italian origin.
 
-## Ingredients (for 4 persons)
+## Ingredients
 
 * 500g tuna
 * 250g rice

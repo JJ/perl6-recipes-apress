@@ -1,12 +1,12 @@
 # Carrot wraps
 
-A healty way to start a meal, or to munch between them.
+A healthy way to start a meal, or to munch between them.
 
 ## Ingredients
 
-1. Five carrots
-2. Cottage cheese or cheese spread
-3. Flour or wheat tortillas
+* 5 carrots
+* 200g cottage cheese or cheese spread
+* 4 Flour or wheat tortillas
 
 ## Preparation
 
