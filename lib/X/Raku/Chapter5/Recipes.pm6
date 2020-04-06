@@ -11,7 +11,9 @@ class X::Raku::Recipes::Obsolete is Exception {
     }
 
     multi method gist(X::Raku::Recipes::Obsolete:D: ) {
-        return ( for self.backtrace.list -> $bt {
+        my @nice-bts = self.backtrace.list.grep( ! *.is-setting() );
+        @nice-bts.shift;
+        return ( for @nice-bts -> $bt {
             "Backtrace ⇒ ", $bt.raku;
         }).join: "\/\n";
     }
