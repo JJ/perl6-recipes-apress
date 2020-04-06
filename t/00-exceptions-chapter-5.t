@@ -1,7 +1,6 @@
 use Test; # -*- mode: perl6 -*-
 use X::Raku::Chapter5::Recipes;
 
-
 throws-like { X::Raku::Recipes::WrongType.new( desired-type => "Main" ) },
         X::Obsolete, message => /api/,  "Obsolete OK";
 
