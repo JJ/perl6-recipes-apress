@@ -12,5 +12,4 @@ $x =  X::Raku::Recipes::ProductMissing.new( product => "Fish tails" );
 isa-ok $x, X::Raku::Recipes::ProductMissing, "Type OK";
 throws-like { $x.throw },  X::Raku::Recipes::ProductMissing, message => /information/,  "Throws OK";
 
-
 done-testing;

@@ -13,12 +13,15 @@ throws-like { $x.throw },  X::Raku::Recipes::Missing::File, message =>
         /calories/,
         "Throws OK";
 
-
 $x =  X::Raku::Recipes::Missing::Part.new( name => "main" );
 isa-ok $x, X::Raku::Recipes::Missing::Part, "Type OK";
 throws-like { $x.throw },  X::Raku::Recipes::Missing::Part, message =>
         /main/,
         "Throws OK";
+
+throws-like { $x.throw },  X::Raku::Recipes::Missing::Part,
+        message => /it$$/,
+        "Throws without backtrace";
 
 $x =  X::Raku::Recipes::Missing::Product.new( name => "cardboard" );
 isa-ok $x, X::Raku::Recipes::Missing::Product, "Type OK";
