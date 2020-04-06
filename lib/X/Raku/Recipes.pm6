@@ -19,4 +19,9 @@ role X::Raku::Recipes::Missing:api<1> is Exception {
     method message() {
         return "the $!part $!name seems to be missing. Please provide it";
     }
+
+    method gist(X::Raku::Recipes::Missing:D: ) {
+        self.message()
+    }
+
 }
