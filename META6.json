@@ -9,7 +9,7 @@
   "auth": "github:JJ",
   "depends": [
     "Text::Markdown",
-    "Terminal::ANSIcolor",
+    "Colorizable",
     "Text::CSV"
   ],
   "provides": {
