@@ -1,8 +1,10 @@
 use Test; # -*- mode: perl6 -*-
 use X::Raku::Chapter5::Recipes;
 
+say X::Raku::Recipes::Obsolete.new( :old-stuff("old"),:new-stuff("new")).new;
+
 throws-like { X::Raku::Recipes::WrongType.new( desired-type => "Main" ) },
-        X::Obsolete, message => /api/,  "Obsolete OK";
+        X::Raku::Recipes::Obsolete, message => /api/,  "Obsolete OK";
 
 my $x =  X::Raku::Recipes::MissingPart.new( part => "course" );
 isa-ok $x, X::Raku::Recipes::MissingPart, "Type OK";
