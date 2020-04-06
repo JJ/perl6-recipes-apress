@@ -11,7 +11,9 @@ class X::Raku::Recipes::Obsolete is Exception {
     }
 
     multi method gist(X::Raku::Recipes::Obsolete:D: ) {
-        say self.backtrace.raku;
+        return ( for self.backtrace.list -> $bt {
+            "Backtrace ⇒ ", $bt.raku;
+        }).join: "\/\n";
     }
 
 }
