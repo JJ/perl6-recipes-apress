@@ -1,4 +1,5 @@
 use Raku::Recipes;
+use Colorizable;
 
 class X::Raku::Recipes::Obsolete is Exception {
     has $!old-stuff is required;
@@ -13,9 +14,17 @@ class X::Raku::Recipes::Obsolete is Exception {
     multi method gist(X::Raku::Recipes::Obsolete:D: ) {
         my @nice-bts = self.backtrace.list.grep( ! *.is-setting() );
         @nice-bts.shift;
-        return ( for @nice-bts -> $bt {
-            "Backtrace ⇒ ", $bt.raku;
-        }).join: "\/\n";
+        my $output =  ("Hey! " but Colorizable).colorize: :mo(bold);
+        $output ~= ( self.message but Colorizable).colorize: :mo(underline);
+        $output ~= "\nThis happened on ⇒\n";
+        for @nice-bts -> $bt {
+            $output ~= (("\t» Line " ~ $bt.line()) but Colorizable).colorize:
+                    blue;
+            my $subname = ($bt.subname eq "<unit>")??  "an anonymous routine"!!
+                                        $bt.subname;
+            $output ~= " in " ~ ($subname but Colorizable).colorize: cyan;
+        }
+        return $output;
     }
 
 }
