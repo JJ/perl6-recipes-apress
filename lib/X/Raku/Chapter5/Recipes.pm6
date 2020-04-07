@@ -12,6 +12,7 @@ class X::Raku::Recipes::Obsolete is Exception {
     }
 
     multi method gist(X::Raku::Recipes::Obsolete:D: ) {
+        say self.backtrace.list.raku;
         my @nice-bts = self.backtrace.list.grep( ! *.is-setting() );
         @nice-bts.shift;
         my $output =  ("Hey! " but Colorizable).colorize: :mo(bold);
