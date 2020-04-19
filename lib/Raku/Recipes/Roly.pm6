@@ -23,7 +23,7 @@ say $rrr.products;       # Prints the products that form the set of ingredients
 
 Simple data-loading role that can be composed into classes that will deal with tables of ingredients, every one with tabular data.
 
-git=head1 CAVEATS
+=head1 CAVEATS
 
 The file needs to be called C<calories.csv> and be placed in a C<data/> subdirectory.
 
@@ -77,6 +77,14 @@ method products () { return @!products };
 
 #| Basic getter for the calorie table
 method calories-table() { return %!calories-table };
+
+#| Compute calories, given a product and a quantity. Raises exception if the
+#| product does not exist.
+method calories( Str $product, $quantity) {
+    say %!calories-table{$product};
+    return %!calories-table{$product}<Calories>*$quantity
+            /%!calories-table{$product}<parsed-measures>[0];
+}
 
 #| Check type of ingredient
 method check-type( Str $ingredient where $ingredient ∈ %!calories-table.keys,

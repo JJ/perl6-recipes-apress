@@ -15,6 +15,7 @@ subtest "File has been processed into data", {
 subtest "Particular ingredients and measures are OK", {
     ok( %calories-table<Rice>, "Rice is there" );
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
+    is( $rr.calories("Rice",300), 390, "Correct calories for rice");
 };
 
 subtest "There's documentation for the module", {
