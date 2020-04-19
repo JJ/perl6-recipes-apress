@@ -1,6 +1,7 @@
 use Text::CSV;
 use Raku::Recipes;
 use X::Raku::Recipes::Missing;
+use X::Raku::Recipes;
 
 =begin pod
 
@@ -84,6 +85,19 @@ method calories( Str $product, $quantity) {
     say %!calories-table{$product};
     return %!calories-table{$product}<Calories>*$quantity
             /%!calories-table{$product}<parsed-measures>[0];
+}
+
+#| Computes calories for a dish composed of main and side.
+#| Every one is a pair product, quantity
+method calories-for( :$main, :$side) {
+    say $main;
+    say $side;
+    X::Raku::Recipes::WrongType.new(:product($main.key),
+                                    :desired-type("Main")).throw
+            unless self.check-type($main.key,"Main");
+    X::Raku::Recipes::WrongType.new(:product($side.key),
+                                :desired-type("Side")).throw
+            unless self.check-type($side.key,"Side");
 }
 
 #| Check type of ingredient

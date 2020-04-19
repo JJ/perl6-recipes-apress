@@ -1,5 +1,5 @@
 use Test; # -*- mode: perl6 -*-
-
+use X::Raku::Recipes;
 use Raku::Recipes::Roly;
 
 my $rr = Raku::Recipes::Roly.new( "." );
@@ -28,6 +28,13 @@ subtest "Food types are correct", {
     ok $rr.check-type( "Rice", "Vegan" ), "Rice is vegan";
     ok $rr.check-type( "Apple", "Dessert"), "Apple is dessert";
     ok $rr.check-type( "Egg", "Dairy"); "Apple is dairy";
+}
+
+subtest "Composing dishes", {
+    throws-like { $rr.calories-for( main => "Apple" => 300,
+            side => "Whatever" => 3
+            ) },
+          X::Raku::Recipes::WrongType, "Apple not a main dish";
 }
 
 done-testing;

@@ -2,11 +2,13 @@ use Raku::Recipes;
 
 class X::Raku::Recipes::WrongType:api<1> is Exception {
     has $!desired-type is required;
+    has $!product;
 
-    submethod BUILD( :$!desired-type) {}
+    submethod BUILD(:$!desired-type,
+                    :$!product = "Object") {}
 
     method message() {
-	    return "Object does not seem to be of type $!desired-type";
+	    return "$!product does not seem to be of type $!desired-type";
     }
 }
 
