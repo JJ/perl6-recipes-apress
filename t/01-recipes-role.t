@@ -44,6 +44,9 @@ subtest "Composing dishes", {
             side => "Whatever" => 3
             ) },
           X::Raku::Recipes::WrongType, "Apple not a main dish";
+    is( $rr.calories-for( main => "Tuna" => 250,
+            side => "Rice" => 100  ), 455, "Calories for dish
+computed correctly");
 }
 
 done-testing;
