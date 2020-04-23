@@ -79,6 +79,13 @@ method products () { return @!products };
 #| Basic getter for the calorie table
 method calories-table() { return %!calories-table };
 
+#| Checks if a product exist
+proto method is-ingredient( | ) {*}
+multi method is-ingredient( Str $product where $product ∈ self.products() -->
+        True) {}
+multi method is-ingredient( Str $product where $product ∉ self.products() -->
+        False) {}
+
 #| Compute calories, given a product and a quantity. Raises exception if the
 #| product does not exist.
 method calories( Str $product, $quantity) {
