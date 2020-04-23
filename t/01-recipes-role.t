@@ -36,6 +36,10 @@ subtest "Food types are correct", {
 }
 
 subtest "Composing dishes", {
+    throws-like { $rr.calories-for( main => "Whatever" => 300,
+            side => "Whatever" => 3
+            ) },
+            X::Raku::Recipes::Missing::Product, "Whatever not a product";
     throws-like { $rr.calories-for( main => "Apple" => 300,
             side => "Whatever" => 3
             ) },

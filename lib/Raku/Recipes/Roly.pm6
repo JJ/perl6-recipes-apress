@@ -98,13 +98,15 @@ method calories( Str $product, $quantity) {
 #| Computes calories for a dish composed of main and side.
 #| Every one is a pair product, quantity
 method calories-for( :$main, :$side) {
-    X::Raku::Recipes::Missing::Product.new(:product($main.key)).throw
-            unless self.products{$main.key};
-    X::Raku::Recipes::Missing::Product.new(:product($side.key)).throw
-            unless self.products{$side.key};
+    say $main;
+    say $side;
+    X::Raku::Recipes::Missing::Product.new(:name($main.key)).throw
+            unless self.is-ingredient($main.key);
     X::Raku::Recipes::WrongType.new(:product($main.key),
                                     :desired-type("Main")).throw
             unless self.check-type($main.key,"Main");
+    X::Raku::Recipes::Missing::Product.new(:name($side.key)).throw
+            unless self.is-ingredient($side.key);
     X::Raku::Recipes::WrongType.new(:product($side.key),
                                 :desired-type("Side")).throw
             unless self.check-type($side.key,"Side");
