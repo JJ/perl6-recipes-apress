@@ -15,6 +15,9 @@ subtest "File has been processed into data", {
 subtest "Particular ingredients and measures are OK", {
     ok( %calories-table<Rice>, "Rice is there" );
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
+    throws-like  { $rr.calories("boogers",100) },
+            X::Raku::Recipes::Missing::Product,
+            "Not an ingredient";
     is( $rr.calories("Rice",300), 390, "Correct calories for rice");
 };
 

@@ -82,7 +82,8 @@ method calories-table() { return %!calories-table };
 #| Compute calories, given a product and a quantity. Raises exception if the
 #| product does not exist.
 method calories( Str $product, $quantity) {
-    say %!calories-table{$product};
+    X::Raku::Recipes::Missing::Product.new(:product($product)).throw
+            unless $product ∈ self.products();
     return %!calories-table{$product}<Calories>*$quantity
             /%!calories-table{$product}<parsed-measures>[0];
 }
@@ -90,14 +91,18 @@ method calories( Str $product, $quantity) {
 #| Computes calories for a dish composed of main and side.
 #| Every one is a pair product, quantity
 method calories-for( :$main, :$side) {
-    say $main;
-    say $side;
+    X::Raku::Recipes::Missing::Product.new(:product($main.key)).throw
+            unless self.products{$main.key};
+    X::Raku::Recipes::Missing::Product.new(:product($side.key)).throw
+            unless self.products{$side.key};
     X::Raku::Recipes::WrongType.new(:product($main.key),
                                     :desired-type("Main")).throw
             unless self.check-type($main.key,"Main");
     X::Raku::Recipes::WrongType.new(:product($side.key),
                                 :desired-type("Side")).throw
             unless self.check-type($side.key,"Side");
+
+
 }
 
 #| Check type of ingredient
