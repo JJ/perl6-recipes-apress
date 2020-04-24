@@ -15,9 +15,8 @@ try {
     CATCH {
         default {
             given .message {
-                when /Main/ { $main = "Chickpeas" }
-                when /Side/ { $side = "Rice" }
-
+                when /Main/ || /$main/ { $main = "Chickpeas" }
+                when /Side/ || /$side/ { $side = "Rice" }
             }
             $calories = $rrr.calories-for( main => $main => 200,
                     side => $side => 250 )
