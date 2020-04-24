@@ -18,20 +18,23 @@ try {
                 when /$main/ { $main = "Pasta" }
                 when /$side/ { $side = "Potatoes" }
             }
-            $calories = $rrr.calories-for( main => $main => 200,
-                    side => $side => 250 );
-        }
-        when X::Raku::Recipes::WrongType {
+            proceed;
+       }
+       when X::Raku::Recipes::WrongType {
             given .message {
                 when /Main/ { $main = "Chickpeas" }
                 when /Side/ { $side = "Rice" }
             }
-            $calories = $rrr.calories-for( main => $main => 200,
-                    side => $side => 250 );
-        }
-       default {
+            proceed;
+       }
+       when none(X::Raku::Recipes::Missing::Product,
+                X::Raku::Recipes::WrongType) {
            die "There's something wrong with ingredients, I can't generate
 that";
+       }
+       default {
+            $calories = $rrr.calories-for( main => $main => 200,
+                    side => $side => 250 );
        }
 
     }
