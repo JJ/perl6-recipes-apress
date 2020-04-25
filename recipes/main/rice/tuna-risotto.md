@@ -6,7 +6,7 @@ A relatively simple version of this rich, creamy dish of Italian origin.
 
 * 500g tuna
 * 250g rice
-* Half an onion
+* ½ onion
 * 250g cheese (parmegiano reggiano or granapadano, or manchego)
-* Extra virgin olive oil
+* 1 tbsp extra virgin olive oil
 * 4 cloves garlic

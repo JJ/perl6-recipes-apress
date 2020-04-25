@@ -6,7 +6,7 @@ A healthy way to start a meal, or to munch between them.
 
 * 5 carrots
 * 200g cottage cheese or cheese spread
-* 4 Flour or wheat tortillas
+* 4 wheat tortillas
 
 ## Preparation
 
