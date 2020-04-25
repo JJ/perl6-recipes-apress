@@ -20,7 +20,7 @@ subtest "Test units", {
             "clove", "Parses integers" );
 }
 
-subtest "Test ingrediets", {
+subtest "Test ingredients", {
     my $_300g = Raku::Recipes::Grammar::Ingredients.subparse( "300g",
             rule => 'ingredient');
     is( $_300g, "300g", "Parses 300g" );
@@ -33,4 +33,12 @@ subtest "Test ingrediets", {
     is( ~$_1-clove<unit>, "clove", "Parses unit OK");
 }
 
+subtest "Test items", {
+    my $item = Raku::Recipes::Grammar::Ingredients.subparse("* 2 tbsps",
+            rule => 'row' );
+    is( $item, "* 2 tbsps", "Parses item");
+    is( +$item<item><quantity>, 2, "Parses number OK");
+    is( $item<item><unit>, "tbsps", "Parses unit OK");
+
+}
 done-testing;
