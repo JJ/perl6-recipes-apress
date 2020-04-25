@@ -34,11 +34,11 @@ subtest "Test ingredients", {
 }
 
 subtest "Test items", {
-    use Grammar::Tracer;
     my $item = Raku::Recipes::Grammar::Ingredients.parse("* 2 tbsps");
     is( $item, "* 2 tbsps", "Parses item");
-    is( +$item<item><quantity>, 2, "Parses number OK");
-    is( $item<item><unit>, "tbsps", "Parses unit OK");
+    say $item.raku;
+    is( +$item<row><ingredient><quantity>, 2, "Parses number OK");
+    is( $item<row><ingredient><unit>, "tbsps", "Parses unit OK");
 
 }
 done-testing;
