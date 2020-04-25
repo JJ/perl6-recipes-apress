@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress", "System"
     ],
-    "depends" : [ "Grammar::Tracer", "Grammar::ErrorReporting"],
+    "depends" : [ "Grammar::Tracer", "Grammar::PrettyErrors"],
     "version" : "0.0.1"
 }

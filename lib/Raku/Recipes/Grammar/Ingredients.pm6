@@ -1,5 +1,3 @@
-use Grammar::Tracer;
-
 unit grammar Raku::Recipes::Grammar::Ingredients;
 
 token TOP     { <row> }
