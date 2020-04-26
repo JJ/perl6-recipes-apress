@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress", "System"
     ],
-    "depends" : [ "GeoIP2"],
+    "depends" : [ "GeoIP2","HTTP::UserAgent"],
     "version" : "0.0.1"
 }
