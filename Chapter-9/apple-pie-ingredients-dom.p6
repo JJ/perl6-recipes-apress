@@ -1,17 +1,18 @@
 #!/usr/bin/env perl6
 
 use WWW;
+use DOM::Tiny;
 
 
 my $URL = @*ARGS[0] // "https://en.wikibooks.org/wiki/Cookbook:Apple_Pie_I";
-my $recipr = HTTP::UserAgent.new;
-my $response = $recipr.get($URL);
+my $content = get($URL);
 
-die $response.status-line unless $response.is-success;
+die "That $URL didn't work" unless $content;
 
-my $ingredients = ( $response.content.split(/"<h2>"/))[1];
+my @all-lis = DOM::Tiny.parse( $content).find('li').map: ~*;
 
-my @ingredients = ($ingredients ~~ m:g/"\/Cookbook:"(\w+)/);
+my @my-lis = @all-lis.grep( /title..Cookbook ":"/)
+        .map( { DOM::Tiny.parse( $_ ) } );
+say @my-lis;
 
-say @ingredients.map( ~*[0] ).unique;
-
+say @my-lis.map( "→ " ~ *).join("\n");
