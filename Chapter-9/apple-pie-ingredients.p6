@@ -11,5 +11,7 @@ die $response.status-line unless $response.is-success;
 
 my $ingredients = ( $response.content.split(/"<h2>"/))[1];
 
-say $ingredients;
+my @ingredients = ($ingredients ~~ m:g/"\/Cookbook:"(\w+)/);
+
+say @ingredients.map( ~*[0] ).unique;
 
