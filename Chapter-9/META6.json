@@ -11,6 +11,6 @@
 	"book","Apress", "System"
     ],
     "depends" : [ "GeoIP2","HTTP::UserAgent", "DOM::Tiny", "WWW",
-        "Cro::HTTP", "JSON::Fast"],
+        "Cro::HTTP", "JSON::Fast", "Wikidata::API"],
     "version" : "0.0.1"
 }
