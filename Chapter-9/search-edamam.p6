@@ -13,5 +13,7 @@ my $cro = Cro::HTTP::Client.new(base-uri => "https://api.edamam.com/" );
 
 my $response = await $cro.get( "search?q=$ingredient"~ $api-req);
 
-say await $response.body;
+my %data = await $response.body;
+
+say %data<hits>.map( *<recipe><label> ).join: "\n";
 
