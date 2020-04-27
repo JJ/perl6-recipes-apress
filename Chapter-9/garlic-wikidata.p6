@@ -2,8 +2,14 @@
 
 use Wikidata::API;
 
-my $query = "Chapter-9/ingredients.sparql";
+my $query = "Chapter-9/ingredients.sparql".IO.slurp;
 
 my $recipes-with-garlic= query($query);
 
-say "Recipes with garlic:\n", $recipes-with-garlic;
+say "Recipes with garlic:\n",
+        $recipes-with-garlic<results><bindings>
+            .map: { utf8y( $_<recipeLabel><value>) };
+
+sub utf8y ( $str ) {
+    Buf.new( $str.comb.map( {$_.ord} ) ).decode("utf8")
+}
