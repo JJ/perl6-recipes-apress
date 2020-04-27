@@ -9,10 +9,9 @@ my $content = get($URL);
 
 die "That $URL didn't work" unless $content;
 
-my @all-lis = DOM::Tiny.parse( $content).find('li').map: ~*;
+my @all-lis = DOM::Tiny.parse( $content.split(/"<h2>"/)[1]).find('li').map: ~*;
 
 my @my-lis = @all-lis.grep( /title..Cookbook ":"/)
         .map( { DOM::Tiny.parse( $_ ) } );
-say @my-lis;
 
-say @my-lis.map( "→ " ~ *).join("\n");
+say @my-lis.map( "→ " ~ *.all-text).unique.join("\n");
