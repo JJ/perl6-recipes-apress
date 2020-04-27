@@ -11,5 +11,7 @@ my $ingredient = @*ARGS[0] // "water";
 
 my $cro = Cro::HTTP::Client.new(base-uri => "https://api.edamam.com/" );
 
-say await $cro.get( "search?q=$ingredient"~ $api-req);
+my $response = await $cro.get( "search?q=$ingredient"~ $api-req);
+
+say await $response.body;
 
