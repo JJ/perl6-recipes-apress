@@ -10,6 +10,7 @@
     "tags" : [
 	"book","Apress", "System"
     ],
-    "depends" : [ "GeoIP2","HTTP::UserAgent", "DOM::Tiny", "WWW"],
+    "depends" : [ "GeoIP2","HTTP::UserAgent", "DOM::Tiny", "WWW",
+        "Cro::HTTP", "JSON::Fast"],
     "version" : "0.0.1"
 }
