@@ -11,13 +11,14 @@ our @products is export;
 
 #| Gets all recipes in the tree
 sub recipes( $dir = "recipes/") is export {
-    gather for dir($dir) -> $f {
+    my @files = gather for dir($dir) -> $f {
         if ( $f.IO.f ) {
             take $f
         } else {
-            take tree($f);
+            take recipes($f);
         }
     }
+    return @files.List.flat;
 }
 
 #| Parses measure to return an array with components
