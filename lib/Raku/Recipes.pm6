@@ -9,6 +9,17 @@ our %calories-table is export;
 
 our @products is export;
 
+#| Gets all recipes in the tree
+sub recipes( $dir = "recipes/") is export {
+    gather for dir($dir) -> $f {
+        if ( $f.IO.f ) {
+            take $f
+        } else {
+            take tree($f);
+        }
+    }
+}
+
 #| Parses measure to return an array with components
 sub parse-measure ( $description ) is export {
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;

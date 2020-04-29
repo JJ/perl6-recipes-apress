@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress"
     ],
-    "depends" : [ "File::Compare", "Algorithm::Diff", "Text::Diff::Sift4", "Text::Markdown"],
+    "depends" : [ "File::Compare", "Algorithm::Diff", "Text::Diff::Sift4", "Text::Markdown", "Markit"],
     "version" : "0.0.1"
 }
