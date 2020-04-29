@@ -6,5 +6,9 @@ use Markit;
 my $md = Markdown.new;
 
 for recipes() -> $recipe {
-    say $md.markdown( $recipe.slurp );
+    my $html = ~$recipe;
+    $html ~~ s/\.md/\.html/;
+    $html ~~ s/recipes/build/;
+    say $html;
+    spurt $html,  $md.markdown( $recipe.slurp );
 }
