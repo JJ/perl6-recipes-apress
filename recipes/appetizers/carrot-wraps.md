@@ -4,7 +4,7 @@ A healthy way to start a meal, or to munch between them.
 
 ## Ingredients
 
-* 5 carrots
+* 250g carrots
 * 200g cottage cheese or cheese spread
 * 4 wheat tortillas
 
