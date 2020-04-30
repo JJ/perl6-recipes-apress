@@ -1,4 +1,6 @@
-h1 { color: #111; font-family: 'Helvetica Neue', sans-serif; font-size: 125px;
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@600&family=Open+Sans&display=swap');
+
+h1 { color: #111; font-family: 'Manrope', sans-serif; font-size: 125px;
 font-weight: bold; letter-spacing: -1px; line-height: 1; text-align: center; }
 
 h2 { color: #111; font-family: 'Open Sans', sans-serif;
@@ -12,8 +14,12 @@ h2::before {
     content: "🍳 ";
 }
 
-li { color: #685206; font-family: 'Helvetica Neue', sans-serif; font-size: 14px;
- line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
+li { color: #685206; font-family: 'Manrope', sans-serif; font-size: 14px;
+ line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify:
+ inter-word; padding: 48px}
 
 p { color: #685206; font-family: 'Open Sans', sans-serif; font-size: 16px;
- line-height: 24px; margin: 0 0 24px; text-align: justify; text-justify: inter-word; }
+ line-height: 24px; margin: 0 0 24px; text-align: justify;
+    text-justify: inter-word;
+    padding:40px
+}
