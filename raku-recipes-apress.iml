@@ -1966,5 +1966,117 @@
         </SOURCES>
       </library>
     </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Slang::Tuxic" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Slang::Tuxic!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Colorizable" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Colorizable!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="HTML::Escape" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:HTML::Escape!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="File::Directory::Tree" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:File::Directory::Tree!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Text::Markdown" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Text::Markdown!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Text::CSV" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Text::CSV!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="File::Temp" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:File::Temp!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Slang::Tuxic" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Slang::Tuxic!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Colorizable" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Colorizable!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="HTML::Escape" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:HTML::Escape!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="File::Directory::Tree" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:File::Directory::Tree!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Text::Markdown" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Text::Markdown!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="Text::CSV" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:Text::CSV!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library name="File::Temp" type="perl6">
+        <CLASSES />
+        <SOURCES>
+          <root url="raku://1165951813:File::Temp!/" />
+        </SOURCES>
+      </library>
+    </orderEntry>
   </component>
 </module>
