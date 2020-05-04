@@ -13,8 +13,8 @@ my &generate-page := template :($content), $template-file;
 
 for recipes() -> $recipe {
     my $html-fragment = recipe($md,$recipe);
-    my $page = generate-page( $html-fragment );
-    say $page;
+    my @page = generate-page( $html-fragment );
+    say @page.eager.join;
 }
 
 sub recipe( $md, $recipe ) {
