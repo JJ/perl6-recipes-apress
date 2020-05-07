@@ -3,18 +3,21 @@
 use Raku::Recipes;
 use Markit;
 use Template::Classic;
+use Text::Markdown;
 
-my $template-name="templates/recipe.html";
+my $template-name="templates/recipe-with-title.html";
 my $template-file = "resources/$template-name".IO.e
-                ??"resources/$template-name".IO.slurp
-                !!%?RESOURCES{$template-name}.slurp;
+        ??"resources/$template-name".IO.slurp
+        !!%?RESOURCES{$template-name}.slurp;
 
 my $md = Markdown.new;
-my &generate-page := template :($content), $template-file;
+my &generate-page := template :($title,$content), $template-file;
 
 for recipes() -> $recipe {
+    my $this-md = parse-markdown-from-file($recipe.path);
     my $html-fragment = recipe($md,$recipe);
-    my @page = generate-page( $html-fragment );
+    note "Can't find title for $recipe" unless $this-md.document.items[0].text;
+    my @page = generate-page( $this-md.document.items[0].text, $html-fragment );
     spurt-with-dir($recipe, @page.eager.join );
 }
 
