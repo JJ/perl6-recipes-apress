@@ -5,20 +5,30 @@ use Markit;
 use Template::Classic;
 use Text::Markdown;
 
-my $template-name="templates/recipe-with-title.html";
-my $template-file = "resources/$template-name".IO.e
-        ??"resources/$template-name".IO.slurp
-        !!%?RESOURCES{$template-name}.slurp;
-
 my $md = Markdown.new;
-my &generate-page := template :($title,$content), $template-file;
+my &generate-page := template :($title,$content),
+                        template-file( "templates/recipe-with-title.html" );
 
+my %links;
 for recipes() -> $recipe {
     my $this-md = parse-markdown-from-file($recipe.path);
     my $html-fragment = recipe($md,$recipe);
-    note "Can't find title for $recipe" unless $this-md.document.items[0].text;
-    my @page = generate-page( $this-md.document.items[0].text, $html-fragment );
-    spurt-with-dir($recipe, @page.eager.join );
+    my $title = $this-md.document.items[0].text;
+    note "Can't find title for $recipe" unless $title;
+    my @page = generate-page( $title, $html-fragment );
+    my $path = spurt-with-dir($recipe, @page.eager.join );
+    %links{$path .= subst( "build/", '' )} = $title;
+}
+
+my &generate-index:= template :( %links ),
+                        template-file( "templates/recipes-index.html" );
+
+spurt("build/index.html", generate-index( %links ).eager.join);
+
+sub template-file( $template-file-name ) {
+    "resources/$template-file-name".IO.e
+            ??"resources/$template-file-name".IO.slurp
+            !!%?RESOURCES{$template-file-name}.slurp;
 }
 
 sub recipe( $md, $recipe ) {
@@ -33,5 +43,5 @@ sub spurt-with-dir( $file-path, $content ) {
     my $html-dir = $html-path.dirname.IO;
     $html-dir.mkdir unless $html-dir.d;
     spurt $html-path-name,  $content;
-
+    return $html-path-name;
 }
