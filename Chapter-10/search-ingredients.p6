@@ -22,5 +22,6 @@ my $recipe-query =  Data::StaticTable::Query.new($recipes); # Query object
 
 $recipe-query.add-index( "Ingredients" );
 
-my Data::StaticTable::Position @rice = $recipe-query.grep(rx/rice/, 'Ingredients'):n;
+my Data::StaticTable::Position @rice = $recipe-query.grep(rx/rice/,
+        'Ingredients',n => True);
 say $recipes.take( @rice ).display;
