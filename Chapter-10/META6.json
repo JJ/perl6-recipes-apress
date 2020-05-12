@@ -2,13 +2,13 @@
     "authors" : [
 	"JJ Merelo"
     ],
-    "description" : "Perl 6 Recipes",
+    "description" : "Raku Recipes",
     "license" : "Artistic-2.0",
-    "name" : "Perl 6 Recipes examples, Chapter 10",
+    "name" : "Raku Recipes examples, Chapter 10",
     "perl" : "6.d",
     "provides" : { },
     "tags" : [
-	"book","Apress"
+	"book","Apress","Text", "Markdown"
     ],
     "depends" : [ "File::Compare", "Algorithm::Diff", "Text::Diff::Sift4", "Text::Markdown", "Markit", "Template::Classic","Data::StaticTable"],
     "version" : "0.0.1"
