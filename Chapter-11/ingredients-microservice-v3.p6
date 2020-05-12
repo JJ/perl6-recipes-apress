@@ -7,11 +7,17 @@ use Raku::Recipes;
 
 my $rrr = Raku::Recipes::Roly.new();
 
-my $recipes = route {
-    get -> 'content', *@path {
-        static 'build/', @path, :indexes<index.html index.htm>;
+sub static-routes {
+    route {
+        get -> *@path {
+            static 'build/', @path, :indexes<index.html index.htm>;
+        }
     }
 
+}
+
+my $recipes = route {
+    include "content" => static-routes;
     get -> "Type", Str $type where $type ∈ @food-types {
         my %ingredients-table = $rrr.calories-table;
         my @result =  %ingredients-table.keys.grep: {
