@@ -42,9 +42,9 @@ sub ingredient-routes {
 }
 
 my $recipes = route {
-    include "content"    => static-routes;
-    include "Type"       => type-routes;
-    include "Ingredient" => ingredient-routes;
+    include "content"    => static-routes,
+            "Type"       => type-routes,
+            "Ingredient" => ingredient-routes;
 
 }
 
