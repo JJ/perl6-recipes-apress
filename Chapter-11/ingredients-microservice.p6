@@ -2,10 +2,13 @@
 
 use Cro::HTTP::Server;
 use Cro::HTTP::Router;
+use Raku::Recipes::Roly;
+
+my $rrr = Raku::Recipes::Roly.new();
 
 my $recipes = route {
-    get -> {
-        content 'text/html', 'Hello World!';
+    get -> "Ingredient", Str $ingredient {
+        content 'application/json', $rrr.calories-table{$ingredient};
     }
 }
 
