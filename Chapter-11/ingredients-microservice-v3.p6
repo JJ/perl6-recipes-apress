@@ -16,14 +16,23 @@ sub static-routes {
 
 }
 
+sub type-routes {
+    route {
+        get -> Str $type where $type ∈ @food-types {
+            my %ingredients-table = $rrr.calories-table;
+            my @result =  %ingredients-table.keys.grep: {
+                %ingredients-table{$_}{$type} };
+            content 'application/json', @result;
+        }
+        get -> Str $type where $type ∉ @food-types {
+            not-found;
+        }
+    }
+}
+
 my $recipes = route {
     include "content" => static-routes;
-    get -> "Type", Str $type where $type ∈ @food-types {
-        my %ingredients-table = $rrr.calories-table;
-        my @result =  %ingredients-table.keys.grep: {
-            %ingredients-table{$_}{$type} };
-        content 'application/json', @result;
-    }
+    include "Type"    => type-routes;
 
     get -> "Ingredient", Str $ingredient where $rrr.is-ingredient($ingredient) {
         content 'application/json', $rrr.calories-table{$ingredient};
