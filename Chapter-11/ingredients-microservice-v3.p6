@@ -30,17 +30,22 @@ sub type-routes {
     }
 }
 
-my $recipes = route {
-    include "content" => static-routes;
-    include "Type"    => type-routes;
+sub ingredient-routes {
+    route {
+        get -> Str $ingredient where $rrr.is-ingredient($ingredient) {
+            content 'application/json', $rrr.calories-table{$ingredient};
+        }
+        get -> Str $ingredient where !$rrr.is-ingredient($ingredient) {
+            not-found;
+        }
+    }
+}
 
-    get -> "Ingredient", Str $ingredient where $rrr.is-ingredient($ingredient) {
-        content 'application/json', $rrr.calories-table{$ingredient};
-    }
-    get -> "Ingredient",
-           Str $ingredient where !$rrr.is-ingredient($ingredient) {
-        not-found;
-    }
+my $recipes = route {
+    include "content"    => static-routes;
+    include "Type"       => type-routes;
+    include "Ingredient" => ingredient-routes;
+
 }
 
 my Cro::Service $μservice = Cro::HTTP::Server.new(
