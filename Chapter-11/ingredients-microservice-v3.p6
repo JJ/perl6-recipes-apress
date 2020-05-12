@@ -3,12 +3,20 @@
 use Cro::HTTP::Server;
 use Cro::HTTP::Router;
 use Raku::Recipes::Roly;
+use Raku::Recipes;
 
 my $rrr = Raku::Recipes::Roly.new();
 
 my $recipes = route {
     get -> 'content', *@path {
         static 'build/', @path, :indexes<index.html index.htm>;
+    }
+
+    get -> "Type", Str $type where $type ∈ @food-types {
+        my %ingredients-table = $rrr.calories-table;
+        my @result =  %ingredients-table.keys.grep: {
+            %ingredients-table{$_}{$type} };
+        content 'application/json', @result;
     }
 
     get -> "Ingredient", Str $ingredient where $rrr.is-ingredient($ingredient) {
