@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress"
     ],
-    "depends" : [ "Cro::HTTP::Router", "Cro::HTTP::Server" ],
+    "depends" : [ "Cro::HTTP" ],
     "version" : "0.0.1"
 }
