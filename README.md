@@ -1,4 +1,5 @@
-![Tests utility module](https://github.com/JJ/perl6-recipes-apress/workflows/Tests%20utility%20module/badge.svg)
+[![Tests utility module](https://github.com/JJ/perl6-recipes-apress/workflows
+/Tests%20utility%20module/badge.svg)](https://github.com/JJ/perl6-recipes-apress/actions)
 
 # Raku recipes for Apress
 
