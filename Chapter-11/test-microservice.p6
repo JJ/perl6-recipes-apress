@@ -1,16 +1,12 @@
 #!/usr/bin/env perl6
 
 use Cro::HTTP::Test;
-require "ingredients-microservice-v3.p6";
+require "ingredients-microservice-v3.p6" <&static-routes>;
 
-say ::("ingredients-microservice-v3.p6");
-
-my &static-routes-for-testing = ::("ingredients-microservice-v3.p6::TEST::EXPORT::DEFAULT:&static-routes");
-
-test-service static-routes-for-testing, {
-    test get('/content/'),
+test-service static-routes, {
+    test get('/'),
             status => 200,
-            content-type => 'text/HTML',
+            content-type => 'text/html',
             body => /recipes/;
 }
 
