@@ -7,7 +7,7 @@ use Raku::Recipes;
 
 my $rrr = Raku::Recipes::Roly.new();
 
-sub static-routes {
+sub static-routes is export {
     route {
         get -> *@path {
             static 'build/', @path, :indexes<index.html index.htm>;
@@ -16,7 +16,7 @@ sub static-routes {
 
 }
 
-sub type-routes {
+sub type-routes is export {
     route {
         get -> Str $type where $type ∈ @food-types {
             my %ingredients-table = $rrr.calories-table;
@@ -30,7 +30,7 @@ sub type-routes {
     }
 }
 
-sub ingredient-routes {
+sub ingredient-routes is export {
     route {
         get -> Str $ingredient where $rrr.is-ingredient($ingredient) {
             content 'application/json', $rrr.calories-table{$ingredient};
@@ -48,13 +48,16 @@ my $recipes = route {
 
 }
 
-my Cro::Service $μservice = Cro::HTTP::Server.new(
-        :host('localhost'), :port(31415), application => $recipes
-);
+if ( $*PROGRAM eq $?FILE ) {
+    my Cro::Service $μservice = Cro::HTTP::Server.new(
+            :host('localhost'), :port(31415), application => $recipes
+            );
 
-$μservice.start;
+    say "Starting service";
+    $μservice.start;
 
-react whenever signal(SIGINT) {
-    $μservice.stop;
-    exit;
+    react whenever signal(SIGINT) {
+        $μservice.stop;
+        exit;
+    }
 }
