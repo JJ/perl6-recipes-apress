@@ -31,7 +31,11 @@ test-service ingredient-routes, {
     test get("Apple"),
             status => 200,
             content-type => "application/json",
-            body => /Vegan/;
+            body => *<Vegan> == True;
+    test get("Olive%20Oil"),
+            status => 200,
+            content-type => "application/json",
+            body => *<Vegan> == True;
     test get("Fishtails"),
         status => 404;
 }
