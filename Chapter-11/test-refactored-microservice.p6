@@ -8,20 +8,28 @@ test-service static-routes, {
             status => 200,
             content-type => 'text/html',
             body => /recipes/;
+    test get("/foo"),
+        status => 404;
 }
 
 test-service type-routes, {
+
     test get("Dessert"),
         status => 200,
         content-type => "application/json",
-        body => /Apple/
+        body => /Apple/;
+
+    test get("foo"),
+            status => 404;
 }
 
 test-service ingredient-routes, {
     test get("Apple"),
             status => 200,
             content-type => "application/json",
-            body => /Vegan/
+            body => /Vegan/;
+    test get("Fishtails"),
+        status => 404;
 }
 
 done-testing;

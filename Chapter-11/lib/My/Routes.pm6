@@ -24,9 +24,6 @@ sub type-routes is export {
                 %ingredients-table{$_}{$type} };
             content 'application/json', @result;
         }
-        get -> Str $type where $type ∉ @food-types {
-            not-found;
-        }
     }
 }
 
@@ -34,9 +31,6 @@ sub ingredient-routes is export {
     route {
         get -> Str $ingredient where $rrr.is-ingredient($ingredient) {
             content 'application/json', $rrr.calories-table{$ingredient};
-        }
-        get -> Str $ingredient where !$rrr.is-ingredient($ingredient) {
-            not-found;
         }
     }
 }
