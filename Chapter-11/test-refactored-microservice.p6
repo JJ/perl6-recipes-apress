@@ -18,10 +18,9 @@ test-service static-routes, {
 
 test-service type-routes, {
 
-    test get("Dessert"),
-        status => 200,
-        content-type => "application/json",
-        body => /Apple/;
+        test get("Dessert"),
+            status => 200,
+            json => /Apple/;
 
     test get("foo"),
             status => 404;
