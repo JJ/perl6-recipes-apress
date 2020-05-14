@@ -9,7 +9,7 @@ our $rrr = Raku::Recipes::Roly.new();
 sub static-routes is export {
     route {
         get -> *@path {
-            static 'build/', @path, :indexes<index.html index.htm>;
+            static 'build/', @path, :indexes<index.html>;
         }
     }
 

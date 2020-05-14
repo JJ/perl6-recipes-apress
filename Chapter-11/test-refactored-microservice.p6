@@ -8,6 +8,10 @@ test-service static-routes, {
             status => 200,
             content-type => 'text/html',
             body => /recipes/;
+    test get('/index.html'),
+            status => 200,
+            content-type => 'text/html',
+            body => /"Recipes: index"/;
     test get("/foo"),
         status => 404;
 }
