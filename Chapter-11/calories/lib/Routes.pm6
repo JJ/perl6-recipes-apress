@@ -19,8 +19,10 @@ sub routes() is export {
                         my $item =
                                 Raku::Recipes::Grammar::Measured-Ingredients
                                 .parse( $text );
-                        my $calories = $rrr.calories( $item<ingredient>,
-                                +$item<ingredient>);
+                        say $item<ingredient>;
+                        say $item<quantity>;
+                        my $calories = $rrr.calories( ~$item<ingredient>,
+                                +$item<quantity>);
                         emit "Calories: for $text ⇒ $calories";
                     }
                 }
