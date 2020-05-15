@@ -16,6 +16,8 @@
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
     "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6",
     "Raku::Recipes::Grammar::Ingredients": "lib/Raku/Recipes/Grammar/Ingredients.pm6",
+    "Raku::Recipes::Grammar::Measured-Ingredients": "lib/Raku/Recipes/Grammar/Measured-Ingredients.pm6",
+    "Raku::Recipes::Grammar::Measures": "lib/Raku/Recipes/Grammar/Measures.pm6",
     "Raku::Recipes::Roly": "lib/Raku/Recipes/Roly.pm6",
     "Raku::Recipes::Texts": "lib/Raku/Recipes/Texts.pm6",
     "X::Raku::Chapter5::Recipes": "lib/X/Raku/Chapter5/Recipes.pm6",
