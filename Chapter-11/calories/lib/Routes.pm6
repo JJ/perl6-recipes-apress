@@ -3,12 +3,8 @@ use Cro::HTTP::Router::WebSocket;
 
 sub routes() is export {
     route {
-        get -> {
-            content 'text/html', "<h1>Recipes: calories computer </h1>";
-        }
-
         my $chat = Supplier.new;
-        get -> 'chat' {
+        get -> 'calories' {
             web-socket -> $incoming {
                 supply {
                     whenever $incoming -> $message {
