@@ -9,4 +9,4 @@ unit grammar Raku::Recipes::Grammar::Quantified-Ingredients;
 token TOP      { <quantity> [\h* <unit> \h+ <ingredient> | \h+ <ingredient>]}
 token quantity { <:N>+ }
 token unit     { "g" | "tbsp" | "clove" | "tbsps" | "cloves" }
-token ingredient { @products }
+token ingredient {:i @products }
