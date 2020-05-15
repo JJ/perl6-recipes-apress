@@ -1,5 +1,9 @@
 use Cro::HTTP::Router;
 use Cro::HTTP::Router::WebSocket;
+use Raku::Recipes::Grammar::Measured-Ingredients;
+use Raku::Recipes::Roly;
+
+my $rrr = Raku::Recipes::Roly.new;
 
 sub routes() is export {
     route {
@@ -12,7 +16,12 @@ sub routes() is export {
                     }
                     whenever $chat -> $text {
                         # Compute calories here
-                        emit $text;
+                        my $item =
+                                Raku::Recipes::Grammar::Measured-Ingredients
+                                .parse( $text );
+                        my $calories = $rrr.calories( $item<ingredient>,
+                                +$item<ingredient>);
+                        emit "Calories: for $text ⇒ $calories";
                     }
                 }
             }
