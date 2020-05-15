@@ -12,15 +12,11 @@ const endpoint = Deno.args[0] || "ws://127.0.0.1:31415/calories";
 /** simple websocket cli */
 try {
   const sock = await connectWebSocket(endpoint);
-  console.log(green("ws connected! (type 'close' to quit)"));
+  console.log(green("«Calories» webservice connected! (type 'close' to quit)"));
   const messages = async (): Promise<void> => {
     for await (const msg of sock) {
       if (typeof msg === "string") {
         console.log(yellow(`< ${msg}`));
-      } else if (isWebSocketPingEvent(msg)) {
-        console.log(blue("< ping"));
-      } else if (isWebSocketPongEvent(msg)) {
-        console.log(blue("< pong"));
       } else if (isWebSocketCloseEvent(msg)) {
         console.log(red(`closed: code=${msg.code}, reason=${msg.reason}`));
       }
@@ -31,13 +27,8 @@ try {
     while (true) {
       await Deno.stdout.write(encode("> "));
       const line = await tpr.readLine();
-      if (line === null) {
+      if (line === null || line === "close") {
         break;
-      }
-      if (line === "close") {
-        break;
-      } else if (line === "ping") {
-        await sock.ping();
       } else {
         await sock.send(line);
       }
