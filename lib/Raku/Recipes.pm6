@@ -1,7 +1,7 @@
 use Text::CSV;
 
 #| Utility functions for the Raku Recipes book
-unit module Raku::Recipes::Roly;
+unit module Raku::Recipes;
 
 our @food-types is export = <Vegan Main Side Dessert Dairy>;
 
