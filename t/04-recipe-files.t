@@ -11,5 +11,7 @@ subtest "Test basic load", {
             "We have buckwheat pudding");
     ok( %recipes{"Buckwheat pudding"},
             "Includes key «$_»" ) for <description ingredients>;
+    like( %recipes{"Buckwheat pudding"}<path>, /buckwheat\-pudding/,
+    "Path is OK" );
 }
 done-testing;

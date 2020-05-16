@@ -1,5 +1,7 @@
 use Raku::Recipes;
 use Text::Markdown;
+use Markit;
+use Template::Classic;
 
 unit class Raku::Recipes::Texts;
 
@@ -16,9 +18,10 @@ method new( $dir where .IO.d  = "recipes") {
             .grep( !*.numbered )
             .map( *[0].items);
         %recipes{$title} = { description => $description,
-                             ingredients => @ingredients
+                             ingredients => @ingredients,
+                             path => $r.path }
+
         }
-    }
     self.bless( :%recipes );
 
 }
