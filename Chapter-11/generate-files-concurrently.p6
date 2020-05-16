@@ -2,13 +2,13 @@
 
 use Raku::Recipes::Texts;
 
-my $recipes-text = Raku::Recipes::Texts.new();
 my $builder = Channel.new;
 
 my $p = start {
     react {
         whenever $builder {
             say "Building…";
+            my $recipes-text = Raku::Recipes::Texts.new();
             $recipes-text.generate-site()
         }
     }
