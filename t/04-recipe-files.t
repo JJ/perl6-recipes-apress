@@ -14,4 +14,8 @@ subtest "Test basic load", {
     like( %recipes{"Buckwheat pudding"}<path>, /buckwheat\-pudding/,
     "Path is OK" );
 }
+
+subtest "Generate site", {
+    lives-ok { $recipes-text.generate-site() }, "Generates site";
+}
 done-testing;
