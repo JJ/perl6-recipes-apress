@@ -10,7 +10,9 @@
   "depends": [
     "Text::Markdown",
     "Colorizable",
-    "Text::CSV"
+    "Text::CSV",
+    "Markit",
+    "Template::Classic"
   ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
