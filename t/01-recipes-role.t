@@ -32,7 +32,14 @@ subtest "Food types are correct", {
     ok $rr.check-type( "Tuna", "Main"), "Tuna is main";
     ok $rr.check-type( "Rice", "Vegan" ), "Rice is vegan";
     ok $rr.check-type( "Apple", "Dessert"), "Apple is dessert";
-    ok $rr.check-type( "Egg", "Dairy"); "Apple is dairy";
+    ok $rr.check-type( "Egg", "Dairy"), "Egg is dairy";
+}
+
+subtest "U tnitypes are correct", {
+    ok $rr.check-unit( "Tuna", "g"), "Tuna uses g";
+    ok $rr.check-unit( "Beer", "liter" ), "Beer uses liters";
+    ok $rr.check-unit( "Apple", "Unit"), "Apple use units";
+    ok $rr.check-unit( "Olive Oil", "tablespoon"), "Oil measured in tablespoons";
 }
 
 subtest "Composing dishes", {

@@ -7,7 +7,8 @@ unit module Raku::Recipes;
 our @food-types is export = <Vegan Main Side Dessert Dairy>;
 
 #| Unit that can be used to describe quantities
-our @unit-types is export = <g  tbsp clove tbsps cloves liters l tablespoons>;
+our @unit-types is export = <g tbsp clove tbsps cloves liters liter l
+tablespoons Unit tablespoon>;
 
 our %calories-table is export;
 

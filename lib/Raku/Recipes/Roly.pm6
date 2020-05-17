@@ -124,5 +124,5 @@ method check-type( Str $ingredient where $ingredient ∈ %!calories-table.keys,
 #| Check type of ingredient
 method check-unit( Str $ingredient where $ingredient ∈ %!calories-table.keys,
                    Str $unit where $unit ∈ @unit-types --> Bool ) {
-    return;
+    return %!calories-table{$ingredient}<parsed-measures>[1] eq $unit;
 }
