@@ -3,7 +3,11 @@ use Text::CSV;
 #| Utility functions for the Raku Recipes book
 unit module Raku::Recipes;
 
+# Types of food that are checked
 our @food-types is export = <Vegan Main Side Dessert Dairy>;
+
+#| Unit that can be used to describe quantities
+our @unit-types is export = <g  tbsp clove tbsps cloves liters l tablespoons>;
 
 our %calories-table is export;
 
