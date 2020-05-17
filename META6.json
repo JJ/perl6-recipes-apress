@@ -17,6 +17,7 @@
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
     "Raku::Recipes::Classy": "lib/Raku/Recipes/Classy.pm6",
+    "Raku::Recipes::Grammar::Actions": "lib/Raku/Recipes/Grammar/Actions.pm6",
     "Raku::Recipes::Grammar::Ingredients": "lib/Raku/Recipes/Grammar/Ingredients.pm6",
     "Raku::Recipes::Grammar::Measured-Ingredients": "lib/Raku/Recipes/Grammar/Measured-Ingredients.pm6",
     "Raku::Recipes::Grammar::Measures": "lib/Raku/Recipes/Grammar/Measures.pm6",
