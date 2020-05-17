@@ -88,12 +88,17 @@ multi method is-ingredient( Str $product where $product ∉ self.products() -->
 
 #| Compute calories, given a product and a quantity. Raises exception if the
 #| product does not exist.
-method calories( Str $product is copy, $quantity) {
+multi method calories( Str $product is copy, $quantity) {
     $product = tc $product;
     X::Raku::Recipes::Missing::Product.new(:product($product)).throw
             unless $product ∈ self.products();
     return %!calories-table{$product}<Calories>*$quantity
             /%!calories-table{$product}<parsed-measures>[0];
+}
+
+#| Compute calories, given a Pair ingredient => unit => quantity
+multi method calories( Pair $ingredient ) {
+    return self.calories( $ingredient.key, $ingredient.value.value );
 }
 
 #| Computes calories for a dish composed of main and side.

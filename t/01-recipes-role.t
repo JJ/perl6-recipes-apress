@@ -21,6 +21,7 @@ subtest "Particular ingredients and measures are OK", {
             X::Raku::Recipes::Missing::Product,
             "Not an ingredient";
     is( $rr.calories("Rice",300), 390, "Correct calories for rice");
+    is( $rr.calories("Rice" => "g" => 300), 390, "Correct calories for Pair");
 };
 
 subtest "There's documentation for the module", {
