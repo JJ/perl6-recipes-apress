@@ -15,5 +15,13 @@ subtest "Test items", {
         is(.value.key, "Unit", "Unit parsed");
         is(.value.value, 2, "Measure parsed");
     }
+
+    throws-like
+            { Raku::Recipes::Grammar::Measured-Ingredients.parse("2g apple",
+                    actions =>
+                    Raku::Recipes::Grammar::Actions::Measured-Ingredients.new);
+            },
+        X::Raku::Recipes::WrongUnit,
+        "Raises error with wrong unit";
 }
 done-testing;

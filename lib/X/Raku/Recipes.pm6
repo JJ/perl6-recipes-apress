@@ -20,7 +20,7 @@ class X::Raku::Recipes::WrongUnit:api<1> is Exception {
                     :$!unit) {}
 
     method message() {
-        return "$!unit does not match the product, should be $!desired-unit";
+        return "$!unit does not match the unit type, should be $!desired-unit";
     }
 }
 
