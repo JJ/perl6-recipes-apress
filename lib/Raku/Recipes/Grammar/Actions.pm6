@@ -2,7 +2,8 @@ unit module Raku::Recipes::Grammar::Actions;
 
 class Measured-Ingredients {
     method TOP($/) {
-        make $/<ingredient>.made =>  $/<unit>.made => $/<quantity>.made
+        my $unit = $/<unit>.made // "Unit";
+        make $/<ingredient>.made =>  $unit => $/<quantity>.made
     }
     method ingredient($/) {
         make tc ~$/;
