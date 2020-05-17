@@ -8,10 +8,11 @@ use Raku::Recipes::Roly;
 my $bot = Telegram::Bot.new(%*ENV<RAKU_RECIPES_BOT_TOKEN>);
 my $rrr = Raku::Recipes::Roly.new;
 
-$bot.start(1); # Starts scanning for updates every second; defaults to every 2 seconds
+$bot.start(1);
 
 react {
     whenever $bot.messagesTap -> $msg {
+        say $msg.raku;
         my $item =  Raku::Recipes::Grammar::Measured-Ingredients.parse(
                 $msg.text,
                 actions =>
