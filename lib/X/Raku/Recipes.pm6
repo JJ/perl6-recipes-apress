@@ -12,6 +12,18 @@ class X::Raku::Recipes::WrongType:api<1> is Exception {
     }
 }
 
+class X::Raku::Recipes::WrongUnit:api<1> is Exception {
+    has $!desired-unit is required;
+    has $!unit;
+
+    submethod BUILD(:$!desired-unit,
+                    :$!unit) {}
+
+    method message() {
+        return "$!unit does not match the product, should be $!desired-unit";
+    }
+}
+
 role X::Raku::Recipes::Missing:api<1> is Exception {
     has $!part is required;
     has $!name is required;
