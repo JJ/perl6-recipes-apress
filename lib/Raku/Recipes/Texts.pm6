@@ -26,7 +26,7 @@ method new( $dir where .IO.d  = "recipes") {
 
 }
 
-method generate-site( $build-dir is copy where .IO.d = "build/") {
+method generate-site( $build-dir is copy = "build/") {
     $build-dir ~= "/" unless $build-dir ~~ m{"/"$$};
     my $md = Markdown.new;
     my &generate-page := template :($title,$content),
