@@ -7,8 +7,8 @@ use Libarchive::Filter;
 my @files = dir( "/var/log", test => { "/var/log/$_".IO.f } );
 
 while @files {
-    my $file = choose( @files.map( *.Str ), :prompt("Choose file or 'q' to
-exit") );
+    my $file = choose( @files.map( *.Str ),
+            :prompt("Choose file or 'q' to exit") );
     last unless $file;
     my $i;
     my $content;
