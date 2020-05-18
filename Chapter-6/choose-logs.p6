@@ -6,9 +6,10 @@ use Libarchive::Filter;
 
 my @files = dir( "/var/log", test => { "/var/log/$_".IO.f } );
 
-my $file;
-repeat {
-    $file = choose( @files.map( *.Str ), :prompt("Choose file or 'q' to exit") );
+while @files {
+    my $file = choose( @files.map( *.Str ), :prompt("Choose file or 'q' to
+exit") );
+    last unless $file;
     my $i;
     my $content;
     if $file ~~ /\.gz$/ {
@@ -18,5 +19,5 @@ repeat {
     }
     my @lined-file= $content.lines.map: { [ ++$i, $_ ] }
     print-table([ ['⇒',$file], |@lined-file ]);
-} while $file; 
+};
 
