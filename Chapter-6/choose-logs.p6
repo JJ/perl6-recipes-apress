@@ -11,7 +11,7 @@ repeat {
     $file = choose( @files.map( *.Str ), :prompt("Choose file or 'q' to exit") );
     my $i;
     my $content;
-    if $file ~~ /.gz$/ {
+    if $file ~~ /\.gz$/ {
 	$content = archive-decode($file, filter=>'gzip');
     } else {
        $content = $file.IO;
