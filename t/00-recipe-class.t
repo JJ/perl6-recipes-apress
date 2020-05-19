@@ -10,3 +10,4 @@ ok( $recipe, "Can instantiate");
 
 like( $recipe.gist, /"* " {@ingredients[0]} /, "Gist is OK" );
 
+done-testing;
