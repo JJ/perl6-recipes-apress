@@ -29,19 +29,18 @@ sub recipes( $dir = "recipes/") is export {
 #| Parses measure to return an array with components
 sub parse-measure ( $description ) is export {
     $description ~~ / $<unit>=(<:N>*) \s* $<measure>=(\S+) /;
-    my $unit = +$<unit>??+$<unit>!!1;
+    my $unit = +val( ~$<unit>  ) // unival( ~$<unit> );;
     return ($unit,~$<measure>);
 }
 
-multi sub unit-measure ( $description where /^<:N>/ ) is export {
-    $description ~~ / $<unit>=(<:N>+) \s* $<measure>=(\S+) /;
+multi sub unit-measure ( $description
+                         where  /$<unit>=(<:N>+) \s* $<measure>=(\S+) /) is export {
     my $value = +val( ~$<unit>  ) // unival( ~$<unit> );
     return ( $value, ~$<measure> );
 }
 
-multi sub unit-measure ( $description where /^<alpha>/ ) is export {
-    $description ~~ / $<measure>=(\S+) /;
-    return ( 1, ~$<measure> );
+multi sub unit-measure ( $description ) is export {
+    return ( 1, $description.trim );
 }
 
 # Returns the table of calories in the CSV file
