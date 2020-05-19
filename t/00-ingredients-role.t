@@ -7,4 +7,6 @@ my $ingredients = Raku::Recipes::Ingredients.new( :@ingredients );
 ok( $ingredients, "Can instantiate");
 
 class With-Ingredients does Raku::Recipes::Ingredients {};
-ok( With-Ingredients.new( :@ingredients), "Baked in class");
+my $ingredients-mostly = With-Ingredients.new( :@ingredients);
+ok( $ingredients-mostly, "Baked in class");
+like( $ingredients-mostly.gist, /"* " {@ingredients[0]} /, "Gist is OK" );
