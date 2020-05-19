@@ -10,3 +10,5 @@ class With-Ingredients does Raku::Recipes::Ingredients {};
 my $ingredients-mostly = With-Ingredients.new( :@ingredients);
 ok( $ingredients-mostly, "Baked in class");
 like( $ingredients-mostly.gist, /"* " {@ingredients[0]} /, "Gist is OK" );
+is( $ingredients-mostly.how-many, @ingredients.elems,
+        "Number of ingredients correct")

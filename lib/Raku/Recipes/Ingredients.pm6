@@ -3,4 +3,5 @@ unit role Raku::Recipes::Ingredients;
 
 has @.ingredients;
 
-method gist { return @!ingredients.map( "* " ~ * ~ "\n").join; }
+method how-many { return @!ingredients.elems }
+method gist { return @!ingredients.map( "* " ~ * ~ "\n").join }
