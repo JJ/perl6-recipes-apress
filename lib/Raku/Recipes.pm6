@@ -34,8 +34,7 @@ sub parse-measure ( $description ) is export {
 }
 
 multi sub unit-measure ( $description
-                         where  /^^$<unit>=(<:N>+) \s* $<measure>=(\S+) /) is
-                                                                                                 export {
+                         where  /^^$<unit>=(<:N>+) \s* $<measure>=(\S+) /) is export {
     my $value = +val( ~$<unit>  ) // unival( ~$<unit> );
     return ( $value, ~$<measure> );
 }

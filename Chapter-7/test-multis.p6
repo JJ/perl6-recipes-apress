@@ -2,7 +2,7 @@
 
 use Raku::Recipes;
 
-my @measures = 1000.rand xx 10000;
+my @measures = 1000.rand.Int xx 10000;
 
 my @units = <g l liter tablespoon>;
 
