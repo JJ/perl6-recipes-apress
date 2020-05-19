@@ -3,7 +3,6 @@
 use Raku::Recipes;
 
 %calories-table = calories-table();
-say %calories-table;
 
 multi sub how-many-calories( Str $description ){
     return samewith( | $description.split(/\s+/))
@@ -19,7 +18,7 @@ multi sub how-many-calories( Int $how-much, Str $unit, Str $product ) {
         return %calories-table{$product}<Calories> * $how-much
             / %calories-table{$product}<parsed-measures>[0];
     } else {
-        fail;
+        die "Die $how-much $unit $product";
     }
 }
 
@@ -42,18 +41,30 @@ sub gimme-calories( $first, $second?, $third?) {
     }
 }
 
-my @measures = 1000.rand xx 10000;
-my @units = <g l liter tablespoon>;
-my @first  = @measures X~ @units;
+my @measures = 1000.rand.Int xx 10000;
 my @food = <Rice Tuna Lentils>;
-my @final = @first X~ @food.map: {" $_"};
+my @final = @measures.map( {$_ ~ "g "})  X~ @food;
 
-say @final[^10];
+my $start = now;
+for @final {
+    my $calories = how-many-calories($_) ;
+}
+say now - $start;
 
-say how-many-calories( "300g Tuna");
-say how-many-calories( "300g", "Tuna");
-say how-many-calories( 300, "g", "Tuna");
+$start = now;
+for @final {
+    my $calories = gimme-calories($_);
+}
+say now - $start;
 
-say gimme-calories( "300g Tuna");
-say gimme-calories( "300g", "Tuna");
-say gimme-calories( 300, "g", "Tuna");
+$start = now;
+for @measures X @food {
+    my $calories = how-many-calories( @_[0].Int, "g", @_[1]) ;
+}
+say now - $start;
+
+$start = now;
+for @measures X @food {
+    my $calories = gimme-calories( @_[0].Int, "g", @_[1] );
+}
+say now - $start;
