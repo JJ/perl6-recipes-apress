@@ -6,7 +6,7 @@ my @measures = 1000.rand xx 10000;
 
 my @units = <g l liter tablespoon>;
 
-my @strings = @measures X~ @units;
+my @strings  = @measures X~ @units;
 my @things = <Unit Clove Pinch>.pick xx 10000;
 
 @strings.append: @things;
