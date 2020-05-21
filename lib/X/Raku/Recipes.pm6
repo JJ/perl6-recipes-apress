@@ -19,8 +19,7 @@ class X::Raku::Recipes::WrongType:api<1> is Exception {
     }
 
     multi method message() {
-	    return "$!product if not of the required type «$!desired-type», only
-types $!actual-types";
+	    return "$!product is not of the required type «$!desired-type», only types $!actual-types";
     }
 }
 

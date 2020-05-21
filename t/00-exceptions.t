@@ -10,6 +10,7 @@ is $x.product, "Object", "Assigns default type";
 
 $x =  X::Raku::Recipes::WrongType.new( desired-type => "Main",
         product => "Apple");
+$x.throw;
 is $x.product, "Apple", "Assigns real type";
 is $x.actual-types.elems, 2, "Checks real types";
 
