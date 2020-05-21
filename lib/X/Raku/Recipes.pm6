@@ -15,7 +15,7 @@ class X::Raku::Recipes::WrongType:api<1> is Exception {
 
     multi method message( X::Raku::Recipes::WrongType $x where $x.product eq
             "Object": ) {
-        return "The product if not of the required type $!desired-type";
+        return "The product is not of the required type $!desired-type";
     }
 
     multi method message() {

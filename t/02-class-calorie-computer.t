@@ -12,7 +12,7 @@ my %calories-table = $cc.calories-table;
 subtest "Particular ingredients and measures are OK", {
     ok( %calories-table<Rice>, "Rice is there" );
     ok( $cc.is-ingredient("Rice"), "Rice is a product");
-    is( %calories-table<Rice><types>.elems, 5, "Rice food types");
+    is( %calories-table<Rice><types>.elems, 4, "Rice food types");
     nok( $cc.is-ingredient("Lint"), "Lint is not a product");
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
     throws-like  { $cc.calories("boogers",100) },

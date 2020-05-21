@@ -67,7 +67,7 @@ method new( $dir = "." ) {
             }
         }
         for @food-types -> $f {
-            %ingredient<types> ∪= $f;
+            %ingredient<types> ∪= $f if %ingredient{$f};
         }
     };
     @products = %calories-table.keys;
