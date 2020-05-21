@@ -11,5 +11,5 @@ say "Recipes with garlic:\n",
             .map: { utf8y( $_<recipeLabel><value>) };
 
 sub utf8y ( $str ) {
-    Buf.new( $str.comb.map( {$_.ord} ) ).decode("utf8")
+    Buf.new( $str.ords ).decode("utf8")
 }
