@@ -2,14 +2,16 @@
 
 use Raku::Recipes::Calorie-Computer;
 use X::Raku::Recipes;
-use X::Raku::Recipes::Missing;
 
 my $rrr = Raku::Recipes::Calorie-Computer.new();
 my $main = @*ARGS[0] // "Chickpeas";
 my $side = @*ARGS[1] // "Rice";
 
 my $calories = $rrr.calories-for( main => $main => 200,
-        side => $side => 250 );
+                                  side => $side => 250 );
+
+say "Calories for a main dish of $main and side of $side are $calories";
+
 CATCH {
     default {
         given .message {
@@ -18,8 +20,5 @@ CATCH {
         }
         $calories = $rrr.calories-for( main => $main => 200,
                 side => $side => 250 );
-        .resume;
     }
 }
-
-say "Calories for a main dish of $main and side of $side are $calories";
