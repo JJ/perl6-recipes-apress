@@ -18,11 +18,6 @@ subtest "Particular ingredients and measures are OK", {
     is( %calories-table<Rice><types>.elems, 5, "Rice food types");
     nok( $rr.is-ingredient("Lint"), "Lint is not a product");
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
-    throws-like  { $rr.calories("boogers",100) },
-            X::Raku::Recipes::Missing::Product,
-            "Not an ingredient";
-    is( $rr.calories("Rice",300), 390, "Correct calories for rice");
-    is( $rr.calories("Rice" => "g" => 300), 390, "Correct calories for Pair");
 };
 
 subtest "There's documentation for the module", {
@@ -42,20 +37,6 @@ subtest "U tnitypes are correct", {
     ok $rr.check-unit( "Beer", "liter" ), "Beer uses liters";
     ok $rr.check-unit( "Apple", "Unit"), "Apple use units";
     ok $rr.check-unit( "Olive Oil", "tablespoon"), "Oil measured in tablespoons";
-}
-
-subtest "Composing dishes", {
-    throws-like { $rr.calories-for( main => "Whatever" => 300,
-            side => "Whatever" => 3
-            ) },
-            X::Raku::Recipes::Missing::Product, "Whatever not a product";
-    throws-like { $rr.calories-for( main => "Apple" => 300,
-            side => "Whatever" => 3
-            ) },
-          X::Raku::Recipes::WrongType, "Apple not a main dish";
-    is( $rr.calories-for( main => "Tuna" => 250,
-            side => "Rice" => 100  ), 455, "Calories for dish
-computed correctly");
 }
 
 done-testing;
