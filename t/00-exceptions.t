@@ -10,9 +10,8 @@ is $x.product, "Object", "Assigns default type";
 
 $x =  X::Raku::Recipes::WrongType.new( desired-type => "Main",
         product => "Apple");
-$x.throw;
 is $x.product, "Apple", "Assigns real type";
-is $x.actual-types.elems, 2, "Checks real types";
+is $x.actual-types.elems, 2, "Checks actual types";
 
 $x =  X::Raku::Recipes::Missing::File.new( name => "calories-table.csv" );
 isa-ok $x, X::Raku::Recipes::Missing::File, "Type OK";
