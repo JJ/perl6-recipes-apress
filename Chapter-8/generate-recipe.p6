@@ -1,26 +1,23 @@
 #!/usr/bin/env raku
 
-use Raku::Recipes::Roly;
+use Raku::Recipes::Calorie-Computer;
 use X::Raku::Recipes;
 use X::Raku::Recipes::Missing;
 
-my $rrr = Raku::Recipes::Roly.new();
+my $rrr = Raku::Recipes::Calorie-Computer.new();
 my $main = @*ARGS[0] // "Chickpeas";
 my $side = @*ARGS[1] // "Rice";
-my $calories;
 
-try {
-    $calories = $rrr.calories-for( main => $main => 200,
-                                   side => $side => 250 );
-    CATCH {
-        default {
-            given .message {
-                when /Main/ || /$main/ { $main = "Chickpeas" }
-                when /Side/ || /$side/ { $side = "Rice" }
-            }
-            $calories = $rrr.calories-for( main => $main => 200,
-                    side => $side => 250 )
+my $calories = $rrr.calories-for( main => $main => 200,
+        side => $side => 250 );
+CATCH {
+    default {
+        given .message {
+            when /Main/ || /$main/ { $main = "Chickpeas" }
+            when /Side/ || /$side/ { $side = "Rice" }
         }
+        $calories = $rrr.calories-for( main => $main => 200,
+                side => $side => 250 )
     }
 }
 
