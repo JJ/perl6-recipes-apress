@@ -67,6 +67,9 @@ method new( $dir = "." ) {
                 when "No"  { %ingredient{$k} = False };
             }
         }
+        for @food-types -> $f {
+            %ingredient<types> ∪= $f;
+        }
     };
     @products = %calories-table.keys;
     self.bless( :%calories-table, :@products );

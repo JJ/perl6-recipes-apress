@@ -15,6 +15,7 @@ subtest "File has been processed into data", {
 subtest "Particular ingredients and measures are OK", {
     ok( %calories-table<Rice>, "Rice is there" );
     ok( $rr.is-ingredient("Rice"), "Rice is a product");
+    is( %calories-table<Rice><types>.elems, 5, "Rice food types");
     nok( $rr.is-ingredient("Lint"), "Lint is not a product");
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
     throws-like  { $rr.calories("boogers",100) },
