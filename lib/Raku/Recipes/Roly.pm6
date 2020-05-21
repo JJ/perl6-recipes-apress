@@ -1,7 +1,6 @@
 use Text::CSV;
 use Raku::Recipes;
 use X::Raku::Recipes::Missing;
-use X::Raku::Recipes;
 
 =begin pod
 
@@ -32,8 +31,8 @@ The file needs to be called C<calories.csv> and be placed in a C<data/> subdirec
 
 our $pod is export = $=pod[0];
 
-#| Basic file-loading role
-unit role Raku::Recipes::Roly:ver<0.0.2>;
+#| Basic calorie table handling role
+unit role Raku::Recipes::Roly:ver<0.0.3>;
 
 #| Contains the table of calories
 has %.calories-table;
@@ -88,40 +87,6 @@ multi method is-ingredient( Str $product where $product ∈ self.products() -->
         True) {}
 multi method is-ingredient( Str $product where $product ∉ self.products() -->
         False) {}
-
-#| Compute calories, given a product and a quantity. Raises exception if the
-#| product does not exist.
-multi method calories( Str $product is copy, $quantity) {
-    $product = tc $product;
-    X::Raku::Recipes::Missing::Product.new(:product($product)).throw
-            unless $product ∈ self.products();
-    return %!calories-table{$product}<Calories>*$quantity
-            /%!calories-table{$product}<parsed-measures>[0];
-}
-
-#| Compute calories, given a Pair ingredient => unit => quantity
-multi method calories( Pair $ingredient ) {
-    return self.calories( $ingredient.key, $ingredient.value.value );
-}
-
-#| Computes calories for a dish composed of main and side.
-#| Every one is a pair product, quantity
-method calories-for( :$main, :$side) {
-    X::Raku::Recipes::Missing::Product.new(:name($main.key)).throw
-            unless self.is-ingredient($main.key);
-    X::Raku::Recipes::WrongType.new(:product($main.key),
-                                    :desired-type("Main")).throw
-            unless self.check-type($main.key,"Main");
-    X::Raku::Recipes::Missing::Product.new(:name($side.key)).throw
-            unless self.is-ingredient($side.key);
-    X::Raku::Recipes::WrongType.new(:product($side.key),
-                                :desired-type("Side")).throw
-            unless self.check-type($side.key,"Side");
-
-    return self.calories( $main.key, $main.value ) +
-            self.calories( $side.key, $side.value );
-
-}
 
 #| Check type of ingredient
 method check-type( Str $ingredient where $ingredient ∈ %!calories-table.keys,

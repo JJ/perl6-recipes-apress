@@ -1,14 +1,26 @@
-use Raku::Recipes;
+use Raku::Recipes::Roly;
 
 class X::Raku::Recipes::WrongType:api<1> is Exception {
     has $.desired-type is required;
     has $.product;
+    has $.actual-types;
 
     submethod BUILD(:$!desired-type,
-                    :$!product = "Object") {}
+                    :$!product = "Object") {
+        my $rrr = Raku::Recipes::Roly.new();
+        if $!product ne "Object" {
+            $!actual-types = $rrr.calories-table{$!product}<types>
+        }
+    }
 
-    method message() {
-	    return "$!product if not of the required type «$!desired-type»";
+    multi method message( X::Raku::Recipes::WrongType $x where $x.product eq
+            "Object": ) {
+        return "The product if not of the required type $!desired-type";
+    }
+
+    multi method message() {
+	    return "$!product if not of the required type «$!desired-type», only
+types $!actual-types";
     }
 }
 
@@ -22,20 +34,4 @@ class X::Raku::Recipes::WrongUnit:api<1> is Exception {
     method message() {
         return "$!unit does not match the unit type, should be $!desired-unit";
     }
-}
-
-role X::Raku::Recipes::Missing:api<1> is Exception {
-    has $!part is required;
-    has $!name is required;
-
-    submethod BUILD( :$!part, :$!name ) {}
-
-    method message() {
-        return "the $!part $!name seems to be missing. Please provide it";
-    }
-
-    method gist(X::Raku::Recipes::Missing:D: ) {
-        self.message()
-    }
-
 }
