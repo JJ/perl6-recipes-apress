@@ -17,7 +17,8 @@ CATCH {
             when /Side/ || /$side/ { $side = "Rice" }
         }
         $calories = $rrr.calories-for( main => $main => 200,
-                side => $side => 250 )
+                side => $side => 250 );
+        .resume;
     }
 }
 
