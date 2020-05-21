@@ -6,6 +6,11 @@ use X::Raku::Recipes::Missing;
 my $x =  X::Raku::Recipes::WrongType.new( desired-type => "Main" );
 isa-ok $x, X::Raku::Recipes::WrongType, "Type OK";
 throws-like { $x.throw },  X::Raku::Recipes::WrongType, message => /Main/,  "Throws OK";
+is $x.product, "Object", "Assigns default type";
+
+$x =  X::Raku::Recipes::WrongType.new( desired-type => "Main",
+        product => "Apple");
+is $x.product, "Apple", "Assigns real type";
 
 $x =  X::Raku::Recipes::Missing::File.new( name => "calories-table.csv" );
 isa-ok $x, X::Raku::Recipes::Missing::File, "Type OK";

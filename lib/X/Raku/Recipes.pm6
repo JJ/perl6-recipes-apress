@@ -8,7 +8,7 @@ class X::Raku::Recipes::WrongType:api<1> is Exception {
                     :$!product = "Object") {}
 
     method message() {
-	    return "$!product does not seem to be of type $!desired-type";
+	    return "$!product if not of the required type «$!desired-type»";
     }
 }
 
