@@ -20,5 +20,6 @@ CATCH {
         }
         $calories = $rrr.calories-for( main => $main => 200,
                 side => $side => 250 );
+        .resume;
     }
 }
