@@ -1,8 +1,8 @@
 use Raku::Recipes;
 
 class X::Raku::Recipes::WrongType:api<1> is Exception {
-    has $!desired-type is required;
-    has $!product;
+    has $.desired-type is required;
+    has $.product;
 
     submethod BUILD(:$!desired-type,
                     :$!product = "Object") {}
