@@ -6,7 +6,7 @@ use Template::Classic;
 use Text::Markdown;
 
 my $md = Markdown.new;
-my &generate-page := template :($title,$content),
+my &generate-page = template :($title,$content),
                         template-file( "templates/recipe-with-title.html" );
 
 my %links;
