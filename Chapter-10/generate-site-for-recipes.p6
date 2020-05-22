@@ -17,7 +17,8 @@ for recipes() -> $recipe {
     note "Can't find title for $recipe" unless $title;
     my @page = generate-page( $title, $html-fragment );
     my $path = spurt-with-dir($recipe, @page.eager.join );
-    %links{$path .= subst( "build/", '' )} = $title;
+    $path .= subst( "build/", '' );
+    %links{$path} = $title;
 }
 
 my &generate-index:= template :( %links ),
