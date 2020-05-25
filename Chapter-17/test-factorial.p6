@@ -1,6 +1,5 @@
 #!/usr/bin/env perl6
 
-use lib "../raku-test-script/lib";
 use Test::Script;
 use lib <.>;
 
