@@ -1,3 +1,7 @@
 #!/usr/bin/env perl6
 
-my \n = 1+5.rand.Int; ($_ > n ?? ">" !! "<").print while ( $_ = prompt(" Your guess> ") ) != n
+
+{ $^b > $^a
+        ?? &?BLOCK($^a, prompt("> "))
+        !! $^b < $^a ?? &?BLOCK($^a, prompt("< ")) !! "✓".say
+}((1..6).pick,0)
