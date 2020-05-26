@@ -1,7 +1,8 @@
 #!/usr/bin/env perl6
 
 
-{ $^b > $^a
-        ?? &?BLOCK($^a, prompt("> "))
-        !! $^b < $^a ?? &?BLOCK($^a, prompt("< ")) !! "✓".say
+{ &_ = &?BLOCK; my \p = prompt;
+    $^b > $^a
+        ?? &_($^a, p("> "))
+        !! $^b < $^a ?? &_($^a, p("< ")) !! "✓".say
 }((1..6).pick,0)
