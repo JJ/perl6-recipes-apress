@@ -1,3 +1,3 @@
 #!/usr/bin/env perl6
 
-while ( my $g = prompt(" Your guess> ") ) != ( my $n = 1+5.rand.Int ) { ($g > $n ?? ">" !! "<").print ; }
+my \n = 1+5.rand.Int; ($_ > n ?? ">" !! "<").print while ( $_ = prompt(" Your guess> ") ) != n
