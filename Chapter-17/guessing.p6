@@ -1,8 +1,3 @@
 #!/usr/bin/env perl6
 
-
-my $number = 1+5.rand.Int;
-my $prompt = "*";
-while ( my $guess = prompt("$prompt Your guess>") ) != $number {
-    $prompt = $guess > $number ?? ">" !! "<";
-}
+while ( my $g = prompt(" Your guess> ") ) != ( my $n = 1+5.rand.Int ) { ($g > $n ?? ">" !! "<").print ; }
