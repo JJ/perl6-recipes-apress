@@ -25,12 +25,6 @@ handling, destined to be mixed into actual classes that handle data.
 #| Basic calorie table handling role
 unit role Raku::Recipes::Dator;
 
-#| Contains the table of calories
-has %.ingredients;
-
-#| Products or ingredients will be stored for brevity here
-has @.products;
-
 method get-ingredient( Str $ingredient ) {…}
 method get-ingredients() {…}
 method search-ingredients( %search-criteria ) {…}
