@@ -12,7 +12,8 @@
     "Colorizable",
     "Text::CSV",
     "Markit",
-    "Template::Classic"
+    "Template::Classic",
+    "DBIish"
   ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
