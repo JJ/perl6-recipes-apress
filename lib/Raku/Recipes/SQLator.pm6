@@ -35,18 +35,28 @@ Connects to the database
 ]
 method new( $file = "Chapter-12/ingredients.sqlite3" ) {
     my $dbh = DBIish.connect("SQLite", :database($file));
+
     self.bless( :$dbh );
 }
 
 submethod BUILD( :$!dbh ) {}
 
 method get-ingredient( Str $ingredient ) {
-    say $!dbh;
-    my $sth = $!dbh.prepare(q:to/GET/);
+    my $sth = self!run-statement(q:to/GET/,$ingredient);
 SELECT * FROM recipedata where name = ?;
 GET
-    $sth.execute($ingredient);
     return $sth.allrows()[0];
+}
+
+#| Hashifies a row to make it an uniform format
+sub hashify( @row ) {
+    my %hash;
+}
+
+method !run-statement( $stmt, *@args ) {
+    my $sth = $!dbh.prepare($stmt);
+    $sth.execute(@args);
+    return $sth;
 }
 
 method get-ingredients() { die "NYI";
