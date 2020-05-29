@@ -56,12 +56,9 @@ GET
 #| Hashifies a row to make it an uniform format
 method !hashify( @row is copy ) {
     my %hash;
-    say @!columns;
     for @!columns -> $c {
-        say @row;
         %hash{$c} = shift @row
     }
-    say %hash;
     return %hash;
 }
 
