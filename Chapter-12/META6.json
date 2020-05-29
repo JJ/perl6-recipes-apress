@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress", "databases"
     ],
-    "depends" : [ "DBIish","Red", "Redis", "Wikidata::API" ],
+    "depends" : [ "DBIish","Red", "Redis", "Wikidata::API", "JSON::Fast" ],
     "version" : "0.0.1"
 }
