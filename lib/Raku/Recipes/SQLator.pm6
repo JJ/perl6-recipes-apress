@@ -29,28 +29,40 @@ unit class Raku::Recipes::SQLator does Raku::Recipes::Dator;
 
 #| Contains the table of calories
 has $!dbh;
+has @!columns;
 
 #|[
 Connects to the database
 ]
 method new( $file = "Chapter-12/ingredients.sqlite3" ) {
     my $dbh = DBIish.connect("SQLite", :database($file));
-
-    self.bless( :$dbh );
+    # This is SQLITE3 specific
+    my $sth = $dbh.prepare("PRAGMA table_info('recipedata');");
+    $sth.execute;
+    my @table-data = $sth.allrows();
+    my @columns = @table-data.map: *[1].tc;
+    self.bless( :$dbh, :@columns );
 }
 
-submethod BUILD( :$!dbh ) {}
+submethod BUILD( :$!dbh, :@!columns ) {}
 
 method get-ingredient( Str $ingredient ) {
     my $sth = self!run-statement(q:to/GET/,$ingredient);
 SELECT * FROM recipedata where name = ?;
 GET
-    return $sth.allrows()[0];
+    return self!hashify($sth.allrows()[0]);
 }
 
 #| Hashifies a row to make it an uniform format
-sub hashify( @row ) {
+method !hashify( @row is copy ) {
     my %hash;
+    say @!columns;
+    for @!columns -> $c {
+        say @row;
+        %hash{$c} = shift @row
+    }
+    say %hash;
+    return %hash;
 }
 
 method !run-statement( $stmt, *@args ) {

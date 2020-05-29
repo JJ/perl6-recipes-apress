@@ -8,6 +8,9 @@ use X::Raku::Recipes::Missing;
 my $sqlator = Raku::Recipes::SQLator.new;
 
 isa-ok( $sqlator, Raku::Recipes::SQLator, "Correct class");
-ok($sqlator.get-ingredient("Rice"), "Retrieves ingredient");
+my %data = $sqlator.get-ingredient("Rice");
+ok( %data, "Retrieves ingredient");
+say %data;
+is( %data<Unit>, "100g", "Correct hash");
 
 done-testing;
