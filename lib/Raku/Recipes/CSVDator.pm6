@@ -25,6 +25,7 @@ handling, destined to be mixed into actual classes that handle data.
 use Text::CSV;
 use Raku::Recipes::Dator;
 use Raku::Recipes;
+use X::Raku::Recipes::Missing;
 
 #| Basic calorie table handling role
 unit class Raku::Recipes::CSVDator does Raku::Recipes::Dator;
@@ -67,7 +68,9 @@ method new( $dir = "." ) {
 
 method get-ingredient( Str $ingredient ) {
     return %!ingredients{$ingredient}
+            // X::Raku::Recipes::Missing::Product.new( name => $ingredient ).throw
 }
+
 method get-ingredients() {
     return %!ingredients;
 }

@@ -1,6 +1,7 @@
 use Test;
 
 use Raku::Recipes::CSVDator;
+use X::Raku::Recipes::Missing;
 
 my $rr = Raku::Recipes::CSVDator.new( "." );
 
@@ -18,6 +19,9 @@ subtest "Particular ingredients and measures are OK", {
     is( %ingredients<Rice><types>.elems, 4, "Rice food types");
     is( %ingredients<Rice><parsed-measures>[1], "g", "Measure for rice is
 OK" );
+    throws-like { $rr.get-ingredient( "Goo" )},
+            X::Raku::Recipes::Missing::Product,
+        "Correct exception thrown";
 };
 
 subtest "Search works", {
