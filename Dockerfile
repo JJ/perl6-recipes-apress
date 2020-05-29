@@ -6,7 +6,7 @@ RUN mkdir lib && mkdir data
 ADD lib/ lib
 ADD data/calories.csv data
 
-RUN apk update && apk upgrade && zef install . \
+RUN apk update && apk upgrade && apk add gcc && zef install . \
     && chmod +x filter-ingredients-proteins.p6
 
 ENTRYPOINT [ "./filter-ingredients-proteins.p6" ]
