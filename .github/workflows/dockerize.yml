@@ -15,7 +15,8 @@ jobs:
         wget https://raw.githubusercontent.com/JJ/raku-container-action/master/raku-install.Dockerfile
     - name: Adds preinstall
       run: |
-        sed 's/#Preinstall/#Preinstall\napk update \&\& apk upgrade \&\& apk add gcc/' raku-install.Dockerfile
+        sed -i 's/#Preinstall/#Preinstall\napk update \&\& apk upgrade \&\& apk add gcc/' raku-install.Dockerfile
+        cat raku-install.Dockerfile
     - name: Builds and publishes to GPR
       uses: JJ/gpr-docker-publish@master
       with:
