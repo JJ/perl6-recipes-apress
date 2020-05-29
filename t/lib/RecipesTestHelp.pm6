@@ -14,10 +14,9 @@ sub test-dator( $dator ) is export {
     };
 
     subtest "Particular ingredients and measures are OK", {
-        ok(%ingredients<Rice>, "Rice is there");
+        test-ingredient-table(%ingredients);
         is($dator.get-ingredient("Rice"), %ingredients<Rice>,
         "Single ingredient retrieved");
-        is(%ingredients<Rice><types>.elems, 4, "Rice food types");
         is(%ingredients<Rice><parsed-measures>[1], "g", "Measure for rice is
 OK");
         throws-like { $dator.get-ingredient("Goo") },
@@ -33,4 +32,10 @@ OK");
         my @vegan'n'dessert = $dator.search-ingredients({ :Vegan, :Dessert });
         cmp-ok(@vegan'n'dessert, "⊂", @vegan, "Vegan desserts are vegan")
     }
+}
+
+sub test-ingredient-table( %table ) is export {
+    ok( %table<Rice>, "Rice is there" );
+    is( %table<Rice><types>.elems, 4, "Rice food types");
+
 }

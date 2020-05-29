@@ -1,4 +1,8 @@
 use Test; # -*- mode: perl6 -*-
+
+use lib <lib t/lib>;
+
+use RecipesTestHelp;
 use X::Raku::Recipes;
 use X::Raku::Recipes::Missing;
 use Raku::Recipes::Calorie-Computer;
@@ -8,11 +12,9 @@ my $cc = Raku::Recipes::Calorie-Computer.new( "." );
 my @products = $cc.products;
 my %calories-table = $cc.calories-table;
 
-
 subtest "Particular ingredients and measures are OK", {
-    ok( %calories-table<Rice>, "Rice is there" );
+    test-ingredient-table( %calories-table);
     ok( $cc.is-ingredient("Rice"), "Rice is a product");
-    is( %calories-table<Rice><types>.elems, 4, "Rice food types");
     nok( $cc.is-ingredient("Lint"), "Lint is not a product");
     is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
     throws-like  { $cc.calories("boogers",100) },
