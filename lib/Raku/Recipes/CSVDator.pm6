@@ -74,7 +74,7 @@ method get-ingredients() {
 
 method search-ingredients( %search-criteria ) {
     %!ingredients.keys.grep:
-            self.check(%!ingredients{$_},%search-criteria);
+            { self!check(  %!ingredients{$_},%search-criteria) };
 }
 
 method !check( %ingredient-data, %search-criteria) {

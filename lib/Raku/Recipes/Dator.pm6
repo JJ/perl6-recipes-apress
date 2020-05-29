@@ -22,7 +22,7 @@ handling, destined to be mixed into actual classes that handle data.
 
 =end pod
 
-#| Basic calorie table handling role
+#| Basic data access abstract role
 unit role Raku::Recipes::Dator;
 
 method get-ingredient( Str $ingredient ) {…}
