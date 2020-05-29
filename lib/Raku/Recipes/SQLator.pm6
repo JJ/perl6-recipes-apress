@@ -31,17 +31,22 @@ unit class Raku::Recipes::SQLator does Raku::Recipes::Dator;
 has $!dbh;
 
 #|[
-Creates a new calorie table, reading it from the directory indicated,
-the current directory by default. The file will be in a subdirectory data,
-and will be called calories.csv
+Connects to the database
 ]
 method new( $file = "Chapter-12/ingredients.sqlite3" ) {
-    my $dbh = DBIish.connect("SQLite", :database<example-db.sqlite3>);
+    my $dbh = DBIish.connect("SQLite", :database($file));
     self.bless( :$dbh );
 }
 
+submethod BUILD( :$!dbh ) {}
+
 method get-ingredient( Str $ingredient ) {
-    die "NYI";
+    say $!dbh;
+    my $sth = $!dbh.prepare(q:to/GET/);
+SELECT * FROM recipedata where name = ?;
+GET
+    $sth.execute($ingredient);
+    return $sth.allrows()[0];
 }
 
 method get-ingredients() { die "NYI";

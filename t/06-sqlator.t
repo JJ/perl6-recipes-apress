@@ -8,5 +8,6 @@ use X::Raku::Recipes::Missing;
 my $sqlator = Raku::Recipes::SQLator.new;
 
 isa-ok( $sqlator, Raku::Recipes::SQLator, "Correct class");
+ok($sqlator.get-ingredient("Rice"), "Retrieves ingredient");
 
 done-testing;
