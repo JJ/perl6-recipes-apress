@@ -1,7 +1,7 @@
 {
   "name": "Raku::Recipes",
   "description": "Raku Recipes, modules and examples",
-  "version": "0.0.4.5",
+  "version": "0.0.5",
   "perl": "6.d",
   "authors": [
     "JJ Merelo"
