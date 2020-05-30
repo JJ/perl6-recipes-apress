@@ -42,6 +42,10 @@ lives-ok { $sqlator.insert-ingredient( "Banana", %new-ingredient) },
 
 is $sqlator<Banana><Unit>, "Unit", "Adds correctly stuff";
 
+lives-ok { $sqlator.delete-ingredient( "Banana") },
+        "Can delete ingredient";
+
+nok( $sqlator<Banana>, "Ingredient deleted");
 
 
 done-testing;

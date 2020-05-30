@@ -50,7 +50,8 @@ method get-ingredient( Str $ingredient ) {
     my $sth = self!run-statement(q:to/GET/,$ingredient);
 SELECT * FROM recipedata where name = ?;
 GET
-    return self!hashify($sth.allrows()[0]);
+    with $sth.allrows()[0] { return self!hashify($_) }
+    else { return []};
 }
 
 multi method AT-KEY( Str $ingredient ) {
@@ -112,5 +113,8 @@ method insert-ingredient( Str $ingredient, %data ) {
 }
 
 method delete-ingredient( Str $ingredient) {
-    die "Ingredients are immutable in this class";
+    my $sth = $!dbh.prepare(q:to/DELETE/);
+delete FROM recipedata where name = ?
+DELETE
+    $sth.execute( $ingredient);
 }
