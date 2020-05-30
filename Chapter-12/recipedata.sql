@@ -3,9 +3,9 @@ create table recipedata (
   unit varchar,
   calories float,
   protein float,
+  dairy BOOLEAN,
+  vegan BOOLEAN,
   main BOOLEAN,
   side BOOLEAN,
-  vegan BOOLEAN,
-  dairy BOOLEAN,
   dessert BOOLEAN
 );
