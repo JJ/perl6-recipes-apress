@@ -29,3 +29,7 @@ class X::Raku::Recipes::Missing::Product does X::Raku::Recipes::Missing {
     submethod BUILD($!part = "product", :$!name){}
 
 }
+
+class X::Raku::Recipes::Missing::Column does X::Raku::Recipes::Missing {
+    submethod BUILD($!part = "column", :$!name){}
+}

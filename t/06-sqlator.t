@@ -28,4 +28,16 @@ nok($sqlator.search-ingredients({ :Vegan, :Dairy }), "No vegan and dairy");
 my @vegan'n'dessert = $sqlator.search-ingredients({ :Vegan, :Dessert });
 cmp-ok(@vegan'n'dessert, "⊂", @vegan, "Vegan desserts are vegan");
 
+my %new-ingredient = Calories => "85",
+                       Unit => "Unit",
+                       Protein => "1.1",
+                       Vegan => "Yes",
+                       Dairy => "No",
+                       Dessert => "Yes",
+                       Main => "No",
+                       Side => "Yes";
+
+lives-ok { $sqlator.insert-ingredient( "Banana", %new-ingredient) },
+        "Can insert ingredient";
+
 done-testing;

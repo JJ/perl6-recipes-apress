@@ -99,12 +99,16 @@ method search-ingredients( %search-criteria ) {
     return $sth.allrows().map: *[0];
 }
 
-method !check( %ingredient-data, %search-criteria) {
-    die "NYI";
-}
-
 method insert-ingredient( Str $ingredient, %data ) {
-    die "Ingredients are immutable in this class";
+    my $stmt = "INSERT INTO recipedata (" ~ @!columns.join(", ")
+        ~ ") VALUES (" ~ ("?" xx @!columns.elems ).join(", ") ~ ")";
+    my @values = $ingredient;
+    for @!columns[1..*] -> $c {
+        with %data{$c} { @values.push: %data{$c} }
+        else { X::Raku::Recipes::Missing::Column.new( :name($c) ).throw }
+    }
+    my $sth = $!dbh.prepare($stmt);
+    $sth.execute( |@values);
 }
 
 method delete-ingredient( Str $ingredient) {
