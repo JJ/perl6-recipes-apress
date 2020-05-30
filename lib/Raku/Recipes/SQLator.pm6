@@ -79,12 +79,11 @@ SELECT * FROM recipedata;
 GET
     $sth.execute;
     my %rows;
-    for $sth.allrows() -> $row {
-        my %this-hash = self!hashify($row);
-        say %this-hash;
-        %rows.append: %this-hash;
+    for $sth.allrows() -> @row {
+        my $name = @row[0];
+        my %this-hash = self!hashify(@row);
+        %rows{$name} = %this-hash;
     }
-    say %rows;
     return %rows;
 }
 
