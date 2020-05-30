@@ -25,7 +25,7 @@ use Raku::Recipes;
 use X::Raku::Recipes::Missing;
 
 #| Basic calorie table handling role
-unit class Raku::Recipes::SQLator does Raku::Recipes::Dator;
+unit class Raku::Recipes::SQLator does Raku::Recipes::Dator does Associative;
 
 #| Contains the table of calories
 has $!dbh;
@@ -51,6 +51,10 @@ method get-ingredient( Str $ingredient ) {
 SELECT * FROM recipedata where name = ?;
 GET
     return self!hashify($sth.allrows()[0]);
+}
+
+multi method AT-KEY( Str $ingredient ) {
+    return self.get-ingredient( $ingredient );
 }
 
 #| Hashifies a row to make it an uniform format

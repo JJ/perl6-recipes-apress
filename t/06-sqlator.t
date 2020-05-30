@@ -16,4 +16,6 @@ my %data = $sqlator.get-ingredient("Rice");
 ok( %data, "Retrieves ingredient");
 is( %data<Unit>, "100g", "Correct hash");
 
+is( $sqlator<Rice>, %data, "Associative works");
+
 done-testing;
