@@ -63,6 +63,7 @@ method !hashify( @row is copy ) {
     for @!columns -> $c {
         %hash{$c} = shift @row
     }
+    %hash<name>:delete;
     return %hash;
 }
 
