@@ -23,7 +23,7 @@ is( %ingredients<Lentils><Unit>, "100g", "Correct hash");
 
 my @vegan = $sqlator.search-ingredients({ Vegan => True });
 ok(@vegan, "Searching works");
-cmp-ok(@vegan.elems, ">=", 12, "Elements are OK");
+cmp-ok(@vegan.elems, ">=", 14, "Elements are OK");
 nok($sqlator.search-ingredients({ :Vegan, :Dairy }), "No vegan and dairy");
 my @vegan'n'dessert = $sqlator.search-ingredients({ :Vegan, :Dessert });
 cmp-ok(@vegan'n'dessert, "⊂", @vegan, "Vegan desserts are vegan");

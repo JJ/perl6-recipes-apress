@@ -94,10 +94,9 @@ method search-ingredients( %search-criteria ) {
     my $query = "SELECT name FROM recipedata WHERE " ~ @clauses.join( " AND ");
     $query ~~ s:g/<|w>True<|w>/Yes/;
     $query ~~ s:g/<|w>False<|w>/No/;
-    say $query;
     my $sth = $!dbh.prepare($query);
     $sth.execute;
-    return $sth.allrows();
+    return $sth.allrows().map: *[0];
 }
 
 method !check( %ingredient-data, %search-criteria) {
