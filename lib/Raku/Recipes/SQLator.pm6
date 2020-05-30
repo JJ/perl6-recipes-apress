@@ -88,7 +88,16 @@ GET
 }
 
 method search-ingredients( %search-criteria ) {
-    die "NYI";
+    my @clauses = do for %search-criteria.kv -> $k,$v {
+        lc($k) ~ " = '" ~ $v ~ "'";
+    }
+    my $query = "SELECT name FROM recipedata WHERE " ~ @clauses.join( " AND ");
+    $query ~~ s:g/<|w>True<|w>/Yes/;
+    $query ~~ s:g/<|w>False<|w>/No/;
+    say $query;
+    my $sth = $!dbh.prepare($query);
+    $sth.execute;
+    return $sth.allrows();
 }
 
 method !check( %ingredient-data, %search-criteria) {
