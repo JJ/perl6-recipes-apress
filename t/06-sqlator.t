@@ -40,4 +40,8 @@ my %new-ingredient = Calories => "85",
 lives-ok { $sqlator.insert-ingredient( "Banana", %new-ingredient) },
         "Can insert ingredient";
 
+is $sqlator<Banana><Unit>, "Unit", "Adds correctly stuff";
+
+
+
 done-testing;
