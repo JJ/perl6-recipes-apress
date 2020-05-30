@@ -18,4 +18,7 @@ is( %data<Unit>, "100g", "Correct hash");
 
 is( $sqlator<Rice>, %data, "Associative works");
 
+my %ingredients = $sqlator.get-ingredients();
+test-ingredient-table(%ingredients);
+
 done-testing;

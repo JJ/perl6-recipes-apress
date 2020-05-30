@@ -72,7 +72,19 @@ method !run-statement( $stmt, *@args ) {
     return $sth;
 }
 
-method get-ingredients() { die "NYI";
+method get-ingredients() {
+    my $sth = $!dbh.prepare(q:to/GET/);
+SELECT * FROM recipedata;
+GET
+    $sth.execute;
+    my %rows;
+    for $sth.allrows() -> $row {
+        my %this-hash = self!hashify($row);
+        say %this-hash;
+        %rows.append: %this-hash;
+    }
+    say %rows;
+    return %rows;
 }
 
 method search-ingredients( %search-criteria ) {
