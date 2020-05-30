@@ -14,8 +14,7 @@ use Raku::Recipes::SQLator;
 
 =head1 DESCRIPTION
 
-Use a database driver to get to data
-
+Use a database driver to get to data, with basic CRUD operations.
 
 =end pod
 
@@ -46,6 +45,7 @@ method new( $file = "Chapter-12/ingredients.sqlite3" ) {
 
 submethod BUILD( :$!dbh, :@!columns ) {}
 
+#| Retrieves a single ingredient by name
 method get-ingredient( Str $ingredient ) {
     my $sth = self!run-statement(q:to/GET/,$ingredient);
 SELECT * FROM recipedata where name = ?;
@@ -54,6 +54,7 @@ GET
     else { return []};
 }
 
+#| To make it work as Associative.
 multi method AT-KEY( Str $ingredient ) {
     return self.get-ingredient( $ingredient );
 }
@@ -68,13 +69,15 @@ method !hashify( @row is copy ) {
     return %hash;
 }
 
+#| Prepare and execute in a single sub
 method !run-statement( $stmt, *@args ) {
     my $sth = $!dbh.prepare($stmt);
     $sth.execute(@args);
     return $sth;
 }
 
-method get-ingredients() {
+#| Retrieves all ingredients in a hash
+method get-ingredients {
     my $sth = $!dbh.prepare(q:to/GET/);
 SELECT * FROM recipedata;
 GET
@@ -88,6 +91,7 @@ GET
     return %rows;
 }
 
+#| Search ingredients by criteria
 method search-ingredients( %search-criteria ) {
     my @clauses = do for %search-criteria.kv -> $k,$v {
         lc($k) ~ " = '" ~ $v ~ "'";
@@ -100,6 +104,7 @@ method search-ingredients( %search-criteria ) {
     return $sth.allrows().map: *[0];
 }
 
+#| Insert a new ingredient
 method insert-ingredient( Str $ingredient, %data ) {
     my $stmt = "INSERT INTO recipedata (" ~ @!columns.join(", ")
         ~ ") VALUES (" ~ ("?" xx @!columns.elems ).join(", ") ~ ")";
@@ -112,6 +117,7 @@ method insert-ingredient( Str $ingredient, %data ) {
     $sth.execute( |@values);
 }
 
+#| Deletes an ingredient by name
 method delete-ingredient( Str $ingredient) {
     my $sth = $!dbh.prepare(q:to/DELETE/);
 delete FROM recipedata where name = ?
