@@ -2,8 +2,8 @@ name: Builds a container when needed and publishes it to registry
 on:
   push:
     paths:
-      - 'META6.json'
-      - '.github/workflows/dockerize.yml'
+    - 'META6.json'
+    - '.github/workflows/dockerize.yml'
     
 jobs:
   build:
