@@ -49,7 +49,7 @@ multi method AT-KEY( Str $ingredient ) {
     return self.get-ingredient( $ingredient );
 }
 
-#| Retrieves all ingredients in a hash
+#| Retrieves all ingredients in a hash keyed by name
 method get-ingredients {
     my @keys = $!redis.keys("recipes:*");
     my %rows;
@@ -60,7 +60,7 @@ method get-ingredients {
     return %rows;
 }
 
-#| Search ingredients by criteria
+#| Search ingredients by key values
 method search-ingredients( %search-criteria ) {
     my %ingredients = self.get-ingredients;
     %ingredients.keys.grep:
