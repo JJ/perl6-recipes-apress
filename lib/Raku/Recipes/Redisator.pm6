@@ -41,21 +41,21 @@ submethod BUILD( :$!redis ) {}
 
 #| Retrieves a single ingredient by name
 method get-ingredient( Str $ingredient ) {
-$!redis.hgetall( $ingredient);
+    $!redis.hgetall( "recipes:$ingredient");
 }
 
 #| To make it work as Associative.
 multi method AT-KEY( Str $ingredient ) {
-    return self.get-ingredient( "recipes:$ingredient" );
+    return self.get-ingredient( $ingredient );
 }
 
 #| Retrieves all ingredients in a hash
 method get-ingredients {
-    my @keys = $!redis.hkeys.grep: /^^"recipes:"/;
+    my @keys = $!redis.keys("recipes:*");
     my %rows;
     for @keys -> $k {
         $k ~~ /<?after "recipes:">$<key>=(\w+)/;
-        %rows{~$<key>} = $!redis.hgetall(~$<key>)
+        %rows{~$<key>} = $!redis.hgetall("recipes:" ~ $<key>)
     }
     return %rows;
 }
@@ -72,5 +72,5 @@ method insert-ingredient( Str $ingredient, %data ) {
 
 #| Deletes an ingredient by name
 method delete-ingredient( Str $ingredient) {
-   $!redis.hdel("recipes:$ingredient")
+   $!redis.del("recipes:$ingredient")
 }

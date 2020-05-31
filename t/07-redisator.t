@@ -4,16 +4,28 @@ use Raku::Recipes::Redisator;
 use X::Raku::Recipes::Missing;
 
 my $redisator = Raku::Recipes::Redisator.new();
-
 isa-ok( $redisator, Raku::Recipes::Redisator, "Correct class");
-my %data = $redisator.get-ingredient("Rice");
-ok( %data, "Retrieves ingredient");
-is( %data<Unit>, "100g", "Correct hash");
 
-is( $redisator<Rice>, %data, "Associative works");
+my %new-ingredient = Calories => "85",
+                     Unit => "Unit",
+                     Protein => "1.1",
+                     Vegan => "Yes",
+                     Dairy => "No",
+                     Dessert => "Yes",
+                     Main => "No",
+                     Side => "Yes";
+
+lives-ok { $redisator.insert-ingredient( "Banana", %new-ingredient) },
+        "Can insert ingredient";
+
+my %data = $redisator.get-ingredient("Banana");
+ok( %data, "Retrieves ingredient");
+is( %data<Unit>, "Unit", "Correct hash");
+is $redisator<Banana><Unit>, "Unit", "Adds correctly stuff";
+is( $redisator<Banana>, %data, "Associative works");
 
 my %ingredients = $redisator.get-ingredients();
-is( %ingredients<Lentils><Unit>, "100g", "Correct hash");
+is( %ingredients<Banana><Unit>, "Unit", "Correct hash from all retrieved");
 
 #my @vegan = $redisator.search-ingredients({ Vegan => True });
 #ok(@vegan, "Searching works");
@@ -22,19 +34,6 @@ is( %ingredients<Lentils><Unit>, "100g", "Correct hash");
 #my @vegan'n'dessert = $redisator.search-ingredients({ :Vegan, :Dessert });
 #cmp-ok(@vegan'n'dessert, "⊂", @vegan, "Vegan desserts are vegan");
 
-my %new-ingredient = Calories => "85",
-                       Unit => "Unit",
-                       Protein => "1.1",
-                       Vegan => "Yes",
-                       Dairy => "No",
-                       Dessert => "Yes",
-                       Main => "No",
-                       Side => "Yes";
-
-lives-ok { $redisator.insert-ingredient( "Banana", %new-ingredient) },
-        "Can insert ingredient";
-
-is $redisator<Banana><Unit>, "Unit", "Adds correctly stuff";
 
 lives-ok { $redisator.delete-ingredient( "Banana") },
         "Can delete ingredient";
