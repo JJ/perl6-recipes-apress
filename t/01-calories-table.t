@@ -24,4 +24,14 @@ is-approx $unit, ⅓, "Space and unicode - unit";
 
 is unit-measure( "unit" ), (1,"unit"), "No number here";
 
+my @vegan = search-ingredients(%calories-table, { Vegan => "Yes" });
+ok(@vegan, "Searching works");
+say @vegan;
+cmp-ok(@vegan.elems, ">=", 1, "Elements are OK");
+nok(search-ingredients(%calories-table,{ :Vegan("Yes"), :Dairy("Yes") }),
+        "No vegan and dairy");
+my @vegan'n'dessert =
+        search-ingredients(%calories-table,{ :Vegan("Yes"), :Dessert("Yes")});
+cmp-ok(@vegan'n'dessert, "⊆", @vegan, "Vegan desserts are vegan");
+
 done-testing;

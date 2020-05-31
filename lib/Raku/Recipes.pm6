@@ -77,9 +77,15 @@ multi proteins( @items )  is export  {
     return [+] %calories-table{@items}.map: *<Protein>;
 }
 
+sub search-ingredients( %ingredients, %search-criteria ) is export {
+    %ingredients.keys.grep:
+            { search-table(  %ingredients{$_},%search-criteria) };
+}
+
 sub search-table( %ingredient-data, %search-criteria) is export {
     my @criteria = do for %search-criteria.keys {
         %search-criteria{$_} eq %ingredient-data{$_}
     }
     return all @criteria;
 }
+
