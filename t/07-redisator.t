@@ -1,7 +1,10 @@
 use Test;
 
+use lib <lib t/lib>;
+
 use Raku::Recipes::Redisator;
 use X::Raku::Recipes::Missing;
+use RecipesTestHelp;
 
 my $redisator = Raku::Recipes::Redisator.new();
 isa-ok( $redisator, Raku::Recipes::Redisator, "Correct class");
@@ -15,23 +18,33 @@ my %new-ingredient = Calories => "85",
                      Main => "No",
                      Side => "Yes";
 
-lives-ok { $redisator.insert-ingredient( "Banana", %new-ingredient) },
-        "Can insert ingredient";
-
-my %data = $redisator.get-ingredient("Banana");
-ok( %data, "Retrieves ingredient");
+my %data = test-insert-retrieve( $redisator, "Banana", %new-ingredient);
 is( %data<Unit>, "Unit", "Correct hash");
 is $redisator<Banana><Unit>, "Unit", "Adds correctly stuff";
 is( $redisator<Banana>, %data, "Associative works");
 
+%new-ingredient = Calories => 163,
+                  Unit => "226g",
+                  Protein => 28,
+                  Vegan => "No",
+                  Dairy => "Yes",
+                  Dessert => "Yes",
+                  Main => "No",
+                  Side => "Yes";
+
+%data = test-insert-retrieve( $redisator, "Cottage cheese", %new-ingredient);
+
 my %ingredients = $redisator.get-ingredients();
 is( %ingredients<Banana><Unit>, "Unit", "Correct hash from all retrieved");
 
+say "Ingredients", %ingredients;
 my @vegan = $redisator.search-ingredients({ Vegan => "Yes" });
 ok(@vegan, "Searching works");
 cmp-ok(@vegan.elems, ">=", 1, "Elements are OK");
-nok($redisator.search-ingredients({ :Vegan, :Dairy }), "No vegan and dairy");
-my @vegan'n'dessert = $redisator.search-ingredients({ :Vegan, :Dessert });
+nok($redisator.search-ingredients({ :Vegan("Yes"), :Dairy("Yes") }),
+        "No vegan and dairy");
+my @vegan'n'dessert =
+        $redisator.search-ingredients({ :Vegan("Yes"), :Dessert("Yes") });
 cmp-ok(@vegan'n'dessert, "⊆", @vegan, "Vegan desserts are vegan");
 
 

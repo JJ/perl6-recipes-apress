@@ -39,3 +39,13 @@ sub test-ingredient-table( %table ) is export {
     is( %table<Rice><types>.elems, 4, "Rice food types");
 
 }
+
+sub test-insert-retrieve($dator, $ingredient, %data ) is export {
+    lives-ok { $dator.insert-ingredient( $ingredient, %data) },
+            "Can insert «$ingredient»";
+
+    my %retrieved-data = $dator.get-ingredient($ingredient);
+    ok( %retrieved-data, "Retrieves ingredient «$ingredient»...");
+    is-deeply( %retrieved-data, %data, "... and does it correctly");
+    return %retrieved-data;
+}
