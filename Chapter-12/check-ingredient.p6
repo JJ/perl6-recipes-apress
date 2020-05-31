@@ -5,9 +5,6 @@ use Raku::Recipes::SQLator;
 use Raku::Recipes::Redisator;
 use Raku::Recipes::Base;
 
-use X::Raku::Recipes::Missing;
-use JSON::Fast;
-
 sub MAIN( $ingredient, $type, $data-source = "Chapter-12/ingredients.sqlite3"
          ) {
 
