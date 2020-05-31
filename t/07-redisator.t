@@ -27,12 +27,12 @@ is( $redisator<Banana>, %data, "Associative works");
 my %ingredients = $redisator.get-ingredients();
 is( %ingredients<Banana><Unit>, "Unit", "Correct hash from all retrieved");
 
-my @vegan = $redisator.search-ingredients({ Vegan => True });
+my @vegan = $redisator.search-ingredients({ Vegan => "Yes" });
 ok(@vegan, "Searching works");
 cmp-ok(@vegan.elems, ">=", 1, "Elements are OK");
-#nok($redisator.search-ingredients({ :Vegan, :Dairy }), "No vegan and dairy");
-#my @vegan'n'dessert = $redisator.search-ingredients({ :Vegan, :Dessert });
-#cmp-ok(@vegan'n'dessert, "⊂", @vegan, "Vegan desserts are vegan");
+nok($redisator.search-ingredients({ :Vegan, :Dairy }), "No vegan and dairy");
+my @vegan'n'dessert = $redisator.search-ingredients({ :Vegan, :Dessert });
+cmp-ok(@vegan'n'dessert, "⊆", @vegan, "Vegan desserts are vegan");
 
 
 lives-ok { $redisator.delete-ingredient( "Banana") },
