@@ -1,7 +1,4 @@
-use Text::CSV;
 use Raku::Recipes;
-use X::Raku::Recipes::Missing;
-
 =begin pod
 
 =head1 NAME
