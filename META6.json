@@ -13,7 +13,8 @@
     "Text::CSV",
     "Markit",
     "Template::Classic",
-    "DBIish"
+    "DBIish",
+    "Redis"
   ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
