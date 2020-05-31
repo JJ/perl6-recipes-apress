@@ -62,7 +62,10 @@ method get-ingredients {
 
 #| Search ingredients by criteria
 method search-ingredients( %search-criteria ) {
- die "NYI"
+    my %ingredients = self.get-ingredients;
+    %ingredients.keys.grep:
+            { search-table(  %ingredients{$_},%search-criteria) };
+
 }
 
 #| Insert a new ingredient

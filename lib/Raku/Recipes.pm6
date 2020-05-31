@@ -76,3 +76,10 @@ multi proteins( [] ) is export { 0 }
 multi proteins( @items )  is export  {
     return [+] %calories-table{@items}.map: *<Protein>;
 }
+
+sub search-table( %ingredient-data, %search-criteria) is export {
+    my @criteria = do for %search-criteria.keys {
+        %search-criteria{$_} eq %ingredient-data{$_}
+    }
+    return all @criteria;
+}

@@ -77,14 +77,7 @@ method get-ingredients() {
 
 method search-ingredients( %search-criteria ) {
     %!ingredients.keys.grep:
-            { self!check(  %!ingredients{$_},%search-criteria) };
-}
-
-method !check( %ingredient-data, %search-criteria) {
-    my @criteria = do for %search-criteria.keys {
-        %search-criteria{$_} == %ingredient-data{$_}
-    }
-    return all @criteria;
+            { search-table(  %!ingredients{$_},%search-criteria) };
 }
 
 method insert-ingredient( Str $ingredient, %data ) {
