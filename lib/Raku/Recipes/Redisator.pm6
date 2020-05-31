@@ -53,7 +53,7 @@ multi method AT-KEY( Str $ingredient ) {
 method get-ingredients {
     my @keys = $!redis.keys("recipes:*");
     my %rows;
-    for @keys -> $k {
+    for @keys.first<> -> $k {
         $k ~~ /<?after "recipes:">$<key>=(\w+)/;
         %rows{~$<key>} = $!redis.hgetall("recipes:" ~ $<key>)
     }
@@ -69,7 +69,7 @@ method search-ingredients( %search-criteria ) {
 
 #| Insert a new ingredient
 method insert-ingredient( Str $ingredient, %data ) {
-   $!redis.hmset("recipes:$ingredient", |%data )
+   $!redis.hmset("recipes:$ingredient", |%data );
 }
 
 #| Deletes an ingredient by name
