@@ -9,13 +9,12 @@ jobs:
   build:
     runs-on: ubuntu-latest 
     steps:
-    - name: Check out files
+    - name: Checks out files
       uses: actions/checkout@master
-
     - name: Downloads image
       run: |
         wget https://raw.githubusercontent.com/JJ/raku-container-action/master/raku-install.Dockerfile
-    - name: Adds preinstall and start stuff
+    - name: Adds preinstall and startup stuff
       run: |
         sed -i 's/#Preinstall/#Preinstall\nRUN apk update \&\& apk upgrade \&\& apk add gcc libc-dev sqlite-libs redis/' raku-install.Dockerfile
         sed -i 's/raku -v/redis-server \/etc\/redis.conf \&/' raku-install.Dockerfile
