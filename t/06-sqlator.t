@@ -5,6 +5,8 @@ use RecipesTestHelp;
 use Raku::Recipes::SQLator;
 use X::Raku::Recipes::Missing;
 
+# This needs the database to have been already created
+
 my $filename = "Chapter-12/ingredients.sqlite3".IO.e
     ??"Chapter-12/ingredients.sqlite3"
         !!"ingredients.sqlite3";

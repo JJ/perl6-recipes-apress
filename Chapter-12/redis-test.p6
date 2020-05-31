@@ -2,7 +2,7 @@
 use Redis;
 
 my $redis = Redis.new("127.0.0.1:6379", :decode_response);
-$redis.hmset("recipes:banana",
+$redis.hmset("recipes:Banana",
         Calories => 85,
         Unit => "Unit",
         Protein => 1.1,
@@ -11,5 +11,5 @@ $redis.hmset("recipes:banana",
         Dessert => "Yes",
         Main => "No",
         Side => "Yes");
-say $redis.hgetall("recipes:banana");
+say $redis.hgetall("recipes:Banana");
 $redis.quit();
