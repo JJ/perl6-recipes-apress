@@ -65,7 +65,6 @@ method search-ingredients( %search-criteria ) {
     my %ingredients = self.get-ingredients;
     %ingredients.keys.grep:
             { search-table(  %ingredients{$_},%search-criteria) };
-
 }
 
 #| Insert a new ingredient
