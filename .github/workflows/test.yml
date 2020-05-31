@@ -2,10 +2,10 @@ name: Tests utility module
 on:
   push:
     paths-ignore:
-      - 'META6.json'
+    - 'META6.json'
   pull_request:
     paths:
-      - '*'
+    - '**'
 
 jobs:
   test:
