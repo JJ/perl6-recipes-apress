@@ -23,9 +23,9 @@ is( %data<Unit>, "Unit", "Correct hash");
 is $redisator<Banana><Unit>, "Unit", "Adds correctly stuff";
 is( $redisator<Banana>, %data, "Associative works");
 
-%new-ingredient = Calories => 163,
+%new-ingredient = Calories => "163",
                   Unit => "226g",
-                  Protein => 28,
+                  Protein => "28",
                   Vegan => "No",
                   Dairy => "Yes",
                   Dessert => "Yes",
@@ -37,7 +37,6 @@ is( $redisator<Banana>, %data, "Associative works");
 my %ingredients = $redisator.get-ingredients();
 is( %ingredients<Banana><Unit>, "Unit", "Correct hash from all retrieved");
 
-say "Ingredients", %ingredients;
 my @vegan = $redisator.search-ingredients({ Vegan => "Yes" });
 ok(@vegan, "Searching works");
 cmp-ok(@vegan.elems, ">=", 1, "Elements are OK");

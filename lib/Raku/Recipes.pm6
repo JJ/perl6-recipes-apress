@@ -83,9 +83,7 @@ sub search-ingredients( %ingredients, %search-criteria ) is export {
 }
 
 sub search-table( %ingredient-data, %search-criteria) is export {
-    say %ingredient-data;
     my @criteria = do for %search-criteria.keys {
-        say "Looking up $_, %search-criteria{$_}, %ingredient-data{$_}";
         %search-criteria{$_} eq %ingredient-data{$_}
     }
     return all @criteria;
