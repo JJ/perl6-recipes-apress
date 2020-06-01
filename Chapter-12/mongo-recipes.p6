@@ -13,14 +13,12 @@ my MongoDB::Database $database = $client.database('recipes');
 my @documents;
 for $recipes-text.recipes.kv -> $title, %data {
     %data<title> = $title;
-    with %data<ingredients>[] {
-        for .kv -> $k, $v {
-            say $k.raku, $v.raku;
-                    %data{"ingredient-list-$k"} = $v;
+    if %data<ingredients>.elems > 1 {
+        for %data<ingredients>.kv -> $k, $v {
+            %data{"ingredient-list-$k"} = $v.trim;
         }
     }
     %data<ingredients>:delete;
-    say "Creating $title ", %data.raku;
     @documents.append: BSON::Document.new((|%data)),
 }
 
@@ -30,7 +28,6 @@ insert => 'recipes',
 documents => @documents
 );
 my BSON::Document $doc = $database.run-command($req);
-say $doc.raku;
 if $doc<ok> {
     say "Docs inserted";
 }
