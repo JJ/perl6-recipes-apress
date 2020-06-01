@@ -16,7 +16,7 @@ method new( $dir where .IO.d  = "recipes") {
         my @ingredients = $this-md.document.items
             .grep( Text::Markdown::List )
             .grep( !*.numbered )
-            .map( *[0].items);
+            .map( *[0].items.map: *.Str );
         %recipes{$title} = { description => $description,
                              ingredients => @ingredients,
                              path => $r.path }
