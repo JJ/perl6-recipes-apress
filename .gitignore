@@ -6,3 +6,5 @@ workspace.xml
 build/
 *.iml
 *.sqlite3
+
+*.log
