@@ -18,4 +18,4 @@ for %data.kv -> $ingredient, %data {
     say "Inserting ", %red-data;
 }
 
-say Raku::Recipes::IngRedient.^load;
+say Raku::Recipes::IngRedient.^all.grep: .vegan == "Yes";
