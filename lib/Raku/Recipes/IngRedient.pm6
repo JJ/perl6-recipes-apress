@@ -1,8 +1,7 @@
 use Red:api<2>;
 
 model Raku::Recipes::IngRedient is rw is table<Ingredient> {
-    has Int         $.id        is serial;
-    has Str         $.name      is column{ :unique };
+    has Str         $.name      is id;
     has Str         $.unit      is column{ :!nullable };
     has Int         $.calories  is column{ :!nullable };
     has Num         $.protein   is column{ :!nullable };
