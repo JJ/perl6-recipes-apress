@@ -12,8 +12,15 @@ my MongoDB::Database $database = $client.database('recipes');
 
 my @documents;
 for $recipes-text.recipes.kv -> $title, %data {
-    say "Creating $title ", %data.raku;
     %data<title> = $title;
+    with %data<ingredients>[] {
+        for .kv -> $k, $v {
+            say $k.raku, $v.raku;
+                    %data{"ingredient-list-$k"} = $v;
+        }
+    }
+    %data<ingredients>:delete;
+    say "Creating $title ", %data.raku;
     @documents.append: BSON::Document.new((|%data)),
 }
 

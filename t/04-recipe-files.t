@@ -13,6 +13,8 @@ subtest "Test basic load", {
             "Includes key «$_»" ) for <description ingredients>;
     like( %recipes{"Buckwheat pudding"}<path>, /buckwheat\-pudding/,
     "Path is OK" );
+    isa-ok %recipes{'Tuna risotto'}<ingredients>[0],
+            Str, "Ingredients extracted";
 }
 
 subtest "Generate site", {

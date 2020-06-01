@@ -18,7 +18,7 @@ method new( $dir where .IO.d  = "recipes") {
             .grep( !*.numbered )
             .map( *[0].items.map: *.Str );
         %recipes{$title} = { description => $description,
-                             ingredients => @ingredients,
+                             ingredients => @ingredients[0].list,
                              path => $r.path }
 
         }
