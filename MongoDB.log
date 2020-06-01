@@ -4,3 +4,123 @@
 2020-06-01 10:47
 29.405399 [I][1][Client][276]: Client topology is TT-Unknown
 29.410631 [I][1][Client][276]: Client topology is TT-Single
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 10:55
+46.102846 [I][1][Client][276]: Client topology is TT-Unknown
+46.105107 [I][1][Client][276]: Client topology is TT-Single
+46.321375 [E][1][Wire][112]: localhost:27017: encode() on 200g cottage cheese or cheese spread
+46.322708 [E][1][Collection][101]: No server reply on query
+46.327486 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 10:57
+25.863722 [I][1][Client][276]: Client topology is TT-Unknown
+25.866451 [I][1][Client][276]: Client topology is TT-Single
+25.978768 [E][1][Wire][112]: localhost:27017: encode() on 250g rice
+25.983215 [E][1][Collection][101]: No server reply on query
+25.987035 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 11:02
+43.760752 [I][1][Client][276]: Client topology is TT-Unknown
+43.762629 [I][1][Client][276]: Client topology is TT-Single
+43.881483 [E][1][Wire][112]: localhost:27017: encode() on 250g rice
+43.883265 [E][1][Collection][101]: No server reply on query
+43.884871 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 11:05
+39.246039 [I][1][Client][276]: Client topology is TT-Unknown
+39.248432 [I][1][Client][276]: Client topology is TT-Single
+39.354380 [E][1][Wire][112]: localhost:27017: encode() on 250g rice
+39.356124 [E][1][Collection][101]: No server reply on query
+39.358178 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 11:06
+33.780092 [I][1][Client][276]: Client topology is TT-Unknown
+33.784954 [I][1][Client][276]: Client topology is TT-Single
+33.905455 [E][1][Wire][112]: localhost:27017: encode() on 250g carrots
+33.908960 [E][1][Collection][101]: No server reply on query
+33.914384 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 11:06
+58.128598 [I][1][Client][276]: Client topology is TT-Unknown
+58.133680 [I][1][Client][276]: Client topology is TT-Single
+58.258205 [E][1][Wire][112]: localhost:27017: encode() on 250g cheese (parmegiano reggiano or granapadano, or manchego)
+58.263170 [E][1][Collection][101]: No server reply on query
+58.270893 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 11:12
+20.737599 [I][1][Client][276]: Client topology is TT-Unknown
+20.740612 [I][1][Client][276]: Client topology is TT-Single
+20.840916 [E][1][Wire][112]: localhost:27017: encode() on 250g rice
+20.842407 [E][1][Collection][101]: No server reply on query
+20.844064 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+02.016384 [I][1][Client][276]: Client topology is TT-Unknown
+02.018520 [I][1][Client][276]: Client topology is TT-Single
+02.147205 [E][1][Wire][112]: localhost:27017: encode() on 100 grams texturized soy
+02.150882 [E][1][Collection][101]: No server reply on query
+02.154472 [E][1][Database][73]: No cursor returned
+2020-06-01 11:13
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+14.421369 [I][1][Client][276]: Client topology is TT-Unknown
+14.424120 [I][1][Client][276]: Client topology is TT-Single
+14.544955 [E][1][Wire][112]: localhost:27017: encode() on 500g tuna
+14.547033 [E][1][Collection][101]: No server reply on query
+14.548990 [E][1][Database][73]: No cursor returned
+2020-06-01 11:14
+, error: Not yet implemented
+
+
+
+
+--------------------------------------------------------------------------------
+2020-06-01 11:14
+53.540452 [I][1][Client][276]: Client topology is TT-Unknown
+53.549178 [I][1][Client][276]: Client topology is TT-Single
+53.637693 [E][1][Wire][112]: localhost:27017: encode() on 250g carrots
+53.639531 [E][1][Collection][101]: No server reply on query
+53.642252 [E][1][Database][73]: No cursor returned
+, error: Not yet implemented
