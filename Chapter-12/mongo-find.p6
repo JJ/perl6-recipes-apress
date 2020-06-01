@@ -9,8 +9,10 @@ my MongoDB::Database $database = $client.database('recipes');
 my MongoDB::Collection $recipes = $database.collection('recipes');
 
 my $regex = BSON::Regex.new( regex => @*ARGS[0]) ;
-my MongoDB::Cursor $cursor = $recipes.find( query => "title" => '$regex' => $regex );
+my MongoDB::Cursor $cursor =
+        $recipes.find( criteria => ["title" => '$regex' => $regex],
+                        projection => [ "title" => 1] );
 
 while $cursor.fetch -> BSON::Document $d {
-    say $d.raku;
+    say $d<title>;
 }
