@@ -46,7 +46,8 @@
     "examples",
     "recipes",
     "cooking",
-    "databases"
+      "databases",
+      "documentation"
   ],
   "source-url": "https://github.com/JJ/raku-recipes-apress"
 }
