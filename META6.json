@@ -50,7 +50,8 @@
       "documentation",
       "learning",
       "web",
-      "NativeCall"
+      "NativeCall",
+      "food"
   ],
   "source-url": "https://github.com/JJ/raku-recipes-apress"
 }
