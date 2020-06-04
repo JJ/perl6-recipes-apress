@@ -9,7 +9,7 @@ if tb-init() -> $ret {
 
 END tb-shutdown;
 
-for "Press ESC to exit!".encode.list -> $c {
+for "We're done!".encode.list -> $c {
     state $x = 5;
     tb-change-cell( $x++, 5, $c, TB_BLACK, TB_WHITE );
 }
@@ -25,7 +25,11 @@ react whenever $events.Supply -> $ev {
     given $ev.type {
         when TB_EVENT_KEY {
             given $ev.key {
+                when TB_KEY_SPACE {
+                    tb-change-cell( 12, 5, "V", TB_GREEN, TB_BLACK );
+                }
                 when TB_KEY_ESC { done }
+
             }
         }
     }
