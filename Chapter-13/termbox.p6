@@ -4,6 +4,7 @@ use Termbox :ALL;
 use Raku::Recipes::SQLator;
 
 my %data = Raku::Recipes::SQLator.new.get-ingredients;
+my Set $selected;
 
 if tb-init() -> $ret {
     note "tb-init() failed with error code $ret";
@@ -35,7 +36,7 @@ react whenever $events.Supply -> $ev {
     given $ev.type {
         when TB_EVENT_KEY {
             given $ev.key {
-                when TB_KEY_SPACE {
+                when TB_KEY_SPACE | TB_KEY_ARROW_DOWN {
                     undraw-cursor($ingredient-index);
                     $ingredient-index =
                             ($ingredient-index+1) % @ingredients.elems;
@@ -44,7 +45,31 @@ react whenever $events.Supply -> $ev {
                     draw-cursor( $ingredient-index );
                     tb-present;
                 }
-                when TB_KEY_ESC { done }
+                when TB_KEY_ARROW_UP {
+                    undraw-cursor($ingredient-index);
+                    if $ingredient-index {
+                        $ingredient-index--
+                    } else {
+                        $ingredient-index = @ingredients.elems - 1;
+                    }
+                    my ( $this_column, $this_row ) = ingredient-to-coords
+                            ($ingredient-index);
+                    draw-cursor( $ingredient-index );
+                    tb-present;
+                }
+                when TB_KEY_ENTER {
+                    if @ingredients[$ingredient-index] ∈ $selected {
+                        uncheck-mark($ingredient-index);
+                        $selected ⊖= @ingredients[$ingredient-index];
+                    } else {
+                        check-mark($ingredient-index);
+                        $selected ∪= @ingredients[$ingredient-index];
+                    }
+                    tb-present;
+                }
+                when TB_KEY_ESC {
+                    done
+                }
 
             }
         }
@@ -54,13 +79,13 @@ react whenever $events.Supply -> $ev {
 subset RowOrColumn of Int where * >= 1;
 
 sub uncheck-mark( $ingredient-index ) {
-    my ($this-column,$this-row )  = ingredient-to-coords( $row );
+    my ($this-column,$this-row )  = ingredient-to-coords( $ingredient-index );
     print-string( "[ ]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
 }
 
 sub check-mark( $ingredient-index ) {
-    my ($this-column,$this-row )  = ingredient-to-coords( $row );
-    print-string( "[]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
+    my ($this-column,$this-row )  = ingredient-to-coords( $ingredient-index );
+    print-string( "[X]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
 }
 
 sub draw-cursor( $ingredient-index ) {
