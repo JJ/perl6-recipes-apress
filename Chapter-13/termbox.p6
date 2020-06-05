@@ -13,18 +13,17 @@ if tb-init() -> $ret {
 END tb-shutdown;
 
 my $row = 0;
+my $ingredient-index = 0;
 my @ingredients = %data.keys.sort;
 my $max-len = @ingredients.map: { .codes };
 my $split = @ingredients.elems / 2;
 for @ingredients -> $k {
-    my $this-row = (1 + $row % $split).Int;
-    my $this-column = (2 + ($row / $split).Int * ($max-len + 5));
-    print-string( "[ ]", $this-column, $this-row, TB_BLACK, TB_BLUE );
-    print-string( $k , $this-column + 4, $this-row, TB_BLACK, TB_WHITE );
+    my ($this-column,$this-row )  = ingredient-to-coords( $row );
+    print-string( "[ ]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
+    print-string( $k , $this-column + 5, $this-row, TB_BLACK, TB_WHITE );
     $row++;
 }
-tb-change-cell( 0, 1, ">".ord, TB_YELLOW, TB_RED );
-
+draw-cursor($ingredient-index);
 tb-present;
 
 my $events = Supplier.new;
@@ -37,7 +36,12 @@ react whenever $events.Supply -> $ev {
         when TB_EVENT_KEY {
             given $ev.key {
                 when TB_KEY_SPACE {
-                    tb-change-cell( 12, 5, "V", TB_GREEN, TB_BLACK );
+                    $ingredient-index =
+                            ($ingredient-index+1) % @ingredients.elems;
+                    my ( $this_column, $this_row ) = ingredient-to-coords
+                            ($ingredient-index);
+                    draw-cursor( $ingredient-index );
+                    tb-present;
                 }
                 when TB_KEY_ESC { done }
 
@@ -48,6 +52,11 @@ react whenever $events.Supply -> $ev {
 
 subset RowOrColumn of Int where * >= 1;
 
+sub draw-cursor( $ingredient-index ) {
+    my ($cursor_c, $cursor_r) = ingredient-to-coords( $ingredient-index);
+    tb-change-cell( $cursor_c, $cursor_r, ">".ord, TB_YELLOW, TB_RED );
+
+}
 sub print-string( Str $str, RowOrColumn $column,
                   RowOrColumn $row,
                   $fgcolor,
@@ -59,4 +68,9 @@ sub print-string( Str $str, RowOrColumn $column,
                 $c,
                 $bgcolor, $fgcolor );
     }
+}
+
+sub ingredient-to-coords( UInt $ingredient-index) {
+    return 1 + ($ingredient-index / $split).Int * ($max-len + 5),
+            (1 + $ingredient-index % $split).Int;
 }
