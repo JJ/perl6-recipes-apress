@@ -19,7 +19,7 @@ my $max-len = @ingredients.map: { .codes };
 my $split = @ingredients.elems / 2;
 for @ingredients -> $k {
     my ($this-column,$this-row )  = ingredient-to-coords( $row );
-    print-string( "[ ]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
+    uncheck-mark( $row );
     print-string( $k , $this-column + 5, $this-row, TB_BLACK, TB_WHITE );
     $row++;
 }
@@ -52,6 +52,16 @@ react whenever $events.Supply -> $ev {
 }
 
 subset RowOrColumn of Int where * >= 1;
+
+sub uncheck-mark( $ingredient-index ) {
+    my ($this-column,$this-row )  = ingredient-to-coords( $row );
+    print-string( "[ ]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
+}
+
+sub check-mark( $ingredient-index ) {
+    my ($this-column,$this-row )  = ingredient-to-coords( $row );
+    print-string( "[]", $this-column + 1 , $this-row, TB_BLACK, TB_BLUE );
+}
 
 sub draw-cursor( $ingredient-index ) {
     my ($cursor_c, $cursor_r) = ingredient-to-coords( $ingredient-index);
