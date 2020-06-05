@@ -16,19 +16,14 @@ my $row = 0;
 my @ingredients = %data.keys.sort;
 my $max-len = @ingredients.map: { .codes };
 my $split = @ingredients.elems / 2;
-for %data.keys -> $k {
-    for $k.encode.list -> $c {
-        state $x;
-        my $this-column = (5 + ($row / $split).Int * ($max-len + 5));
-        my $this-row = 1 + $row % $split;
-        # say  $this-row, " $this-column " ;
-        tb-change-cell( $this-column + $x++,
-                (1+$this-row % $split).Int,
-                        $c,
-                        TB_BLACK, TB_WHITE );
-    }
+for @ingredients -> $k {
+    my $this-row = (1 + $row % $split).Int;
+    my $this-column = (2 + ($row / $split).Int * ($max-len + 5));
+    print-string( "[ ]", $this-column, $this-row, TB_BLACK, TB_BLUE );
+    print-string( $k , $this-column + 4, $this-row, TB_BLACK, TB_WHITE );
     $row++;
 }
+tb-change-cell( 0, 1, ">".ord, TB_YELLOW, TB_RED );
 
 tb-present;
 
@@ -48,5 +43,20 @@ react whenever $events.Supply -> $ev {
 
             }
         }
+    }
+}
+
+subset RowOrColumn of Int where * >= 1;
+
+sub print-string( Str $str, RowOrColumn $column,
+                  RowOrColumn $row,
+                  $fgcolor,
+                  $bgcolor  ) {
+    for $str.encode.list -> $c  {
+        state $x;
+        tb-change-cell( $column + $x++,
+                $row,
+                $c,
+                $bgcolor, $fgcolor );
     }
 }
