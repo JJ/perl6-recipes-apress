@@ -36,6 +36,7 @@ react whenever $events.Supply -> $ev {
         when TB_EVENT_KEY {
             given $ev.key {
                 when TB_KEY_SPACE {
+                    undraw-cursor($ingredient-index);
                     $ingredient-index =
                             ($ingredient-index+1) % @ingredients.elems;
                     my ( $this_column, $this_row ) = ingredient-to-coords
@@ -57,6 +58,13 @@ sub draw-cursor( $ingredient-index ) {
     tb-change-cell( $cursor_c, $cursor_r, ">".ord, TB_YELLOW, TB_RED );
 
 }
+
+sub undraw-cursor( $ingredient-index ) {
+    my ($cursor_c, $cursor_r) = ingredient-to-coords( $ingredient-index);
+    tb-change-cell( $cursor_c, $cursor_r, " ".ord, 0, 0 );
+
+}
+
 sub print-string( Str $str, RowOrColumn $column,
                   RowOrColumn $row,
                   $fgcolor,
