@@ -18,6 +18,8 @@ my $ingredient-index = 0;
 my @ingredients = %data.keys.sort;
 my $max-len = @ingredients.map: { .codes };
 my $split = @ingredients.elems / 2;
+print-string("Select with ENTER, move with space or cursors",1,1,
+        TB_WHITE, TB_BLACK);
 for @ingredients -> $k {
     my ($this-column,$this-row )  = ingredient-to-coords( $row );
     uncheck-mark( $row );
@@ -115,5 +117,5 @@ sub print-string( Str $str, RowOrColumn $column,
 
 sub ingredient-to-coords( UInt $ingredient-index) {
     return 1 + ($ingredient-index / $split).Int * ($max-len + 5),
-            (1 + $ingredient-index % $split).Int;
+            (3 + $ingredient-index % $split).Int;
 }
