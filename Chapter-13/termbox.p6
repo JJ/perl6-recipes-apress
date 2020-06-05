@@ -1,6 +1,9 @@
 #!/usr/bin/env perl6
 
 use Termbox :ALL;
+use Raku::Recipes::SQLator;
+
+my %data = Raku::Recipes::SQLator.new.get-ingredients;
 
 if tb-init() -> $ret {
     note "tb-init() failed with error code $ret";
@@ -9,9 +12,22 @@ if tb-init() -> $ret {
 
 END tb-shutdown;
 
-for "We're done!".encode.list -> $c {
-    state $x = 5;
-    tb-change-cell( $x++, 5, $c, TB_BLACK, TB_WHITE );
+my $row = 0;
+my @ingredients = %data.keys.sort;
+my $max-len = @ingredients.map: { .codes };
+my $split = @ingredients.elems / 2;
+for %data.keys -> $k {
+    for $k.encode.list -> $c {
+        state $x;
+        my $this-column = (5 + ($row / $split).Int * ($max-len + 5));
+        my $this-row = 1 + $row % $split;
+        # say  $this-row, " $this-column " ;
+        tb-change-cell( $this-column + $x++,
+                (1+$this-row % $split).Int,
+                        $c,
+                        TB_BLACK, TB_WHITE );
+    }
+    $row++;
 }
 
 tb-present;
