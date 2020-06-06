@@ -10,6 +10,6 @@
     "tags" : [
 	"book","Apress", "databases"
     ],
-    "depends" : [ "Termbox","GTK::Simple" ],
+    "depends" : [ "Termbox","GTK::Simple", "SDL2" ],
     "version" : "0.0.1"
 }
