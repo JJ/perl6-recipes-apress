@@ -14,6 +14,10 @@ my @panels = do for <Main Side Dessert> {
     create-type-panel( $dator, $_)
 };
 
+for @all-radio -> $b {
+    $b.toggled.tap: &grayout-same-name;
+}
+
 $app.set-content(
             GTK::Simple::VBox.new(
                 create-type-buttons( @panels ),
@@ -68,21 +72,44 @@ sub create-type-panel( Raku::Recipes::Dator $dator,
 }
 
 sub toggle-buttons( $type ) {
-    state $clicked = True;
+    state $clicked = False;
     if $clicked {
         for @all-radio -> $b {
             if $b.Hash{$type} eq "Yes" {
                 $b.sensitive = False;
+            } else {
+                $b.sensitive = True;
             }
         }
         $clicked = False;
     } else {
         for @all-radio -> $b {
-            if $b.Hash{$type} eq "Yes" {
+            if $b.Hash{$type} eq "No" {
+                $b.sensitive = False;
+            } else {
                 $b.sensitive = True;
             }
         }
         $clicked = True;
     }
 
+}
+
+sub grayout-same-name( $b ) {
+    state $toggled = False;
+    if $toggled {
+        for @all-radio -> $other {
+            if $b.WHICH ne $other.WHICH and $b.label eq $other.label {
+                $other.sensitive = False;
+            }
+        }
+        $toggled = False;
+    } else {
+        for @all-radio -> $other {
+            if $b.WHICH ne $other.WHICH and $b.label eq $other.label {
+                $other.sensitive = True;
+            }
+        }
+        $toggled = True;
+    }
 }
