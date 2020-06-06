@@ -70,6 +70,12 @@ react whenever $events.Supply -> $ev {
                     tb-present;
                 }
                 when TB_KEY_ESC {
+                    print-string("Selected " ~
+                            $selected.map( *.key ).join("-" ),
+                            1,2,
+                            TB_BLUE, TB_YELLOW);
+                    tb-present;
+                    sleep(5);
                     done
                 }
 
