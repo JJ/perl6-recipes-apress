@@ -13,6 +13,7 @@ my @panels = do for <Main Side Dessert> {
     create-type-panel( $dator, $_)
 };
 
+say @panels.raku;
 $app.set-content(
             GTK::Simple::VBox.new(
                 create-type-buttons( @panels ),
