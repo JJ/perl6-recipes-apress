@@ -8,12 +8,12 @@ use Raku::Recipes::SQLator;
 my $app = GTK::Simple::App.new( title => "Select ingredients" );
 
 my $dator = Raku::Recipes::SQLator.new();
+my @all-radio;
 
 my @panels = do for <Main Side Dessert> {
     create-type-panel( $dator, $_)
 };
 
-say @panels.raku;
 $app.set-content(
             GTK::Simple::VBox.new(
                 create-type-buttons( @panels ),
@@ -32,8 +32,22 @@ sub create-type-buttons( @panels ) {
             );
     $second.sensitive = True;
     $vegan.clicked.tap({
-        .sensitive = False;
-        $second.sensitive = False;
+        state $clicked = True;
+        if $clicked {
+            for @all-radio -> $b {
+                if $b.Hash<Vegan> eq "No" {
+                    $b.sensitive = False;
+                }
+            }
+            $clicked = False;
+        } else {
+            for @all-radio -> $b {
+                if $b.Hash<Vegan> eq "No" {
+                    $b.sensitive = True;
+                }
+            }
+            $clicked = True;
+        }
 
     }
             );
@@ -46,7 +60,6 @@ sub create-radio-buttons ( $dator, @labels is copy ) {
     my $first-radio-button =
             GTK::Simple::RadioButton.new(:$label )
             but $dator.get-ingredient($label);
-    say $first-radio-button.Hash;
     my @radio-buttons = ( $first-radio-button ) ;
     while @labels {
         $label = shift @labels;
@@ -56,6 +69,7 @@ sub create-radio-buttons ( $dator, @labels is copy ) {
         @radio-buttons.append: $this-radio-button;
         $this-radio-button.add( $first-radio-button );
     }
+    @all-radio.append: |@radio-buttons;
     @radio-buttons;
 }
 
