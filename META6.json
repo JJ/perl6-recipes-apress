@@ -7,16 +7,16 @@
     "JJ Merelo"
   ],
   "auth": "github:JJ",
-    "depends": [
-	"Text::Markdown",
-	"Colorizable",
-	"Text::CSV",
-	"Markit",
-	"Template::Classic",
-	"DBIish",
-	"Redis",
-	"Red"
-    ],
+  "depends": [
+    "Text::Markdown",
+    "Colorizable",
+    "Text::CSV",
+    "Markit",
+    "Template::Classic",
+    "DBIish",
+    "Redis",
+    "Red"
+  ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
     "Raku::Recipes::CSVDator": "lib/Raku/Recipes/CSVDator.pm6",
@@ -40,18 +40,18 @@
   },
   "license": "Artistic-2.0",
   "tags": [
-      "book",
-      "Apress",
-      "Raku",
-      "examples",
-      "recipes",
-      "cooking",
-      "databases",
-      "documentation",
-      "learning",
-      "web",
-      "NativeCall",
-      "food"
+    "book",
+    "Apress",
+    "Raku",
+    "examples",
+    "recipes",
+    "cooking",
+    "databases",
+    "documentation",
+    "learning",
+    "web",
+    "NativeCall",
+    "food"
   ],
   "source-url": "https://github.com/JJ/raku-recipes-apress"
 }
