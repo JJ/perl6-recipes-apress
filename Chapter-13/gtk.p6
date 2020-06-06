@@ -27,30 +27,11 @@ $app.run;
 sub create-type-buttons( @panels ) {
     my $button-set = GTK::Simple::HBox.new(
             my $vegan = GTK::Simple::Button.new(label => "Vegan"),
-            my $second = GTK::Simple::Button.new(label => "Dairy"),
+            my $dairy = GTK::Simple::Button.new(label => "Non-Dairy"),
             my $exit = GTK::Simple::Button.new(label => "Exit"),
             );
-    $second.sensitive = True;
-    $vegan.clicked.tap({
-        state $clicked = True;
-        if $clicked {
-            for @all-radio -> $b {
-                if $b.Hash<Vegan> eq "No" {
-                    $b.sensitive = False;
-                }
-            }
-            $clicked = False;
-        } else {
-            for @all-radio -> $b {
-                if $b.Hash<Vegan> eq "No" {
-                    $b.sensitive = True;
-                }
-            }
-            $clicked = True;
-        }
-
-    }
-            );
+    $vegan.clicked.tap: { toggle-buttons( "Vegan" )};
+    $dairy.clicked.tap: { toggle-buttons( "Dairy" )};
     $exit.clicked.tap({ $app.exit; });
     return $button-set;
 }
@@ -84,4 +65,24 @@ sub create-type-panel( Raku::Recipes::Dator $dator,
                        $type where $type ∈ <Main Side Dessert> ) {
     my @ingredients = $dator.search-ingredients( { $type => "Yes" });
     create-button-set( $dator, $type, @ingredients );
+}
+
+sub toggle-buttons( $type ) {
+    state $clicked = True;
+    if $clicked {
+        for @all-radio -> $b {
+            if $b.Hash{$type} eq "Yes" {
+                $b.sensitive = False;
+            }
+        }
+        $clicked = False;
+    } else {
+        for @all-radio -> $b {
+            if $b.Hash{$type} eq "Yes" {
+                $b.sensitive = True;
+            }
+        }
+        $clicked = True;
+    }
+
 }
