@@ -15,7 +15,7 @@ my @panels = do for <Main Side Dessert> {
 
 $app.set-content(
             GTK::Simple::VBox.new(
-                create-type-buttons,
+                create-type-buttons( @panels ),
                 GTK::Simple::HBox.new( |@panels )
             )
         );
@@ -23,14 +23,19 @@ $app.set-content(
 $app.border-width = 15;
 $app.run;
 
-sub create-type-buttons() {
+sub create-type-buttons( @panels ) {
     my $button-set = GTK::Simple::HBox.new(
-            my $button = GTK::Simple::Button.new(label => "Vegan"),
+            my $vegan = GTK::Simple::Button.new(label => "Vegan"),
             my $second = GTK::Simple::Button.new(label => "Dairy"),
             my $exit = GTK::Simple::Button.new(label => "Exit"),
             );
-    $second.sensitive = False;
-    $button.clicked.tap({ .sensitive = False; $second.sensitive = True });
+    $second.sensitive = True;
+    $vegan.clicked.tap({
+        .sensitive = False;
+        $second.sensitive = False;
+
+    }
+            );
     $exit.clicked.tap({ $app.exit; });
     return $button-set;
 }
