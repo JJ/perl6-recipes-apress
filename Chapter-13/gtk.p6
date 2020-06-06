@@ -3,17 +3,24 @@
 use GTK::Simple;
 use GTK::Simple::App;
 use GTK::Simple::RadioButton;
+use Raku::Recipes::SQLator;
 
 my $app = GTK::Simple::App.new( title => "Select ingredients" );
-my @buttons = create-radio-buttons( <a b c >);
+
+my $dator = Raku::Recipes::SQLator.new();
+
+my @panels = do for <Main Side Dessert> {
+    create-type-panel( $dator, $_)
+};
+
 $app.set-content(
             GTK::Simple::VBox.new(
                 create-type-buttons,
-                |@buttons
+                GTK::Simple::HBox.new( |@panels )
             )
         );
 
-$app.border-width = 20;
+$app.border-width = 15;
 $app.run;
 
 sub create-type-buttons() {
@@ -39,4 +46,17 @@ sub create-radio-buttons ( @labels is copy ) {
         $this-radio-button.add( $first-radio-button );
     }
     @radio-buttons;
+}
+
+sub create-button-set( $title, @labels ) {
+    my $label = GTK::Simple::TextView.new;
+    $label.text = "→ $title";
+    my @radio-buttons = create-radio-buttons( @labels );
+    GTK::Simple::VBox.new( $label, |@radio-buttons);
+}
+
+sub create-type-panel( Raku::Recipes::Dator $dator,
+                       $type where $type ∈ <Main Side Dessert> ) {
+    my @ingredients = $dator.search-ingredients( { $type => "Yes" });
+    create-button-set( $type, @ingredients );
 }
