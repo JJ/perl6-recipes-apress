@@ -41,28 +41,33 @@ sub create-type-buttons( @panels ) {
     return $button-set;
 }
 
-sub create-radio-buttons ( @labels is copy ) {
+sub create-radio-buttons ( $dator, @labels is copy ) {
+    my $label = shift @labels;
     my $first-radio-button =
-            GTK::Simple::RadioButton.new(:label(shift @labels));
+            GTK::Simple::RadioButton.new(:$label )
+            but $dator.get-ingredient($label);
+    say $first-radio-button.Hash;
     my @radio-buttons = ( $first-radio-button ) ;
     while @labels {
+        $label = shift @labels;
         my $this-radio-button =
-                GTK::Simple::RadioButton.new(:label(shift @labels));
+                GTK::Simple::RadioButton.new(:$label)
+                but $dator.get-ingredient($label);
         @radio-buttons.append: $this-radio-button;
         $this-radio-button.add( $first-radio-button );
     }
     @radio-buttons;
 }
 
-sub create-button-set( $title, @labels ) {
+sub create-button-set( $dator, $title, @labels ) {
     my $label = GTK::Simple::TextView.new;
     $label.text = "→ $title";
-    my @radio-buttons = create-radio-buttons( @labels );
+    my @radio-buttons = create-radio-buttons( $dator, @labels );
     GTK::Simple::VBox.new( $label, |@radio-buttons);
 }
 
 sub create-type-panel( Raku::Recipes::Dator $dator,
                        $type where $type ∈ <Main Side Dessert> ) {
     my @ingredients = $dator.search-ingredients( { $type => "Yes" });
-    create-button-set( $type, @ingredients );
+    create-button-set( $dator, $type, @ingredients );
 }
