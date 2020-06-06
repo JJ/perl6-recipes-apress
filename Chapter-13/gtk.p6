@@ -19,11 +19,12 @@ $app.run;
 sub create-type-buttons() {
     my $button-set = GTK::Simple::HBox.new(
             my $button = GTK::Simple::Button.new(label => "Vegan"),
-            my $second = GTK::Simple::Button.new(label => "Dairy")
+            my $second = GTK::Simple::Button.new(label => "Dairy"),
+            my $exit = GTK::Simple::Button.new(label => "Exit"),
             );
     $second.sensitive = False;
     $button.clicked.tap({ .sensitive = False; $second.sensitive = True });
-    $second.clicked.tap({ $app.exit; });
+    $exit.clicked.tap({ $app.exit; });
     return $button-set;
 }
 
