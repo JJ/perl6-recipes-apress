@@ -28,6 +28,11 @@ $app.set-content(
 $app.border-width = 15;
 $app.run;
 
+END {
+    say "Selected ingredients →";
+    say @all-radio.grep(  *.status ).map( *.label ).join(" | ");
+}
+
 sub create-type-buttons( @panels ) {
     my $button-set = GTK::Simple::HBox.new(
             my $vegan = GTK::Simple::Button.new(label => "Vegan"),
