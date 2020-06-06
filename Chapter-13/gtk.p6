@@ -34,8 +34,8 @@ sub create-type-buttons( @panels ) {
             my $dairy = GTK::Simple::Button.new(label => "Non-Dairy"),
             my $exit = GTK::Simple::Button.new(label => "Exit"),
             );
-    $vegan.clicked.tap: { toggle-buttons( "Vegan" )};
-    $dairy.clicked.tap: { toggle-buttons( "Dairy" )};
+    $vegan.clicked.tap: { toggle-buttons( $_, "Vegan" )};
+    $dairy.clicked.tap: { toggle-buttons( $_, "Dairy" )};
     $exit.clicked.tap({ $app.exit; });
     return $button-set;
 }
@@ -71,9 +71,10 @@ sub create-type-panel( Raku::Recipes::Dator $dator,
     create-button-set( $dator, $type, @ingredients );
 }
 
-sub toggle-buttons( $type ) {
+sub toggle-buttons( $button, $type ) {
     state $clicked = False;
     if $clicked {
+        $button.label = "Non-$type";
         for @all-radio -> $b {
             if $b.Hash{$type} eq "Yes" {
                 $b.sensitive = False;
@@ -83,6 +84,7 @@ sub toggle-buttons( $type ) {
         }
         $clicked = False;
     } else {
+        $button.label = $type;
         for @all-radio -> $b {
             if $b.Hash{$type} eq "No" {
                 $b.sensitive = False;
