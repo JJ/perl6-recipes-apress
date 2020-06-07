@@ -10,11 +10,9 @@ my int ($w, $h) = 800, 600;
 my $window = init-window( $w, $h );
 LEAVE $window.destroy;
 
-my $renderer = SDL2::Renderer.new( $window, :flags(ACCELERATED) );
-LEAVE $renderer.destroy;
+my $renderer-info = SDL2::Renderer.new( $window, :flags(ACCELERATED) )
+        .renderer-info;
 SDL_ClearError;
-my $renderer_info = $renderer.renderer-info;
-say $renderer_info;
 
 sdl-loop;
 
