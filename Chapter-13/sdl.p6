@@ -43,6 +43,11 @@ sub sdl-loop () {
 #| Handle events
 proto sub handle-event( | ) {*}
 
+multi sub handle-event( SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
+    say $mouse.raku;
+    say "Clicked at {$mouse.x}, {$mouse.y}";
+}
+
 multi sub handle-event( SDL2::Raw::SDL_KeyboardEvent $key ) {
     say $key.raku;
     given $key {
