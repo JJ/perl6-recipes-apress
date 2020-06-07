@@ -10,11 +10,10 @@ my int ($w, $h) = 800, 600;
 my $window = init-window( $w, $h );
 LEAVE $window.destroy;
 
-my $renderer-info = SDL2::Renderer.new( $window, :flags(ACCELERATED) )
-        .renderer-info;
+my $renderer = SDL2::Renderer.new( $window, :flags(ACCELERATED) );
 SDL_ClearError;
 
-sdl-loop;
+sdl-loop($renderer);
 
 #-------------------- routines -----------------------------------------
 
@@ -31,11 +30,11 @@ sub init-window( int $w, int $h ) {
 
 
 #| Rendering loop
-sub sdl-loop () {
+sub sdl-loop ( $renderer ) {
     my SDL_Event $event .= new;
     loop {
         while SDL_PollEvent($event) {
-            handle-event( SDL_CastEvent($event) )
+            handle-event( $renderer, SDL_CastEvent($event) )
         }
     }
 }
@@ -43,12 +42,15 @@ sub sdl-loop () {
 #| Handle events
 proto sub handle-event( | ) {*}
 
-multi sub handle-event( SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
+multi sub handle-event( $renderer, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
     say $mouse.raku;
     say "Clicked at {$mouse.x}, {$mouse.y}";
+    $renderer.draw-color(0xFF, 0xFF, 0xff, 0x7f);
+    $renderer.draw-point( $mouse.x, $mouse.y );
+    $renderer.present;
 }
 
-multi sub handle-event( SDL2::Raw::SDL_KeyboardEvent $key ) {
+multi sub handle-event( $, SDL2::Raw::SDL_KeyboardEvent $key ) {
     say $key.raku;
     given $key {
         when (*.type == KEYDOWN )
@@ -60,7 +62,7 @@ multi sub handle-event( SDL2::Raw::SDL_KeyboardEvent $key ) {
     }
 }
 
-multi sub handle-event( $event ) {
+multi sub handle-event( $, $event ) {
     say $event.raku;
     given $event {
         when ( *.type == QUIT )
