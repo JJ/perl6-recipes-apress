@@ -1,12 +1,10 @@
 #!/usr/bin/env perl6
 
 use SDL2::Raw;
-use lib 'lib';
+use lib <lib Chapter-13/lib>;
 use SDL2;
+use My::Unit;
 
-constant OPAQUE = 255;
-constant GRID_X = 25;
-constant GRID_Y = 25;
 
 LEAVE SDL_Quit;
 
@@ -18,21 +16,19 @@ LEAVE $window.destroy;
 
 my $renderer = SDL2::Renderer.new( $window, :flags(ACCELERATED) );
 SDL_ClearError;
-constant @infected = (255,0,0,OPAQUE);
-constant @healthy = (0,255,0,OPAQUE);
+
 
 my @grid[$w/GRID_X;$h/GRID_Y];
 
 $renderer.draw-color( |@healthy );
-for ^@grid.shape[0] -> $i {
-    for ^@grid.shape[1] -> $j {
+for ^@grid.shape[0] -> $x {
+    for ^@grid.shape[1] -> $y {
         if ( 1.rand < $occupied ) {
-            my $dest-rect = rect-at-grid($i, $j);
-            $renderer.fill-rect($dest-rect);
+            @grid[$x;$y] = My::Unit.new( :$renderer, :$x, :$y );
+            @grid[$x;$y].render;
         }
     }
 }
-$renderer.present;
 sdl-loop($renderer);
 
 #-------------------- routines -----------------------------------------
@@ -58,26 +54,17 @@ sub sdl-loop ( $renderer ) {
     }
 }
 
-sub rect-at-grid( $grid_x, $grid_y ) {
-    SDL_Rect.new: x => $grid_x*GRID_X, y => $grid_y*GRID_Y,
-                  w => GRID_X, h => GRID_Y;
-}
-
-sub gridify ( $x, $y) {
-    return ($x / GRID_X).Int, ($y/GRID_Y).Int;
-}
-
 #| Handle events
 proto sub handle-event( | ) {*}
 
 multi sub handle-event( $renderer, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
     say $mouse.raku;
     say "Clicked at {$mouse.x}, {$mouse.y}";
-    $renderer.draw-color(0x22, 0x22, 0x22, OPAQUE);
-    my $dest-rect = rect-at-grid( | gridify( $mouse.x, $mouse.y));
-    say $dest-rect.raku;
-    $renderer.fill-rect( $dest-rect);
-    $renderer.present;
+
+}
+
+sub gridify ( $x, $y) {
+    return ($x / GRID_X).Int, ($y/GRID_Y).Int;
 }
 
 multi sub handle-event( $, SDL2::Raw::SDL_KeyboardEvent $key ) {
