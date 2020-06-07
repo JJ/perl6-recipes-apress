@@ -19,8 +19,7 @@ SDL_ClearError;
 
 
 my @grid[$w/GRID_X;$h/GRID_Y];
-
-$renderer.draw-color( |@healthy );
+say "Generating grid...";
 for ^@grid.shape[0] -> $x {
     for ^@grid.shape[1] -> $y {
         if ( 1.rand < $occupied ) {
@@ -57,9 +56,17 @@ sub sdl-loop ( $renderer ) {
 #| Handle events
 proto sub handle-event( | ) {*}
 
-multi sub handle-event( $renderer, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
+multi sub handle-event( $, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
     say $mouse.raku;
     say "Clicked at {$mouse.x}, {$mouse.y}";
+    my ( $grid-x, $grid-y ) = gridify( $mouse.x, $mouse.y );
+    given $mouse {
+        when (*.type == MOUSEBUTTONUP ) {
+            with @grid[$grid-x; $grid-y] {
+                .flip;
+            }
+        }
+    }
 
 }
 

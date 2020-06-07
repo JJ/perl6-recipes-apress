@@ -25,6 +25,8 @@ submethod TWEAK {
 
 submethod flip() {
     $!state = $!state == HEALTHY ?? INFECTED !! HEALTHY;
+    sleep 0.2;
+    self.render;
 }
 
 method render {
@@ -35,5 +37,4 @@ method render {
     }
     $!renderer.fill-rect($!rect);
     $!renderer.present;
-
 }
