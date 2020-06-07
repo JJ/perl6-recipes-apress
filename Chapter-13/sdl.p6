@@ -36,7 +36,7 @@ sdl-loop($renderer);
 sub init-window( int $w, int $h ) {
     die "couldn't initialize SDL2: { SDL_GetError }" if SDL_Init(VIDEO) != 0;
     SDL2::Window.new(
-            :title("Particle System!"),
+            :title("DIVCO"),
             :width($w),
             :height($h),
             :flags(SHOWN)
