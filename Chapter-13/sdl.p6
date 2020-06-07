@@ -8,7 +8,7 @@ use My::Unit;
 
 LEAVE SDL_Quit;
 
-my $occupied =  @*ARGS[0] // 0.1;
+my $occupied =  @*ARGS[0] // 0.5;
 
 my int ($w, $h) = 800, 600;
 my $window = init-window( $w, $h );
@@ -47,8 +47,13 @@ sub init-window( int $w, int $h ) {
 sub sdl-loop ( $renderer ) {
     my SDL_Event $event .= new;
     loop {
+        state $last-update = now;
         while SDL_PollEvent($event) {
             handle-event( $renderer, SDL_CastEvent($event) );
+        }
+        if now - $last-update  > 1 {
+            infection-loop($renderer);
+            $last-update = now;
         }
     }
 }
@@ -57,8 +62,6 @@ sub sdl-loop ( $renderer ) {
 proto sub handle-event( | ) {*}
 
 multi sub handle-event( $, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
-    say $mouse.raku;
-    say "Clicked at {$mouse.x}, {$mouse.y}";
     my ( $grid-x, $grid-y ) = gridify( $mouse.x, $mouse.y );
     given $mouse {
         when (*.type == MOUSEBUTTONUP ) {
@@ -75,7 +78,6 @@ sub gridify ( $x, $y) {
 }
 
 multi sub handle-event( $, SDL2::Raw::SDL_KeyboardEvent $key ) {
-    say $key.raku;
     given $key {
         when (*.type == KEYDOWN )
         {
@@ -87,11 +89,39 @@ multi sub handle-event( $, SDL2::Raw::SDL_KeyboardEvent $key ) {
 }
 
 multi sub handle-event( $, $event ) {
-    say $event.raku;
     given $event {
         when ( *.type == QUIT )
         {
             exit;
         }
     }
+}
+
+sub infection-loop( $renderer ) {
+    say "Infection loop…";
+    for ^@grid.shape[0] -> $x {
+        for ^@grid.shape[1] -> $y {
+            with @grid[$x; $y] {
+                if .state == HEALTHY {
+                    my $prob=0;
+                    for max($x - 1, 0) .. min($x + 1, @grid.shape[0] - 1) ->
+                    $xx {
+                        for max($y - 1, 0) .. min($y + 1,
+                                @grid.shape[1] - 1) ->
+                        $yy {
+                            if @grid[$xx;$yy] && @grid[$xx;$yy].state ==
+                            INFECTED {
+                                $prob += 0.5
+                            }
+                        }
+                    }
+                    if 1.rand < $prob {
+                        @grid[$x;
+                        $y].flip;
+                    }
+                }
+            }
+        }
+    }
+    $renderer.present;
 }

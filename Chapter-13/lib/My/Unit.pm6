@@ -13,7 +13,7 @@ unit class My::Unit;
 has $!renderer;
 has $!x;
 has $!y;
-has unit-state $!state = HEALTHY;
+has unit-state $.state = HEALTHY;
 has $!rect;
 
 submethod BUILD( :$!renderer, :$!x, :$!y ) {}
@@ -25,7 +25,6 @@ submethod TWEAK {
 
 submethod flip() {
     $!state = $!state == HEALTHY ?? INFECTED !! HEALTHY;
-    sleep 0.2;
     self.render;
 }
 
@@ -36,5 +35,4 @@ method render {
         $!renderer.draw-color(|@infected);
     }
     $!renderer.fill-rect($!rect);
-    $!renderer.present;
 }
