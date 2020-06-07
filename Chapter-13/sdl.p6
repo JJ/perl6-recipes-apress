@@ -3,7 +3,10 @@
 use SDL2::Raw;
 use lib 'lib';
 use SDL2;
+
 constant OPAQUE = 255;
+constant GRID_X = 25;
+constant GRID_Y = 25;
 
 LEAVE SDL_Quit;
 
@@ -14,11 +17,10 @@ LEAVE $window.destroy;
 my $renderer = SDL2::Renderer.new( $window, :flags(ACCELERATED) );
 SDL_ClearError;
 
-for ^80 -> $i {
-    for ^60 -> $j {
+for ^($w/GRID_X) -> $i {
+    for ^($h/GRID_Y) -> $j {
         $renderer.draw-color($i*3, $j*4, 0x22, 22);
-        my SDL_Rect $dest-rect .= new: x => $i*10, y => $j*10,
-                                       w => 10, h => 20;
+        my $dest-rect = rect-at-grid( $i, $j);
         $renderer.fill-rect( $dest-rect);
     }
 }
@@ -38,16 +40,23 @@ sub init-window( int $w, int $h ) {
             );
 }
 
-
 #| Rendering loop
 sub sdl-loop ( $renderer ) {
     my SDL_Event $event .= new;
     loop {
         while SDL_PollEvent($event) {
             handle-event( $renderer, SDL_CastEvent($event) );
-            $renderer.present;
         }
     }
+}
+
+sub rect-at-grid( $grid_x, $grid_y ) {
+    SDL_Rect.new: x => $grid_x*GRID_X, y => $grid_y*GRID_Y,
+                  w => GRID_X, h => GRID_Y;
+}
+
+sub gridify ( $x, $y) {
+    return ($x / GRID_X).Int, ($y/GRID_Y).Int;
 }
 
 #| Handle events
@@ -57,11 +66,10 @@ multi sub handle-event( $renderer, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
     say $mouse.raku;
     say "Clicked at {$mouse.x}, {$mouse.y}";
     $renderer.draw-color(0x22, 0x22, 0x22, OPAQUE);
-    my SDL_Rect $dest-rect .= new: x => $mouse.x, y => $mouse.y,
-                                   w => 10, h => 20;
+    my $dest-rect = rect-at-grid( | gridify( $mouse.x, $mouse.y));
     say $dest-rect.raku;
     $renderer.fill-rect( $dest-rect);
-#    $renderer.draw-point( $mouse.x, $mouse.y );
+    $renderer.present;
 }
 
 multi sub handle-event( $, SDL2::Raw::SDL_KeyboardEvent $key ) {
@@ -74,22 +82,6 @@ multi sub handle-event( $, SDL2::Raw::SDL_KeyboardEvent $key ) {
             }
         }
     }
-}
-
-sub create-rect($renderer) {
-    my $texture = $renderer.create-texture(
-            :format(%PIXELFORMAT<ARGB8888>),
-            :access(TARGET),
-            :width(8),
-            :height(6)
-            );
-
-    $renderer.render-target($texture);
-    $renderer.draw-color(0, 0, 0, 0);
-    $renderer.clear;
-    $renderer.draw-color(25, 25, 25, OPAQUE );
-    SDL_SetTextureBlendMode($texture, 1);
-    $texture;
 }
 
 multi sub handle-event( $, $event ) {
