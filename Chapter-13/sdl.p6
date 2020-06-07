@@ -10,18 +10,26 @@ constant GRID_Y = 25;
 
 LEAVE SDL_Quit;
 
+my $occupied =  @*ARGS[0] // 0.1;
+
 my int ($w, $h) = 800, 600;
 my $window = init-window( $w, $h );
 LEAVE $window.destroy;
 
 my $renderer = SDL2::Renderer.new( $window, :flags(ACCELERATED) );
 SDL_ClearError;
+constant @infected = (255,0,0,OPAQUE);
+constant @healthy = (0,255,0,OPAQUE);
 
-for ^($w/GRID_X) -> $i {
-    for ^($h/GRID_Y) -> $j {
-        $renderer.draw-color($i*3, $j*4, 0x22, 22);
-        my $dest-rect = rect-at-grid( $i, $j);
-        $renderer.fill-rect( $dest-rect);
+my @grid[$w/GRID_X;$h/GRID_Y];
+
+$renderer.draw-color( |@healthy );
+for ^@grid.shape[0] -> $i {
+    for ^@grid.shape[1] -> $j {
+        if ( 1.rand < $occupied ) {
+            my $dest-rect = rect-at-grid($i, $j);
+            $renderer.fill-rect($dest-rect);
+        }
     }
 }
 $renderer.present;
