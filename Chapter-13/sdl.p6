@@ -33,15 +33,34 @@ sub init-window( int $w, int $h ) {
 #| Rendering loop
 sub sdl-loop () {
     my SDL_Event $event .= new;
-    main: loop {
+    loop {
         while SDL_PollEvent($event) {
-            my $casted_event = SDL_CastEvent($event);
-            given $casted_event {
-                when *.type == QUIT {
-                    last main;
-                }
+            handle-event( SDL_CastEvent($event) )
+        }
+    }
+}
+
+#| Handle events
+proto sub handle-event( | ) {*}
+
+multi sub handle-event( SDL2::Raw::SDL_KeyboardEvent $key ) {
+    say $key.raku;
+    given $key {
+        when (*.type == KEYDOWN )
+        {
+            if $key.sym == 27 {
+                exit;
             }
         }
+    }
+}
 
+multi sub handle-event( $event ) {
+    say $event.raku;
+    given $event {
+        when ( *.type == QUIT )
+        {
+            exit;
+        }
     }
 }
