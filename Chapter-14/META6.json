@@ -10,6 +10,6 @@
     "tags" : [
 	    "book","Apress", "NativeCall"
     ],
-    "depends" : [ "Inline::Perl5" ],
+    "depends" : [ "Inline::Perl5", "Inline::Python" ],
     "version" : "0.0.1"
 }
