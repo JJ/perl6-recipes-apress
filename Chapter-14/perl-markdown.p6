@@ -8,4 +8,7 @@ my $parser = MealMaster.new();
 my @recipes = $parser.parse("Chapter-14/apetizer.mmf");
 for @recipes -> $r {
    say $r.title;
+    for $r.ingredients {
+        say "→ ", .product;
+    }
 }
