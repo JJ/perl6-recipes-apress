@@ -17,7 +17,6 @@ LEAVE $window.destroy;
 my $renderer = SDL2::Renderer.new( $window, :flags(ACCELERATED) );
 SDL_ClearError;
 
-
 my @grid[$w/GRID_X;$h/GRID_Y];
 say "Generating grid...";
 for ^@grid.shape[0] -> $x {
@@ -70,7 +69,6 @@ multi sub handle-event( $, SDL2::Raw::SDL_MouseButtonEvent $mouse ) {
             }
         }
     }
-
 }
 
 sub gridify ( $x, $y) {
@@ -116,8 +114,7 @@ sub infection-loop( $renderer ) {
                         }
                     }
                     if 1.rand < $prob {
-                        @grid[$x;
-                        $y].flip;
+                        @grid[$x;$y].flip;
                     }
                 }
             }
