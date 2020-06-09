@@ -7,10 +7,7 @@ use Markdent::Parser:from<Perl5>;
 
 my $handler = Markdent::Handler::CaptureEvents.new();
 
-my $parser = Markdent::Parser.new(
-    dialect => "GitHub",
-    handler => $handler
-);
+my $parser = Markdent::Parser.new( { handler => $handler } );
 
 $parser.parse( markdown => '# Here we go' );
 
