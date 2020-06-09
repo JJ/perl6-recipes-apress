@@ -2,8 +2,16 @@
 
 use Inline::Perl5;
 
-use Text::Markdown:from<Perl5>;
+use Markdent::Handler::CaptureEvents:from<Perl5>;
+use Markdent::Parser:from<Perl5>;
 
-my $tm = Text::Markdown.new;
+my $handler = Markdent::Handler::CaptureEvents.new();
 
-say $tm.markdown('# HELLO');
+my $parser = Markdent::Parser.new(
+    dialect => "GitHub",
+    handler => $handler
+);
+
+$parser.parse( markdown => '# Here we go' );
+
+say $handler.captured_events;
