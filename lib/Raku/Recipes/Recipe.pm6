@@ -7,6 +7,6 @@ has Str $.title;
 has Str $.description;
 
 method gist {
-    return "#$!title\n\n$!description\n\n## Ingredients\n "
+    return "# $!title\n\n$!description\n\n## Ingredients\n\n"
         ~ self.Raku::Recipes::Ingredients::gist;
 }
