@@ -13,7 +13,7 @@ my @recipes = $parser.parse("Chapter-14/apetizer.mmf");
 my $md = Text::Markdown.new();
 
 for @recipes -> $r {
-    my $description = "Categpries " ~ $r.categories().join( " - ");
+    my $description = "Categories: " ~ $r.categories().join( " - ");
     my $title;
     if $r.title ~~ Str {
         $title = $r.title
