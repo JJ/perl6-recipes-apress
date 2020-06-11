@@ -2,7 +2,6 @@
 
 sub term:<bcp> { prompt(" " x 6 ~  "← ") }
 
-
 my $bc = Proc::Async.new: :w, ‘bc’, ‘-l’;
 my $next;
 my @outputs;
