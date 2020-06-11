@@ -8,7 +8,7 @@ my $next;
 my @outputs;
 
 $bc.stdout.tap: -> $res {
-    @outputs.append: $res;
+    @outputs.append: $res.trim;
     say "[ {@outputs.elems} ] → ", $res;
     get-next($bc);
 }
@@ -29,8 +29,14 @@ sub bc-send( $bc, Str $str ) {
 
 sub get-next( $bc ){
     my $next = bcp;
+    $next.trim;
     if ! $next {
         $bc.close-stdin;
+    }
+    if $next ~~ /"@" $<output> = (\d*) / {
+        my $index = $<output> ne "" ?? $<output> - 1 !! @outputs.elems - 1;
+        my $result = @outputs[$index] // 0;
+        $next ~~ s/"@"\d*/$result/;
     }
     bc-send($bc, $next);
 }
