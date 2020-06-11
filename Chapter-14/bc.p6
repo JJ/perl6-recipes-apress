@@ -1,9 +1,8 @@
 #!/usr/bin/env perl6
 
-sub term:<bcp> { prompt(" " x 6 ~  "← ") }
+sub term:<⏎> { prompt(" " x 6 ~  "← ") }
 
 my $bc = Proc::Async.new: :w, ‘bc’, ‘-l’;
-my $next;
 my @outputs;
 
 $bc.stdout.tap: -> $res {
@@ -17,7 +16,7 @@ $bc.stderr.tap: {
     get-next($bc)
 }
 
-$next = bcp;
+my $next = ⏎;
 my $promise = $bc.start;
 bc-send($bc, $next);
 await $promise;
@@ -27,7 +26,7 @@ sub bc-send( $bc, Str $str ) {
 }
 
 sub get-next( $bc ){
-    my $next = bcp;
+    my $next = ⏎;
     $next.trim;
     if ! $next {
         $bc.close-stdin;
