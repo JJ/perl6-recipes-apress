@@ -8,8 +8,9 @@ my $dator = Raku::Recipes::SQLator.new;
 my @promises = do for $dator.get-ingredients.keys -> $ingredient is copy {
 
     start {
+        sleep 2;
         $ingredient = lc $ingredient;
-    my $query = qq:to/END/;
+        my $query = qq:to/END/;
 SELECT distinct ?item ?itemLabel ?itemDescription WHERE\{
   ?item ?label "$ingredient"\@en.
   ?item wdt:P31?/wdt:P279* wd:Q25403900.
@@ -20,10 +21,13 @@ SELECT distinct ?item ?itemLabel ?itemDescription WHERE\{
 \}
 END
 
-    my $result = query($query);
-    if $result<results><bindings> -> @r {
-        return @r.first<itemDescription><value>;
-    }
+        my $result = query($query);
+        say $result.raku;
+        if $result<results><bindings> -> @r {
+            @r.first<itemDescription><value>;
+        } else {
+            Any;
+        }
     }
 }
 
