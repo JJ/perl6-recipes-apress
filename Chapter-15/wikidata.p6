@@ -1,6 +1,7 @@
 #!/usr/bin/env perl6
 
 use Wikidata::API;
+use X::Wikidata::API;
 use Raku::Recipes::SQLator;
 
 my $dator = Raku::Recipes::SQLator.new;
@@ -22,15 +23,15 @@ SELECT distinct ?item ?itemLabel ?itemDescription WHERE\{
 END
 
         my $result = query($query);
-        say $result.raku;
         if $result<results><bindings> -> @r {
             @r.first<itemDescription><value>;
         } else {
-            fail "No result found"
+            warn "No result found"
         }
 
         CATCH {
-            default { .message.say }
+            when X::Wikidata::API { warn $_.message }
+            default { warn "Inespecific error ", $_.message }
         }
     }
 }
