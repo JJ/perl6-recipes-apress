@@ -1,6 +1,6 @@
 {
   "name": "Raku::Recipes",
-  "description": "Raku Recipes, modules and examples",
+  "description": "Raku Recipes, helper modules and examples",
   "version": "0.0.6.1",
   "perl": "6.d",
   "authors": [
