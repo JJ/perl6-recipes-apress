@@ -8,7 +8,7 @@ my $dator = Raku::Recipes::SQLator.new;
 my @promises = do for $dator.get-ingredients.keys -> $ingredient is copy {
 
     start {
-        sleep 2;
+        sleep 1;
         $ingredient = lc $ingredient;
         my $query = qq:to/END/;
 SELECT distinct ?item ?itemLabel ?itemDescription WHERE\{
@@ -26,7 +26,11 @@ END
         if $result<results><bindings> -> @r {
             @r.first<itemDescription><value>;
         } else {
-            Any;
+            fail "No result found"
+        }
+
+        CATCH {
+            default { .message.say }
         }
     }
 }
@@ -34,7 +38,3 @@ END
 my @results = await @promises;
 
 .say for @results;
-
-sub utf8y ( $str ) {
-    Buf.new( $str.ords ).decode("utf8")
-}
