@@ -15,7 +15,7 @@ my $parser = MealMaster.new();
 my @recipes = $parser.parse("Chapter-14/apetizer.mmf");
 
 my @promises = do for ^$threads {
-    start react whenever $queue -> $recipe{
+    start react whenever $queue -> $recipe {
         say $recipe;
     }
 

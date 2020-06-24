@@ -10,6 +10,6 @@
     "tags" : [
 	    "book","Apress", "Concurrency"
     ],
-    "depends" : [ "Log::Timeline","Wikidata::API", "Cro::HTTP", "Inline::Perl5" ],
+    "depends" : [ "Log::Timeline","Wikidata::API", "Cro::HTTP", "Markit" ],
     "version" : "0.0.1"
 }
