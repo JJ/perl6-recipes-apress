@@ -12,7 +12,7 @@ my $threads = @*ARGS[0] // 4;
 my Channel $queue .= new;
 
 my $parser = MealMaster.new();
-my @recipes = $parser.parse("Chapter-14/apetizer.mmf");
+my @recipes = $parser.parse("Chapter-15/allrecip.mmf");
 
 my @promises = do for ^$threads {
     start react whenever $queue -> $recipe {
