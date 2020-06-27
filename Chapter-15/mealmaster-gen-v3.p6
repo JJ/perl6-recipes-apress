@@ -26,25 +26,24 @@ my &generate-page = template :($title,$content),
         template-file( "templates/recipe-with-title.html" );
 
 my atomicint $serial = 1;
+my %urls-for-known = | @known.map: { $_ => "[$_](/ingredient/$_)"};
+say %urls-for-known;
 
 my @promises = do for ^$threads {
     start react whenever $queue -> $recipe is copy {
         Recipr::Log::Timeline::Processing.log: -> {
-            my @real-ingredients = $recipe.ingredients.grep: /^^\w+/;
-            my @processed = gather for @real-ingredients -> $i is copy {
-                $i = $i ~~ Blob ?? $i.decode !! $i;
-                if $i ~~ m:i/ <|w> $<ingredient> = (@known) <|w>/ {
-                    my $ing = ~$<ingredient>;
-                    my $subst = "[$ing](/ingredient/" ~ uri_encode($ing.lc) ~
-                    ")";
-                    $i ~~ s:i!<|w> $ing <|w> ! $subst !;
-                }
-                take $i;
+            my @real-ingredients = $recipe.ingredients.grep( /^^\w+/)
+            .map( {  $_ ~~ Blob ?? $_.decode !! $_ } );
+            $recipe.ingredients = @real-ingredients;
+            my $recipe-md = $recipe.gist;
+            for @known -> $k {
+                $recipe-md .= subst( /<|w> $k <|w>/, %urls-for-known{$k} )
             }
-            $recipe.ingredients = @processed;
-            "/tmp/recipe-$serial.html".IO.spurt(generate-page($recipe.title,
-                    commonmark-to-html($recipe.gist)).eager.join);
-            say "Writing /tmp/recipe-$serial.html";
+            Recipr::Log::Timeline::Saving.log: -> {
+                "/tmp/recipe-$serial.html".IO.spurt(generate-page($recipe.title,
+                        commonmark-to-html($recipe-md)).eager.join);
+                say "Writing /tmp/recipe-$serial.html";
+            }
             $serial⚛++;
         }
     }

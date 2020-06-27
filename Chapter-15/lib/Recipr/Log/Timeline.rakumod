@@ -9,3 +9,5 @@ class Emitting does Log::Timeline::Task['Recipr', 'Backend', 'Emitting']
 
 class Saving does Log::Timeline::Task['Recipr', 'Processing', 'Saving']
                is export { }
+class Ingredient does Log::Timeline::Task['Recipr', 'Processing', 'Ingredient']
+             is export { }
