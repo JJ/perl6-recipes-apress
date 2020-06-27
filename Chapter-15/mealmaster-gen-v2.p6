@@ -32,7 +32,7 @@ my @promises = do for ^$threads {
         Recipr::Log::Timeline::Processing.log: -> {
             my @real-ingredients = $recipe.ingredients.grep: /^^\w+/;
             my @processed = gather for @real-ingredients -> $i is copy {
-                $i = $i ~~ Blob ?? $i.encode !! $i;
+                $i = $i ~~ Blob ?? $i.decode !! $i;
                 if $i ~~ m:i/ <|w> $<ingredient> = (@known) <|w>/ {
                     my $ing = ~$<ingredient>;
                     my $subst = "[$ing](/ingredient/" ~ uri_encode($ing.lc) ~
@@ -51,6 +51,7 @@ my @promises = do for ^$threads {
 }
 
 await start for @recipes -> $r {
+# for @recipes -> $r {
     my $description = "Categories: " ~ $r.categories().join( " - ");
     my $title;
     if $r.title ~~ Str {
