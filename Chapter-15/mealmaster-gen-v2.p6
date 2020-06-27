@@ -50,7 +50,7 @@ my @promises = do for ^$threads {
     }
 }
 
-for @recipes -> $r {
+await start for @recipes -> $r {
     my $description = "Categories: " ~ $r.categories().join( " - ");
     my $title;
     if $r.title ~~ Str {
