@@ -37,7 +37,7 @@ my @promises = do for ^$threads {
             $recipe.ingredients = @real-ingredients;
             my $recipe-md = $recipe.gist;
             for @known -> $k {
-                $recipe-md .= subst( /<|w> $k <|w>/, %urls-for-known{$k} )
+                $recipe-md .= subst( /:i <|w> $k <|w>/, %urls-for-known{$k} )
             }
             Recipr::Log::Timeline::Saving.log: -> {
                 "/tmp/recipe-$serial.html".IO.spurt(generate-page($recipe.title,
