@@ -12,6 +12,7 @@ use Template::Classic;
 use cmark::Simple;
 
 my $threads = @*ARGS[0] // 3;
+my Channel $queue .= new;
 
 my $parser = MealMaster.new();
 my @recipes = $parser.parse("Chapter-15/allrecip.mmf");
@@ -24,7 +25,21 @@ my &generate-page = template :($title,$content),
 
 my %urls-for-known = | @known.map: { $_ => "[$_](/ingredient/$_)"};
 
-@recipes.kv.rotor(2).map( { process-recipe(@_[0], @_[1]) } );
+my @promises = do for ^$threads {
+    start react whenever $queue -> $recipe-file  {
+        say $recipe-file.path;
+        my @recipes = $parser.parse($recipe-file.path);
+        say @recipes.elems;
+        @recipes.kv.rotor(2).map({ process-recipe(@_[0], @_[1]) });
+    }
+}
+
+await start for dir("/tmp", test => /"all-recipes"/ ) -> $r-file {
+    $queue.send: $r-file;
+}
+
+$queue.close;
+#await @promises;
 
 # Subs
 sub template-file( $template-file-name ) {

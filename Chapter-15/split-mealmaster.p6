@@ -17,12 +17,12 @@ for @recipes.rotor(400) -> @chunk {
         if $r ~~ /^"-"/ {
             $this-mm = "$r\n-----\n";
         } else {
-            $this-mm = "$r\nMMMMM";
+            $this-mm = "$r\nMMMMM\n";
         }
 
         "/tmp/temp.mmf".IO.spurt($this-mm);
         if MealMaster.parse("/tmp/temp.mmf") {
-            $all-recipes = "$all-recipes\n$this-mm";
+            $all-recipes = "$all-recipes$this-mm\n";
         } else {
             say $all-recipes;
             die $this-mm;
