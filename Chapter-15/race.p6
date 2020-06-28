@@ -4,7 +4,7 @@
 my @nutrients = "/home/jmerelo/Documentos/Nutrients.csv".IO.lines;
 my $degree = @*ARGS[0] // 4;
 my $time = now;
-my @selected = @nutrients.race( :batch(@nutrients/$degree), :degree($degree)  ).grep: {
+my @selected = @nutrients.race( :batch(@nutrients/$degree), :$degree ).grep: {
     my @data = $_.split('","');
     @data[2] eq "Protein" and @data[3] eq "LCCS" and @data[4] > 70 and @data[5] ~~ /^g/;
 };
