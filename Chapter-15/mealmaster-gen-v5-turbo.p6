@@ -27,10 +27,18 @@ my %urls-for-known = | @known.map: { $_ => "[$_](/ingredient/$_)"};
 
 my @promises = do for ^$threads {
     start react whenever $queue -> $recipe-file  {
-        say $recipe-file.path;
-        my @recipes = $parser.parse($recipe-file.path);
-        say @recipes.elems;
-        @recipes.kv.rotor(2).map({ process-recipe(@_[0], @_[1]) });
+        $recipe-file.path ~~ /$<serial> = (\d+)/;
+        my $serial = +$<serial>;
+        my @all-lines = $recipe-file.lines;
+        my $recipes = @all-lines
+                .grep( { ! $_.starts-with("MMMMM") })
+                .grep( { ! $_.starts-with("-----") })
+                .join("\n");
+        $recipes ~~ s:g/\h+ "Title:" /# /;
+        for <Categories Yield> -> $c {
+            $recipes ~~ s:g/\h+$c/## $c/;
+        }
+        process-recipes($serial, $recipes);
     }
 }
 
@@ -39,7 +47,7 @@ await start for dir("/tmp", test => /"all-recipes"/ ) -> $r-file {
 }
 
 $queue.close;
-#await @promises;
+await @promises;
 
 # Subs
 sub template-file( $template-file-name ) {
@@ -47,29 +55,9 @@ sub template-file( $template-file-name ) {
             ??"resources/$template-file-name".IO.slurp
             !!%?RESOURCES{$template-file-name}.slurp;
 }
-
-sub process-recipe( $serial, $recipe ) {
-    my $description = "Categories: " ~ $recipe.categories().join(" - ");
-    my $title;
-    if $recipe.title ~~ Str {
-        $title = $recipe.title
-    } else {
-        $title = $recipe.title.decode
-    }
-    my $rrecipe = Raku::Recipes::Recipe.new(
-            :$title,
-            :$description,
-            ingredients => $recipe.ingredients().map: { .product }
-            );
-    my @real-ingredients = $rrecipe.ingredients.grep(/^^\w+/)
-            .map({ $_ ~~ Blob ?? $_.decode !! $_ });
-    $rrecipe.ingredients = @real-ingredients;
-    my $recipe-md = $rrecipe.gist;
-    for @known -> $k {
-        $recipe-md .= subst(/:i <|w> $k <|w>/, %urls-for-known{$k})
-    }
-    "/tmp/recipe-$serial.html".IO.spurt(generate-page($rrecipe.title,
-            commonmark-to-html($recipe-md)).eager.join);
-    say "Writing /tmp/recipe-$serial.html";
+sub process-recipes( $serial, $recipe ) {
+    "/tmp/recipes-$serial.html".IO.spurt(generate-page("Recipes $serial",
+            commonmark-to-html($recipe)).eager.join);
+    say "Writing /tmp/recipes-$serial.html";
 
 }
