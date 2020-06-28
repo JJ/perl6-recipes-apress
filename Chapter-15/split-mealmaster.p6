@@ -23,7 +23,6 @@ for @recipes.rotor(400) -> @chunk {
         "/tmp/temp.mmf".IO.spurt($this-mm);
         if MealMaster.parse("/tmp/temp.mmf") {
             $all-recipes = "$all-recipes\n$this-mm";
-            say "Parsed!";
         } else {
             say $all-recipes;
             die $this-mm;

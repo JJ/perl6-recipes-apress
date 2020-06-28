@@ -13,8 +13,6 @@ use cmark::Simple;
 
 my $threads = @*ARGS[0] // 2;
 
-my Channel $queue .= new;
-
 my $parser = MealMaster.new();
 my @recipes = $parser.parse("Chapter-15/allrecip.mmf");
 
