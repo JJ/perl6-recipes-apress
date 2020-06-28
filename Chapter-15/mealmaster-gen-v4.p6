@@ -55,7 +55,7 @@ sub process-recipe( $serial, $recipe ) {
     for @known -> $k {
         $recipe-md .= subst(/:i <|w> $k <|w>/, %urls-for-known{$k})
     }
-    "/tmp/recipe-$serial.html".IO.spurt(generate-page($recipe.title,
+    "/tmp/recipe-$serial.html".IO.spurt(generate-page($rrecipe.title,
             commonmark-to-html($recipe-md)).eager.join);
     say "Writing /tmp/recipe-$serial.html";
 
