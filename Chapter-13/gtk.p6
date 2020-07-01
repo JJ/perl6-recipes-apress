@@ -106,7 +106,7 @@ sub grayout-same-name( $b ) {
     state $toggled = False;
     if $toggled {
         for @all-radio -> $other {
-            if $b.WHICH ne $other.WHICH and $b.label eq $other.label {
+            if $b !=== $other and $b.label eq $other.label {
                 $other.sensitive = False;
             }
         }
