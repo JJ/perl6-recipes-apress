@@ -91,11 +91,7 @@ sub toggle-buttons( $button, $type ) {
     } else {
         $button.label = $type;
         for @all-radio -> $b {
-            if $b.Hash{$type} eq "No" {
-                $b.sensitive = False;
-            } else {
-                $b.sensitive = True;
-            }
+            $b.sensitive = $b.Hash{$type} eq "No";
         }
         $clicked = True;
     }
