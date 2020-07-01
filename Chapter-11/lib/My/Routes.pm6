@@ -38,7 +38,6 @@ sub ingredient-routes is export {
 sub keep-routes is export {
     route {
         put -> Str $ingredient where $rrr.is-ingredient($ingredient) {
-            say "Put";
             $pantry ∪= $ingredient;
             say $pantry;
             content "application/json", $pantry.list;
