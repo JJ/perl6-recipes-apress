@@ -5,6 +5,7 @@ use Raku::Recipes;
 unit module My::Routes;
 
 our $rrr = Raku::Recipes::Roly.new();
+my Set $pantry;
 
 sub static-routes is export {
     route {
@@ -30,6 +31,28 @@ sub ingredient-routes is export {
     route {
         get -> Str $ingredient where $rrr.is-ingredient($ingredient) {
             content 'application/json', $rrr.calories-table{$ingredient};
+        }
+    }
+}
+
+sub keep-routes is export {
+    route {
+        put -> Str $ingredient where $rrr.is-ingredient($ingredient) {
+            say "Put";
+            $pantry ∪= $ingredient;
+            say $pantry;
+            content "application/json", $pantry.list;
+        }
+
+        get ->  {
+            content "application/json", $pantry.list;
+        }
+
+        delete -> Str $ingredient where $rrr.is-ingredient($ingredient) {
+            if $ingredient ∈ $pantry {
+                $pantry ∖= $ingredient;
+            }
+            content "application/json", $pantry.list;
         }
     }
 }
