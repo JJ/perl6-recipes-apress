@@ -14,7 +14,7 @@ is proteins( <Rice Chickpeas> ), 9.7, "Proteins computed correctly";
 is @products[0], "Apple", "Sorted products";
 
 my @optimal = optimal-ingredients( @products.elems -1 , 500 );
-is @optimal[0], "Skyr drink", "Optimal protein combo";
+is @optimal[0], "Fish broth", "Optimal protein combo";
 
 is unit-measure( "100g" ), (100,"g"), "Unit with number";
 
