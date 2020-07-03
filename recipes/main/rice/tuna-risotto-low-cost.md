@@ -4,14 +4,14 @@ A relatively simple version of this rich, creamy dish of Italian origin.
 
 ## Ingredients (for 4 persons)
 
-* 320g canned tuna
+* 320g tuna (canned)
 * 250g rice
 * ½ onion
-* 250g whatever cheese is in your fridge
+* 250g cheese (whatever is in your fridge)
 * 2 tablespoons olive oil
 * 4 cloves garlic
-* 1 spoon butter or margarine.
-* ⅓ wine or beer.
+* 1 spoon butter (or margarine).
+* ⅓ liter wine (or beer).
 
 ## Preparation
 

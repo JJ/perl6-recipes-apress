@@ -8,7 +8,7 @@ our @food-types is export = <Vegan Main Side Dessert Dairy>;
 
 #| Unit that can be used to describe quantities
 our @unit-types is export = <g tbsp clove tbsps cloves liters liter l
-tablespoons Unit tablespoon>;
+tablespoons Unit tablespoon spoons cloves clove spoon>;
 
 our %calories-table is export;
 

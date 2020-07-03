@@ -13,7 +13,7 @@ token ingredient-description {
 }
 
 token measured-ingredient {
-    [ <quantity> \h* <unit> \h+ <ingredient> || <quantity> \h+ <ingredient>]
+    [ <quantity> \h* <unit> \h+ <product> || <quantity> \h+ <product>]
 }
 
 token options {
