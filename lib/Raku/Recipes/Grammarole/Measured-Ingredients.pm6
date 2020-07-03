@@ -17,7 +17,7 @@ token measured-ingredient {
 }
 
 token options {
-    ['(' ~ ')' .+? ]
+    '(' ~ ')' $<content> = .+?
 }
 
 token product {:i @products "s"? }
