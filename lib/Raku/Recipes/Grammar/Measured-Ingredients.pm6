@@ -1,6 +1,5 @@
 use Raku::Recipes::Roly;
 use Raku::Recipes::Grammar::Measures;
-use Grammar::Tracer;
 
 my @products;
 BEGIN {

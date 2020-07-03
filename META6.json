@@ -27,6 +27,7 @@
     "Raku::Recipes::Grammar::Ingredients": "lib/Raku/Recipes/Grammar/Ingredients.pm6",
     "Raku::Recipes::Grammar::Measured-Ingredients": "lib/Raku/Recipes/Grammar/Measured-Ingredients.pm6",
     "Raku::Recipes::Grammar::Measures": "lib/Raku/Recipes/Grammar/Measures.pm6",
+    "Raku::Recipes::Grammarole::Measured-Ingredients": "lib/Raku/Recipes/Grammarole/Measured-ingredients.pm6",
     "Raku::Recipes::IngRedient": "lib/Raku/Recipes/IngRedient.pm6",
     "Raku::Recipes::Ingredients": "lib/Raku/Recipes/Ingredients.pm6",
     "Raku::Recipes::Recipe": "lib/Raku/Recipes/Recipe.pm6",
