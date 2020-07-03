@@ -10,6 +10,6 @@
     "tags" : [
 	    "book","Apress", "Concurrency"
     ],
-    "depends" : [ "cmark::Simple", "Log::Timeline","Wikidata::API", "Cro::HTTP", "Markit", "URI::Encode", "Template::Classic" ],
+    "depends" : [ "Grammar::Tracer" ],
     "version" : "0.0.1"
 }

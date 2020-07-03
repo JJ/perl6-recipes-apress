@@ -1,6 +1,7 @@
 use Test; # -*- mode: perl6 -*-
 
 use Raku::Recipes::Grammar::Measured-Ingredients;
+use Grammar::Tracer;
 
 subtest "Test quantities", {
     is( Raku::Recipes::Grammar::Measured-Ingredients.subparse( "⅓",
@@ -35,7 +36,7 @@ subtest "Test items", {
 }
 
 subtest "Test alternatives",{
-    my $ingredient = "2 egg (free run)";
+    my $ingredient = "2 eggs (free run)";
     my $item =
             Raku::Recipes::Grammar::Measured-Ingredients.parse( $ingredient );
     is( $item, $ingredient, "Parses item" );

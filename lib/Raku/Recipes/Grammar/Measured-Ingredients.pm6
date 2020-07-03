@@ -9,9 +9,8 @@ BEGIN {
 
 unit grammar Raku::Recipes::Grammar::Measured-Ingredients does Raku::Recipes::Grammar::Measures;
 token TOP {
-    <quantity>
-    [\h* <unit> \h+ <ingredient> | \h+ <ingredient>]
-    \h* ['(' ~ ')' <-[\)]>]?
+    [ <quantity> \h* <unit> \h+ <ingredient> || <quantity> \h+ <ingredient>]
+    \h* ['(' ~ ')' .+? ] ?
 }
 
-token ingredient {:i @products }
+token ingredient {:i @products "s"? }
