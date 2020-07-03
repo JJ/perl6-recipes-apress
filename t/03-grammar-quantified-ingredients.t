@@ -33,4 +33,11 @@ subtest "Test items", {
     is( $item<ingredient>, "Tuna", "Parses ingredient OK");
 
 }
+
+subtest "Test alternatives",{
+    my $ingredient = "2 egg (free run)";
+    my $item =
+            Raku::Recipes::Grammar::Measured-Ingredients.parse( $ingredient );
+    is( $item, $ingredient, "Parses item" );
+}
 done-testing;

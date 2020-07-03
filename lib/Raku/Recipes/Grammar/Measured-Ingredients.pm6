@@ -1,5 +1,6 @@
 use Raku::Recipes::Roly;
-use Raku::Recipes::Grammar::Measures
+use Raku::Recipes::Grammar::Measures;
+use Grammar::Tracer;
 
 my @products;
 BEGIN {
@@ -7,5 +8,10 @@ BEGIN {
 }
 
 unit grammar Raku::Recipes::Grammar::Measured-Ingredients does Raku::Recipes::Grammar::Measures;
-token TOP      { <quantity> [\h* <unit> \h+ <ingredient> | \h+ <ingredient>]}
+token TOP {
+    <quantity>
+    [\h* <unit> \h+ <ingredient> | \h+ <ingredient>]
+    \h* ['(' ~ ')' <-[\)]>]?
+}
+
 token ingredient {:i @products }
