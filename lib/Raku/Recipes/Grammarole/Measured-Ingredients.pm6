@@ -3,9 +3,7 @@ use Raku::Recipes::Grammar::Measures;
 
 my @products;
 BEGIN {
-    @products = Raku::Recipes::CSVDator.new.products.map:
-            {$_.ends-with("s")?? $_ !! ( $_, $_ ~ "s").Slip }
-    say @products;
+    @products = Raku::Recipes::CSVDator.new.products
 }
 
 unit role Raku::Recipes::Grammarole::Measured-Ingredients does
@@ -15,7 +13,7 @@ token ingredient-description {
 }
 
 token measured-ingredient {
-    [ <quantity> \h* <unit> \h+ <product> || <quantity> \h+ <product>]
+    [ <quantity> \h* <unit> \h+ <product> || <quantity> \h+ <product>] s?
 }
 
 token options {

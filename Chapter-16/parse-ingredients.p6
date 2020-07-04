@@ -8,3 +8,6 @@ say Tester.subparse("½ onion",
 
 say Tester.subparse("⅓ liter wine (or beer)",
         rule => "ingredient-description");
+
+say Tester.subparse("3 eggs (free run)",
+        rule => "ingredient-description");
