@@ -13,7 +13,7 @@ A relatively simple version of this rich, creamy dish of Italian origin.
 * 1 spoon butter (or margarine).
 * ⅓ liter wine (or beer).
 
-## Preparation
+## Preparation (60m)
 
 1. Slightly fry tuna with its own oil it until it browns a bit. You can
  do this while you start doing the rest. Save a bit of oil for the rice.

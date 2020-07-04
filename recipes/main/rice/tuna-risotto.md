@@ -14,7 +14,7 @@ A relatively simple version of this rich, creamy dish of Italian origin.
 * 1 cup white wine.
 * 2 spoons butter
 
-## Preparation
+## Preparation (75m)
 
 1. Chop tuna to small chunks, and stir-fry it until it browns a bit. You can
  do this while you start doing the rest.
