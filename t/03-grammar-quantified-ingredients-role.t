@@ -11,6 +11,15 @@ my $ingredients = q:to/EOS/;
 * 4 cloves garlic
 * 1 spoon butter (or margarine)
 * ⅓ liter wine (or beer)
+* 250g tuna
+* 250g rice (carnaroli or arborio)
+* ½ onion
+* 125g cheese (parmegiano reggiano, granapadano or manchego)
+* 1 tbsp olive oil (extra virgin)
+* 4 cloves garlic
+* ½ liter fish broth (or fumé)
+* 1 cup white wine
+* 2 spoons butter
 EOS
 
 grammar Tester does Raku::Recipes::Grammarole::Measured-Ingredients {}
