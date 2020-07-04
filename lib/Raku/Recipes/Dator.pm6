@@ -27,6 +27,7 @@ unit role Raku::Recipes::Dator;
 
 method get-ingredient( Str $ingredient ) {…}
 method get-ingredients() {…}
+method products() { self.get-ingredients.keys }
 method search-ingredients( %search-criteria ) {…}
 method insert-ingredient( Str $ingredient, %data ) {…}
 method delete-ingredient( Str $ingredient) {…}

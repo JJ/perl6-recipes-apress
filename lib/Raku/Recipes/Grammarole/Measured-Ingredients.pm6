@@ -1,9 +1,9 @@
-use Raku::Recipes::Roly;
+use Raku::Recipes::CSVDator;
 use Raku::Recipes::Grammar::Measures;
 
 my @products;
 BEGIN {
-    @products = Raku::Recipes::Roly.new.products;
+    @products = Raku::Recipes::CSVDator.new.products;
 }
 
 unit role Raku::Recipes::Grammarole::Measured-Ingredients does
