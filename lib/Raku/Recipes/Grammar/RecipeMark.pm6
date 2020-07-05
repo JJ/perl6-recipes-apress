@@ -15,7 +15,7 @@ token TOP {
 #    <separation>
     "##" \h+ Preparation \h+ "(" $<time> = \d+ "m)"
     <.separation>
-#    <instructions-list>
+    <instruction-list>
 }
 
 token separation { \v ** 2 }
@@ -34,6 +34,6 @@ token numbering { \d+ )> "." }
 
 token action-verb { <words>  }
 
-token sentence { <words>+ % [\s+|"," \s+] "."}
+token sentence { <words>+ % [[","|";"|":"]? \s+] "."}
 
 token words { <[\w \- \']>+ }

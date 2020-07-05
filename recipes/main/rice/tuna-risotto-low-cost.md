@@ -15,8 +15,8 @@ A relatively simple version of this rich, creamy dish of Italian origin.
 
 ## Preparation (60m)
 
-1. Slightly-fry tuna with its own oil it until it browns a bit. You can
- do this while you start doing the rest. Save a bit of oil for the rice.
+1. Slightly-fry tuna with its own oil it until it browns a bit, you can
+ do this while you start doing the rest, save a bit of oil for the rice.
 1. Stir-fry garlic until golden-colored, chopped if you so like, retire if
  you don't like the color.
 2. Add finely-chopped onion, and stir-fly until transparent.
