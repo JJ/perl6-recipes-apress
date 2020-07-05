@@ -9,8 +9,8 @@ token TOP {
     <.separation>
     <description>
     <.separation>
-#    "##" \h+ Ingredients (for $<persons> = \d persons)
-#    <separation>
+    "##" \h+ Ingredients \h+ "(for" \h+ $<persons> = \d+ \h+ person s? ")"
+    <.separation>
 #    <ingredient-list>
 #    <separation>
 #    "##" \h+ Preparation ($<time> = \d m)

@@ -7,6 +7,8 @@ my $str = q:to{EOC};
 
 A relatively simple version of this rich, creamy dish of Italian origin.
 
+## Ingredients (for 4 persons)
+
 EOC
 
 my $rm = Raku::Recipes::Grammar::RecipeMark.new;
