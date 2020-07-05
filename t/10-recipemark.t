@@ -1,6 +1,5 @@
 use Test;
 use Raku::Recipes::Grammar::RecipeMark;
-use Grammar::Tracer;
 
 my $str = q:to{EOC};
 # Tuna risotto
@@ -8,6 +7,15 @@ my $str = q:to{EOC};
 A relatively simple version of this rich, creamy dish of Italian origin.
 
 ## Ingredients (for 4 persons)
+
+* 320g tuna (canned)
+* 250g rice
+* ½ onion
+* 250g cheese (whatever is in your fridge)
+* 2 tablespoons olive oil
+* 4 cloves garlic
+* 1 spoon butter (or margarine)
+* ⅓ liter wine (or beer)
 
 ## Preparation (75m)
 
@@ -60,6 +68,12 @@ EOC
     check-rule( $rm, $instructions,  'instruction-list');
     check-rule( $rm, "* ½ onion", "itemized-ingredient" );
 
+    my $ingredient-list = q:to{END};
+* 4 cloves garlic
+* 1 spoon butter (or margarine)
+* ⅓ liter wine (or beer)
+END
+    check-rule( $rm, $ingredient-list.chomp, 'ingredient-list');
 
 }
 
