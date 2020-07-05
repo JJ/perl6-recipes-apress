@@ -80,7 +80,7 @@ done-testing;
 #| Several checks for rules
 sub check-rule(  Raku::Recipes::Grammar::RecipeMark $rm,
                  Str $str, $rule ) {
-    my $match = $rm.subparse( $str );
+    my $match = $rm.subparse( $str, rule => $rule );
     ok( $match, "Checking $rule");
     is( $match, $str, "Parsing with $rule correct");
     return  $match;
