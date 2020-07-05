@@ -37,15 +37,12 @@ Italian origin.";
             "Title subparsing working";
 
     my $verb = "Stir-fry";
-    is $rm.subparse($verb, rule => "action-verb" ), $verb,
-            "Verb subparsing working";
-
-    my $instruction = "$verb garlic until golden-colored, chopped if you so like, retire if you don't like the color.";
+    check-rule( $rm, $verb, "action-verb" );
+    my $instruction = "$verb garlic until golden-colored, chopped if you so  like, retire if you don't like the color.";
     for substr($instruction, 0, *-1).split: / ","?\h+ / -> $w {
         is $rm.subparse( $w, rule => "words" ), $w, "Parsing $w";
     }
-    my $match= $rm.subparse( $instruction, rule=> "instruction");
-    is $match, $instruction, "Instruction parsing";
+    my $match= check-rule($rm, $instruction, "instruction");
     is $match<action-verb>, $verb, "Sub-instruction parsing";
 
     my $numbered-instruction = "2. $instruction";
@@ -53,10 +50,8 @@ Italian origin.";
     is $match<numbering>, "2", "Numbering";
 
     my $instructions = q:to/EOC/.chomp;
-1. Slightly-fry tuna with its own oil it until it browns a bit, you can
- do this while you start doing the rest, save a bit of oil for the rice.
-1. Stir-fry garlic until golden-colored, chopped if you so like, retire if
- you don't like the color.
+1. Slightly-fry tuna with its own oil it until it browns a bit, you can do this while you start doing the rest, save a bit of oil for the rice.
+1. Stir-fry garlic until golden-colored, chopped if you so like, retire if you don't like the color.
 2. Add finely-chopped onion, and stir-fly until transparent.
 3. Add rice and stir-fry until grains become transparent in the tips.
 4. Add wine or beer and stir until it's absorbed by grains.
