@@ -49,9 +49,7 @@ Italian origin.";
     is $match<action-verb>, $verb, "Sub-instruction parsing";
 
     my $numbered-instruction = "2. $instruction";
-    $match = $rm.subparse( $numbered-instruction, rule =>
-    'numbered-instruction');
-    is $match, $numbered-instruction, "Parsing numbered instructions";
+    $match = check-rule( $rm, $numbered-instruction, 'numbered-instruction');
     is $match<numbering>, "2", "Numbering";
 
     my $instructions = q:to/EOC/.chomp;
@@ -64,10 +62,8 @@ Italian origin.";
 4. Add wine or beer and stir until it's absorbed by grains.
 EOC
 
-    $match = $rm.subparse( $instructions, rule => 'instruction-list');
-    is $match, $instructions, "Instruction list";
-
-    $match = check-rule( $rm, "* ½ onion", "itemized-ingredient" );
+    check-rule( $rm, $instructions,  'instruction-list');
+    check-rule( $rm, "* ½ onion", "itemized-ingredient" );
 
 
 }
