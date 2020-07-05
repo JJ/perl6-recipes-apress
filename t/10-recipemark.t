@@ -67,9 +67,21 @@ EOC
     $match = $rm.subparse( $instructions, rule => 'instruction-list');
     is $match, $instructions, "Instruction list";
 
+    $match = check-rule( $rm, "* ½ onion", "itemized-ingredient" );
+
+
 }
 
 subtest "Parse", {
     ok $rm.parse( $str.chomp ), "Whole parsing works";
 }
 done-testing;
+
+#| Several checks for rules
+sub check-rule(  Raku::Recipes::Grammar::RecipeMark $rm,
+                 Str $str, $rule ) {
+    my $match = $rm.subparse( $str );
+    ok( $match, "Checking $rule");
+    is( $match, $str, "Parsing with $rule correct");
+    return  $match;
+}

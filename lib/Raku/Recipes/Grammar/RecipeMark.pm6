@@ -1,6 +1,6 @@
 use Grammar::Tracer;
 
-unit grammar Raku::Recipes::Grammar::RecipeMark;
+unit grammar Raku::Recipes::Grammar::RecipeMark does Raku::Recipes::Grammarole::Measured-Ingredients;
 
 use Raku::Recipes::Grammarole::Measured-Ingredients;
 
@@ -24,6 +24,7 @@ token title { <words>+ % \h }
 
 token description { [<sentence> | <sentence>+ % \s+] }
 
+token itemized-ingredient { ["*"|"-"] \h+ <ingredient-description>}
 token instruction-list { <numbered-instruction>+  % \v }
 
 token numbered-instruction { <numbering> \h+ <instruction> }
