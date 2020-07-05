@@ -1,7 +1,6 @@
 #!/usr/bin/env perl6
 
 use Raku::Recipes::Grammar::RecipeMark;
-use Grammar::Tracer;
 
 my $rm = Raku::Recipes::Grammar::RecipeMark.new;
 
