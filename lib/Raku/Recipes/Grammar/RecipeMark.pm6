@@ -24,6 +24,8 @@ token title { <words>+ % \h }
 
 token description { [<sentence> | <sentence>+ % \s+] }
 
+token instruction-list { <numbered-instruction>+  % \v }
+
 token numbered-instruction { <numbering> \h+ <instruction> }
 
 token instruction { <action-verb> \h <sentence>}
