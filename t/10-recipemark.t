@@ -12,6 +12,8 @@ my $rm = Raku::Recipes::Grammar::RecipeMark.new;
 subtest "Subparse", {
     my $description = "A relatively simple version of this rich, creamy dish of
 Italian origin.";
+    is $rm.subparse($description, rule => "sentence" ), $description,
+            "Sentence subparsing working";
     is $rm.subparse($description, rule => "description" ), $description,
             "Description subparsing working";
     my $title = "Boiled fishtails";

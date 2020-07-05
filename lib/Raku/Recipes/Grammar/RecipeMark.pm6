@@ -22,6 +22,8 @@ token separation { \v ** 2 }
 
 token title { <words>+ % \h }
 
-token words { \w+ }
+token description { <sentence> | <sentence>+ % \s+ }
 
-token description { .+ }
+token sentence { <words>+ % [\s+|"," \s+] "."}
+
+token words { \w+ }
