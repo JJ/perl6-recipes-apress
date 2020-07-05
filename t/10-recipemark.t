@@ -35,7 +35,13 @@ Italian origin.";
     }
     my $match= $rm.subparse( $instruction, rule=> "instruction");
     is $match, $instruction, "Instruction parsing";
-    is $match<action-verb>, $verb, "Sub-instruction parsint";
+    is $match<action-verb>, $verb, "Sub-instruction parsing";
+
+    my $numbered-instruction = "2. $instruction";
+    $match = $rm.subparse( $numbered-instruction, rule =>
+    'numbered-instruction');
+    is $match, $numbered-instruction, "Parsing numbered instructions";
+    is $match<numbering>, "2", "Numbering";
 
 }
 
