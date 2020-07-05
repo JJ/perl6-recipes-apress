@@ -24,6 +24,10 @@ token title { <words>+ % \h }
 
 token description { [<sentence> | <sentence>+ % \s+] }
 
+token instruction { <action-verb> \h <sentence>}
+
+token action-verb { <words>  }
+
 token sentence { <words>+ % [\s+|"," \s+] "."}
 
-token words { \w+ }
+token words { <[\w \- \']>+ }
