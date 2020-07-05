@@ -1,17 +1,27 @@
+use Grammar::Tracer;
+
 unit grammar Raku::Recipes::Grammar::RecipeMark;
 
 use Raku::Recipes::Grammarole::Measured-Ingredients;
 
 token TOP {
     "#" \h+ <title>
-    \v ** 2
+    <.separation>
     <description>
-    \v ** 2
-    "##" \h+ Ingredients
-    \v ** 2
-    <ingredient-list>
-    \v ** 2
-    "##" \h+ Preparation
-    \v ** 2
-    <instructions-list>
+#    <separation>
+#    "##" \h+ Ingredients (for $<persons> = \d persons)
+#    <separation>
+#    <ingredient-list>
+#    <separation>
+#    "##" \h+ Preparation ($<time> = \d m)
+#    <separation>
+#    <instructions-list>
 }
+
+token separation { \v ** 2 }
+
+token title { <words>+ % \h }
+
+token words { \w+ }
+
+token description { .+ }
