@@ -1,5 +1,4 @@
 use Raku::Recipes::Grammarole::Measured-Ingredients;
-
 unit grammar Raku::Recipes::Grammar::RecipeMark does Raku::Recipes::Grammarole::Measured-Ingredients;
 
 use Raku::Recipes::Grammarole::Measured-Ingredients;
@@ -36,8 +35,8 @@ token instruction { <action-verb> \h <sentence>}
 
 token numbering { \d+ )> "." }
 
-token action-verb { <words>  }
+token action-verb { <.words>  }
 
-token sentence { <words>+ % [[","|";"|":"]? \s+] "."}
+token sentence { <.words>+ % [[","|";"|":"]? \s+] "."}
 
 token words { <[\w \- \']>+ }
