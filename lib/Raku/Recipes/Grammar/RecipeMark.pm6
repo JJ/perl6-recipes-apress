@@ -13,8 +13,8 @@ token TOP {
     <.separation>
 #    <ingredient-list>
 #    <separation>
-#    "##" \h+ Preparation ($<time> = \d m)
-#    <separation>
+    "##" \h+ Preparation \h+ "(" $<time> = \d+ "m)"
+    <.separation>
 #    <instructions-list>
 }
 

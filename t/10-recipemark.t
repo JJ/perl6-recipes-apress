@@ -9,6 +9,8 @@ A relatively simple version of this rich, creamy dish of Italian origin.
 
 ## Ingredients (for 4 persons)
 
+## Preparation (75m)
+
 EOC
 
 my $rm = Raku::Recipes::Grammar::RecipeMark.new;
