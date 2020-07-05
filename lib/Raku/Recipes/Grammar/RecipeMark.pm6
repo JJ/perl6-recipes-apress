@@ -8,7 +8,7 @@ token TOP {
     "#" \h+ <title>
     <.separation>
     <description>
-#    <separation>
+    <.separation>
 #    "##" \h+ Ingredients (for $<persons> = \d persons)
 #    <separation>
 #    <ingredient-list>
@@ -22,7 +22,7 @@ token separation { \v ** 2 }
 
 token title { <words>+ % \h }
 
-token description { <sentence> | <sentence>+ % \s+ }
+token description { [<sentence> | <sentence>+ % \s+] }
 
 token sentence { <words>+ % [\s+|"," \s+] "."}
 
