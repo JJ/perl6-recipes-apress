@@ -72,7 +72,6 @@ END
             actions => Raku::Recipes::Grammar::RecipeMark::Actions.new );
     is $result.made.elems, 3, "Ingredient list size";
     is $result.made.[0].keys[0], "Garlic", "First ingredient";
-    say $result.made[*-1].values;
     is $result.made[*-1].values[0]<unit>, "liter", "Last measure";
 }
 
