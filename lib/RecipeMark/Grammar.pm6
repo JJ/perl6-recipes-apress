@@ -1,6 +1,7 @@
 use Raku::Recipes::Grammarole::Measured-Ingredients;
 
-unit grammar Raku::Recipes::Grammar::RecipeMark does Raku::Recipes::Grammarole::Measured-Ingredients;
+unit grammar RecipeMark::Grammar does
+                            Raku::Recipes::Grammarole::Measured-Ingredients;
 
 token TOP {
     "#" \h+ <title>
