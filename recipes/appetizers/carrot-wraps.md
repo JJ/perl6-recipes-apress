@@ -2,10 +2,10 @@
 
 A healthy way to start a meal, or to munch between them.
 
-## Ingredients
+## Ingredients (for 4 persons)
 
 * 250g carrots
-* 200g cottage cheese or cheese spread
+* 200g cottage cheese (or cheese spread)
 * 4 wheat tortillas
 
 ## Preparation
