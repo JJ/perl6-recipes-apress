@@ -62,13 +62,17 @@ EOC
     is $result.made[0].key, 1, "First instruction OK";
     is $result.made[*-1].value.key, "Add", "Action verb extracted";
 
-    my $ingredient-list = q:to{END};
+    my $ingredient-list = q:to{END}.chomp;
 * 4 cloves garlic
 * 1 spoon butter (or margarine)
 * ⅓ liter wine (or beer)
 END
-    check-rule( $rm, $ingredient-list.chomp, 'ingredient-list');
-
+    $result = $rm.subparse( $ingredient-list,
+            rule => "ingredient-list",
+            actions => Raku::Recipes::Grammar::RecipeMark::Actions.new );
+    is $result.made.elems, 3, "Ingredient list size";
+    is $result.made.[0].keys[0], "Garlic", "First ingredient";
+    is $result.made[*-1].values[0]<unit>, "liter", "Last measure";
 }
 
 subtest "Parse", {
