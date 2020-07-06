@@ -1,7 +1,7 @@
 unit class Raku::Recipes::Grammar::RecipeMark::Actions;
 
 method TOP($/) { make {
-    title => $/<title>.made,
+    title => ~$/<title>,
     description => ~$/<description>,
     persons => +$/<persons>,
     ingredient-list => $/<ingredient-list>.made,
