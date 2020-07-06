@@ -72,19 +72,16 @@ END
             actions => Raku::Recipes::Grammar::RecipeMark::Actions.new );
     is $result.made.elems, 3, "Ingredient list size";
     is $result.made.[0].keys[0], "Garlic", "First ingredient";
+    say $result.made[*-1].values;
     is $result.made[*-1].values[0]<unit>, "liter", "Last measure";
 }
 
 subtest "Parse", {
-    ok $rm.parse( $str.chomp ), "Whole parsing works";
+    my $result = $rm.parse( $str.chomp,
+            actions => Raku::Recipes::Grammar::RecipeMark::Actions);
+    ok $result.made, "Whole parsing works";
+    is $result.made<preparation-minutes>, 75, "Preparation time";
+    is $result.made.keys.elems, 6, "All keys in";
+    say $result.made;
 }
 done-testing;
-
-#| Several checks for rules
-sub check-rule(  Raku::Recipes::Grammar::RecipeMark $rm,
-                 Str $str, $rule ) {
-    my $match = $rm.subparse( $str, rule => $rule );
-    ok( $match, "Checking $rule");
-    is( $match, $str, "Parsing with $rule correct");
-    return  $match;
-}

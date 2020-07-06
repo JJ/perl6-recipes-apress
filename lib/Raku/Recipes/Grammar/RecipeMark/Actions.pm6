@@ -1,6 +1,13 @@
 unit class Raku::Recipes::Grammar::RecipeMark::Actions;
 
-method TOP($/) { make $/.made }
+method TOP($/) { make {
+    title => $/<title>.made,
+    description => ~$/<description>,
+    persons => +$/<persons>,
+    ingredient-list => $/<ingredient-list>.made,
+    preparation-minutes => + $/<time>,
+    instruction-list => $/<instruction-list>.made
+} }
 
 method ingredient-list( $/ ) {
     make gather for $/.hash<itemized-ingredient> ->
@@ -13,7 +20,7 @@ method itemized-ingredient($/) { make $/<ingredient-description>.made }
 
 method ingredient-description($/) {
     my %ingredient = $/<measured-ingredient>.made;
-    %ingredient{'options'} = $/<options> if $/<options>;
+    %ingredient{%ingredient.keys[0]}{'options'} = $/<options> if $/<options>;
     make %ingredient;
 }
 
