@@ -1,12 +1,18 @@
 unit class Raku::Recipes::Grammar::RecipeMark::Actions;
 
-method TOP($/) { say $/.made; make $/.made }
+method TOP($/) { make $/.made }
 
+method instruction-list( $/ ) {
+    my @instructions = gather for $/.hash<numbered-instruction> ->
+$instruction {
+        take $instruction.made
+    }
+    make @instructions;
+}
 method numbered-instruction($/) {
-    say $/;
     make $/<numbering>.made => $/<instruction>.made;
 }
 method numbering($/) { make +$/; }
 method instruction($/) { make $/<action-verb>.made => $/<sentence>.made}
 method action-verb($/) { make ~$/; }
-method sentence($/) { say $/; make ~$/; }
+method sentence($/) { make ~$/; }

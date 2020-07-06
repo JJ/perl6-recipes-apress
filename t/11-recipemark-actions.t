@@ -44,7 +44,7 @@ Italian origin.";
     my $result = $rm.subparse( $numbered-instruction,
             rule => "numbered-instruction",
             actions => Raku::Recipes::Grammar::RecipeMark::Actions.new );
-    say $result.made;
+    is $result.made.key, 2, "Parsed and made OK";
 
 
     my $instructions = q:to/EOC/.chomp;
@@ -55,8 +55,12 @@ Italian origin.";
 4. Add wine or beer and stir until it's absorbed by grains.
 EOC
 
-    check-rule( $rm, $instructions,  'instruction-list');
-    check-rule( $rm, "* ½ onion", "itemized-ingredient" );
+    $result = $rm.subparse( $instructions,
+                    rule => "instruction-list",
+                    actions => Raku::Recipes::Grammar::RecipeMark::Actions.new );
+    is $result.made.elems, 5, "Number of instructions";
+    is $result.made[0].key, 1, "First instruction OK";
+    is $result.made[*-1].value.key, "Add", "Action verb extracted";
 
     my $ingredient-list = q:to{END};
 * 4 cloves garlic
