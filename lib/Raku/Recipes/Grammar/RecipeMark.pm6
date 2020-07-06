@@ -22,7 +22,7 @@ token separation { \v ** 2 }
 
 token title { <words>+ % \h }
 
-token description { [<sentence> | <sentence>+ % \s+] }
+token description { [<.sentence> | <.sentence>+ % \s+] }
 
 token ingredient-list { <itemized-ingredient>+ % \v }
 
