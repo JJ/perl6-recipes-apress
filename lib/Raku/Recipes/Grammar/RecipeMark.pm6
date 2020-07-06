@@ -1,4 +1,5 @@
 use Raku::Recipes::Grammarole::Measured-Ingredients;
+use Grammar::Tracer;
 
 unit grammar Raku::Recipes::Grammar::RecipeMark does Raku::Recipes::Grammarole::Measured-Ingredients;
 
