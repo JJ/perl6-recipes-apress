@@ -77,7 +77,7 @@ END
 
 subtest "Parse", {
     my $result = $rm.parse( $str.chomp,
-            actions => RecipeMark::Grammar::Actions);
+                actions => RecipeMark::Grammar::Actions.new);
     ok $result.made, "Whole parsing works";
     is $result.made<preparation-minutes>, 75, "Preparation time";
     is $result.made.keys.elems, 6, "All keys in";

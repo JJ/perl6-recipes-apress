@@ -85,7 +85,7 @@ subtest "Parse", {
 subtest "Error", {
     $str .= subst("tuna", "piranha");
     throws-like { $rm.parse( $str.chomp ) },
-    X::Grammar::PrettyError,
+    X::Grammar::PrettyError, lastrule => 'separation',
     "Changing throws";
 }
 
