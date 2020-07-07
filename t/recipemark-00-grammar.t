@@ -1,5 +1,6 @@
 use Test;
 use RecipeMark::Grammar;
+use Grammar::PrettyErrors;
 
 my $str = q:to{EOC};
 # Tuna risotto
@@ -80,6 +81,14 @@ END
 subtest "Parse", {
     ok $rm.parse( $str.chomp ), "Whole parsing works";
 }
+
+subtest "Error", {
+    $str .= subst("tuna", "piranha");
+    throws-like { $rm.parse( $str.chomp ) },
+    X::Grammar::PrettyError,
+    "Changing throws";
+}
+
 done-testing;
 
 #| Several checks for rules

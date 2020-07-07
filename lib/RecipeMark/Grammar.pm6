@@ -19,7 +19,7 @@ token TOP {
     <instruction-list>
 }
 
-token separation { \v ** 2 }
+token separation { <ws> ** 2 }
 
 token title { <words>+ % \h }
 
@@ -42,3 +42,5 @@ token action-verb { <.words>  }
 token sentence { <.words>+ % [[","|";"|":"]? \s+] "."}
 
 token words { <[\w \- \']>+ }
+
+token ws { <!ww> \v }
