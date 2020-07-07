@@ -43,9 +43,7 @@ token instruction { <action-verb> \h <sentence>}
 token numbering {
     \d+ )> "."
     {
-        say "Match ", +$/, " Last $*LAST ";
         if +$/ < $*LAST {
-            say "Failing";
             fail "Wrong number"
         } else {
             $*LAST = +$/;
