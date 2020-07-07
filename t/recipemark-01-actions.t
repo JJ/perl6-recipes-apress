@@ -41,6 +41,7 @@ Italian origin.";
     my $verb = "Stir-fry";
     my $instruction = "$verb garlic until golden-colored, chopped if you so  like, retire if you don't like the color.";
     my $numbered-instruction = "2. $instruction";
+    my $*LAST = 0; # Needed to avoid errors.
     my $result = $rm.subparse( $numbered-instruction,
             rule => "numbered-instruction",
             actions => RecipeMark::Grammar::Actions.new );
