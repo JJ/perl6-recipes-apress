@@ -15,7 +15,8 @@
     "Template::Classic",
     "DBIish",
     "Redis",
-    "Red"
+    "Red",
+    "Grammar::PrettyErrors"
   ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
