@@ -25,9 +25,22 @@ token title { <words>+ % \h }
 
 token description { [<.sentence> | <.sentence>+ % \s+] }
 
-token ingredient-list { <itemized-ingredient>+ % \v }
+token ingredient-list {
+    :my $*INGREDIENTS;
+    <itemized-ingredient>+ % \v }
 
-token itemized-ingredient { ["*"|"-"] \h+ <ingredient-description>}
+token itemized-ingredient {
+    ["*"|"-"] \h+ <ingredient-description>
+    {
+        my $product = tc ~$/<ingredient-description><measured-ingredient
+><product>;
+        if $product ∉ $*INGREDIENTS {
+            $*INGREDIENTS ∪= $product;
+        } else {
+            fail "Repeated ingredient";
+        }
+    }
+}
 
 token instruction-list {
     :my UInt $*LAST = 0;

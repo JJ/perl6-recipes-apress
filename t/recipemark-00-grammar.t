@@ -68,6 +68,7 @@ Italian origin.";
 EOC
 
     check-rule( $rm, $instructions,  'instruction-list');
+    my $*INGREDIENTS = set();
     check-rule( $rm, "* ½ onion", "itemized-ingredient" );
 
     my $ingredient-list = q:to{END};
@@ -87,9 +88,10 @@ subtest "Errors", {
     throws-like { $rm.parse( $str.subst("tuna", "piranha").chomp ) },
     X::Grammar::PrettyError, lastrule => 'separation',
     "Changing throws";
+
     throws-like {
         $rm.parse($str.subst("7.", "5.").chomp)
-    }, X::AdHoc, message => "Wrong number", "Numberging taken care of";
+    }, X::AdHoc, message => "Wrong number", "Numbering taken care of";
 
 }
 
