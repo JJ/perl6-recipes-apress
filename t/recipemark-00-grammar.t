@@ -54,6 +54,7 @@ Italian origin.";
     my $match= check-rule($rm, $instruction, "instruction");
     is $match<action-verb>, $verb, "Sub-instruction parsing";
 
+    my $*LAST = 0; # Needed to avoid errors.
     my $numbered-instruction = "2. $instruction";
     $match = check-rule( $rm, $numbered-instruction, 'numbered-instruction');
     is $match<numbering>, "2", "Numbering";
@@ -82,11 +83,14 @@ subtest "Parse", {
     ok $rm.parse( $str.chomp ), "Whole parsing works";
 }
 
-subtest "Error", {
-    $str .= subst("tuna", "piranha");
-    throws-like { $rm.parse( $str.chomp ) },
+subtest "Errors", {
+    throws-like { $rm.parse( $str.subst("tuna", "piranha").chomp ) },
     X::Grammar::PrettyError, lastrule => 'separation',
     "Changing throws";
+    throws-like {
+        $rm.parse($str.subst("7.", "5.").chomp)
+    }, X::AdHoc, message => "Wrong number", "Numberging taken care of";
+
 }
 
 done-testing;

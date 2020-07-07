@@ -29,13 +29,29 @@ token ingredient-list { <itemized-ingredient>+ % \v }
 
 token itemized-ingredient { ["*"|"-"] \h+ <ingredient-description>}
 
-token instruction-list { <numbered-instruction>+  % \v }
+token instruction-list {
+    :my UInt $*LAST = 0;
+    <numbered-instruction>+  % \v
+}
 
-token numbered-instruction { <numbering> \h+ <instruction> }
+token numbered-instruction {
+    <numbering> \h+ <instruction>
+}
 
 token instruction { <action-verb> \h <sentence>}
 
-token numbering { \d+ )> "." }
+token numbering {
+    \d+ )> "."
+    {
+        say "Match ", +$/, " Last $*LAST ";
+        if +$/ < $*LAST {
+            say "Failing";
+            fail "Wrong number"
+        } else {
+            $*LAST = +$/;
+        }
+    }
+}
 
 token action-verb { <.words>  }
 
