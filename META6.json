@@ -43,7 +43,8 @@
     "RecipeMark::Recipe": "lib/RecipeMark/Recipe.pm6",
     "X::Raku::Chapter5::Recipes": "lib/X/Raku/Chapter5/Recipes.pm6",
     "X::Raku::Recipes": "lib/X/Raku/Recipes.pm6",
-    "X::Raku::Recipes::Missing": "lib/X/Raku/Recipes/Missing.pm6"
+    "X::Raku::Recipes::Missing": "lib/X/Raku/Recipes/Missing.pm6",
+    "X::RecipeMark": "lib/X/RecipeMark.pm6"
   },
   "license": "Artistic-2.0",
   "tags": [

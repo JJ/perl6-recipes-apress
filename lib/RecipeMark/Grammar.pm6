@@ -1,5 +1,6 @@
 use Raku::Recipes::Grammarole::Measured-Ingredients;
 use Grammar::PrettyErrors;
+use X::RecipeMark;
 
 unit grammar RecipeMark::Grammar
         does Raku::Recipes::Grammarole::Measured-Ingredients
@@ -37,7 +38,8 @@ token itemized-ingredient {
         if $product ∉ $*INGREDIENTS {
             $*INGREDIENTS ∪= $product;
         } else {
-            fail "Repeated ingredient";
+            X::RecipeMark::RepeatedIngredient.new( :pos($/.pos),
+                    :name($product) );
         }
     }
 }
