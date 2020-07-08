@@ -85,9 +85,10 @@ subtest "Parse", {
 }
 
 subtest "Errors", {
+#    say $rm.parse( $str.subst("tuna", "piranha").chomp );
     throws-like { $rm.parse( $str.subst("tuna", "piranha").chomp ) },
     X::Grammar::PrettyError, lastrule => 'separation',
-    "Changing throws";
+    "Inexistent product throws";
 
     throws-like {
         $rm.parse($str.subst("7.", "5.").chomp)

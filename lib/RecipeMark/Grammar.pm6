@@ -38,8 +38,8 @@ token itemized-ingredient {
         if $product ∉ $*INGREDIENTS {
             $*INGREDIENTS ∪= $product;
         } else {
-            X::RecipeMark::RepeatedIngredient.new( :pos($/.pos),
-                    :name($product) );
+            X::RecipeMark::RepeatedIngredient.new( :match($/),
+                    :name($product) ).throw;
         }
     }
 }
@@ -56,10 +56,11 @@ token numbered-instruction {
 token instruction { <action-verb> \h <sentence>}
 
 token numbering {
-    \d+ )> "."
-    {
+    \d+ )> "." {
         if +$/ < $*LAST {
-            fail "Wrong number"
+            X::RecipeMark::OutOfOrder.new( :match($/),
+            :number(+$/),
+            :last($*LAST) ).throw;
         } else {
             $*LAST = +$/;
         }
