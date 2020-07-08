@@ -16,7 +16,8 @@
     "DBIish",
     "Redis",
     "Red",
-    "Grammar::PrettyErrors"
+    "Grammar::PrettyErrors",
+    "Grammar::Message"
   ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
