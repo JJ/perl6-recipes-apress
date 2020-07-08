@@ -92,11 +92,13 @@ subtest "Errors", {
 
     throws-like {
         $rm.parse($str.subst("7.", "5.").chomp)
-    }, X::AdHoc, message => "Wrong number", "Numbering taken care of";
+    }, X::RecipeMark::OutOfOrder, last => 6,
+            "Numbering taken care of";
 
     throws-like {
         $rm.parse($str.subst("rice", "tuna").chomp)
-    }, X::AdHoc, message => "Repeated ingredient", "Ingredients taken care of";
+    }, X::RecipeMark::RepeatedIngredient, name => "Tuna",
+            "Ingredients taken care of";
 
 }
 
