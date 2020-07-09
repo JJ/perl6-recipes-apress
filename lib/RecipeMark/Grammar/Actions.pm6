@@ -20,7 +20,7 @@ method itemized-ingredient($/) { make $/<ingredient-description>.made }
 
 method ingredient-description($/) {
     my %ingredient = $/<measured-ingredient>.made;
-    %ingredient{%ingredient.keys[0]}{'options'} = $/<options> if $/<options>;
+    %ingredient{%ingredient.keys[0]}{'options'} = ~$/<options> if $/<options>;
     make %ingredient;
 }
 
