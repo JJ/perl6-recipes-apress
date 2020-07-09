@@ -8,7 +8,9 @@ use RecipeMark::Grammar::Actions;
 use JSON::Fast;
 
 multi sub MAIN( "check", $file where .IO.e ) {
-    say to-json RecipeMark::Grammar.parse( $file.IO.slurp,
-                   actions => RecipeMark::Grammar::Actions.new ).made;
+    say to-json RecipeMark::Grammar.parse(
+                $file.IO.slurp,
+                actions => RecipeMark::Grammar::Actions.new
+            ).made;
 
 }
