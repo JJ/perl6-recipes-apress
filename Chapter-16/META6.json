@@ -4,12 +4,12 @@
     ],
     "description" : "Raku Recipes",
     "license" : "Artistic-2.0",
-    "name" : "Raku Recipes examples, Chapter 15",
+    "name" : "Raku Recipes examples, Chapter 16",
     "perl" : "6.d",
     "provides" : { },
     "tags" : [
 	    "book","Apress", "Concurrency"
     ],
-    "depends" : [ "Grammar::Tracer" ],
+    "depends" : [ "Grammar::Tracer", "JSON::Fast" ],
     "version" : "0.0.1"
 }
