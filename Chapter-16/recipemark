@@ -3,6 +3,7 @@
 use lib <lib ../lib>;
 
 use RecipeMark;
+use Template::Classic;
 
 multi sub MAIN( "check", $file where .IO.e ) {
     say RecipeMark.new( $file ).to-json;
@@ -15,4 +16,15 @@ multi sub MAIN( "shopping-list", $file where .IO.e ) {
             .sort
             .map( {"* [ ] $_."})
             .join: "\n";
+}
+
+multi sub MAIN("md", $file where .IO.e ) {
+    my $template-name="templates/recipemark.md";
+    my $template-file = "resources/$template-name".IO.e
+            ??"resources/$template-name".IO.slurp
+            !!%?RESOURCES{$template-name}.slurp;
+    my &generate-page := template :($recipemark), $template-file;
+    my $recipemark = RecipeMark.new( $file );
+    say generate-page( $recipemark).eager.join
+
 }
