@@ -8,7 +8,6 @@ use Raku::Recipes::Recipe;
 use Raku::Recipes::SQLator;
 
 use Recipr::Log::Timeline;
-use URI::Encode;
 use Template::Classic;
 use cmark::Simple;
 

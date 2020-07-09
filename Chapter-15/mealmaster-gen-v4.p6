@@ -7,7 +7,6 @@ use MealMaster:from<Perl5>;
 use Raku::Recipes::Recipe;
 use Raku::Recipes::SQLator;
 
-use URI::Encode;
 use Template::Classic;
 use cmark::Simple;
 

@@ -1,6 +1,7 @@
 #!/usr/bin/env perl6
 
 use RecipeMark;
+use URI::Encode;
 
 my $recipemark = RecipeMark.new( @*ARGS[0]
         // "recipes/main/rice/tuna-risotto.md" );
@@ -8,7 +9,7 @@ my $recipemark = RecipeMark.new( @*ARGS[0]
 my %ingredients = $recipemark.ingredient-list;
 my @ingredients = gather for %ingredients.kv -> $product, %data {
     take "* %data<quantity> %data<unit> "
-        ~ "[ {lc $product} ](/Ingredient/$product)"
+        ~ "[ {lc $product} ](/Ingredient/" ~ uri_encode($product) ~ ")"
                     ~ " %data<options>" if %data<options>;
 }
 
