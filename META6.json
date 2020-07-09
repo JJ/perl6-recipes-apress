@@ -60,7 +60,9 @@
     "learning",
     "web",
     "NativeCall",
-    "food"
+    "food",
+    "web services",
+    "grammars"
   ],
   "source-url": "https://github.com/JJ/raku-recipes-apress"
 }
