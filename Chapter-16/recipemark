@@ -7,5 +7,14 @@ use RecipeMark;
 use JSON::Fast;
 
 multi sub MAIN( "check", $file where .IO.e ) {
-    my $recipemark = RecipeMark.new( $file );
+    say RecipeMark.new( $file ).to-json;
+}
+
+multi sub MAIN( "shopping-list", $file where .IO.e ) {
+    say "# Shopping list\n\n",
+            RecipeMark.new( $file )
+            .product-list
+            .sort
+            .map( {"* [ ] $_."})
+            .join: "\n";
 }
