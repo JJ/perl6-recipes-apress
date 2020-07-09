@@ -4,8 +4,6 @@ use lib <lib ../lib>;
 
 use RecipeMark;
 
-use JSON::Fast;
-
 multi sub MAIN( "check", $file where .IO.e ) {
     say RecipeMark.new( $file ).to-json;
 }
