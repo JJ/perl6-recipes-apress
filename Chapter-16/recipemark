@@ -8,6 +8,4 @@ use JSON::Fast;
 
 multi sub MAIN( "check", $file where .IO.e ) {
     my $recipemark = RecipeMark.new( $file );
-
-
 }

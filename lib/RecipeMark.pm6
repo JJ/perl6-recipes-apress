@@ -32,3 +32,7 @@ method Hash() {
              instruction-list => @!instruction-list
     }
 }
+
+method product-list() {
+    return %!ingredient-list.keys;
+}
