@@ -12,10 +12,6 @@ is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
 is proteins( <Rice Chickpeas> ), 9.7, "Proteins computed correctly";
 @products .= sort;
 is @products[0], "Apple", "Sorted products";
-
-my @optimal = optimal-ingredients( @products.elems -1 , 500 );
-is @optimal[0], "Skyr drink" | "Garlic", "Optimal protein combo";
-
 is unit-measure( "100g" ), (100,"g"), "Unit with number";
 
 my ($unit, $measure) = unit-measure( "⅓ liter" );

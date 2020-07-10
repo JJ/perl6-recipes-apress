@@ -15,9 +15,6 @@ is( %calories-table<Rice><parsed-measures>[1], "g", "Measure for rice is OK" );
 
 is $rr.proteins( <Rice Chickpeas> ), 9.7, "Proteins computed correctly";
 
-my @optimal = $rr.optimal-ingredients( @products.elems -1 , 500 );
-like @optimal[0], /\w+/, "Optimal protein combo";
-
 cmp-ok $rr.filter-ingredients( :Dairy ).elems, ">", 0, "Enough dairy ingredients";
 cmp-ok $rr.filter-ingredients( :!Dairy, :Vegan ).elems, ">", 5, "Enough non-dairy, vegan ingredients";
 
