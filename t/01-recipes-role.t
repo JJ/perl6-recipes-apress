@@ -39,7 +39,8 @@ subtest "U tnitypes are correct", {
     ok $rr.check-unit( "Tuna", "g"), "Tuna uses g";
     ok $rr.check-unit( "Beer", "liter" ), "Beer uses liters";
     ok $rr.check-unit( "Apple", "Unit"), "Apple use units";
-    ok $rr.check-unit( "Olive Oil", "tablespoon"), "Oil measured in tablespoons";
+    ok $rr.check-unit( "Olive oil", "tablespoon"),
+            "Oil measured in tablespoons";
 }
 
 done-testing;

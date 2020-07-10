@@ -1,6 +1,8 @@
 use RecipeMark::Grammar;
 use RecipeMark::Grammar::Actions;
 
+use Raku::Recipes::CSVDator;
+
 use JSON::Fast;
 
 unit class RecipeMark;
@@ -35,4 +37,10 @@ method Hash() {
 
 method product-list() {
     return %!ingredient-list.keys;
+}
+
+method vegan() {
+    my $data = Raku::Recipes::CSVDator.new;
+    return so all self.product-list.map:
+            { $data.get-ingredient($_)<Vegan> };
 }

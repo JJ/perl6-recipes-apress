@@ -3,7 +3,9 @@
 use lib <lib ../lib>;
 
 use RecipeMark;
+
 use Template::Classic;
+use Terminal::ANSIColor;
 
 multi sub MAIN( "check", $file where .IO.e ) {
     say RecipeMark.new( $file ).to-json;
@@ -27,4 +29,12 @@ multi sub MAIN("md", $file where .IO.e ) {
     my $recipemark = RecipeMark.new( $file );
     say generate-page( $recipemark).eager.join
 
+}
+
+multi sub MAIN( "vegan", $file where .IO.e ) {
+    my $recipemark = RecipeMark.new( $file );
+    say $recipemark.title,
+            $recipemark.vegan ??
+            color("green") ~ " is vegan " ~ color("reset")!!
+            " is " ~ color("red") ~ "not" ~ color("reset") ~ " vegan ";
 }
