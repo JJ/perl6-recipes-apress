@@ -7,11 +7,11 @@ An avocado cream that can be used on the side with all kind of desserts, from fr
 * 250g avocados
 * 2 tbsps molasses (or cane sugar)
 
-## Instructions (10m)
+## Preparation (10m)
 
-* Cut avocados in half, extract kernel.
-* Scoop out the avocado.
-* Pour molasses or cane sugar over it.
-* Blend or mash with a hard fork.
-* Serve with a sprig of coriander in a cup, chilled if you so like.
-* Add soy or almond milk if you like it with less consistency.
+1. Cut avocados in half, extract kernel.
+2. Scoop out the avocado.
+3. Pour molasses or cane sugar over it.
+4. Blend or mash with a hard fork.
+5. Serve with a sprig of coriander in a cup, chilled if you so like.
+6. Add soy or almond milk if you like it with less consistency.
