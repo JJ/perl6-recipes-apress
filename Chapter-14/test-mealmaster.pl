@@ -1,11 +1,11 @@
 #!/usr/bin/env perl
 
-use v5.14;
+use v5.20;
 
 use MealMaster;
 
 my $parser = MealMaster->new();
-my @recipes = $parser->parse("apetizer.mmf");
+my @recipes = $parser->parse(shift // "apetizer.mmf");
 foreach my $r (@recipes) {
   print "Title: " . $r->title . "\n";
   print "Categories: " . join(", ", sort @{$r->categories}) . "\n";

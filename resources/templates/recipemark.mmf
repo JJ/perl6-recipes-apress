@@ -1,0 +1,22 @@
+---------- Recipe via Meal-Master (tm) v8.05
+
+      Title: <%= $recipemark.title %>
+ Categories: <%= $categories %>
+      Yield: <%= $recipemark.persons %> servings
+
+<%    my %ingredients = $recipemark.ingredient-list;
+      for %ingredients.kv -> $product, %data {
+      take "     "
+           ~ (%data<quantity> ~~ Rat ?? %data<quantity>.Num
+                                     !! %data<quantity> )
+            ~ " " ~ %data<unit> ~ " " ~ lc $product ~ "\n"
+      }
+      %>
+
+<%for $recipemark.instruction-list[0][] -> $instruction {
+        take "  " ~ $instruction.key ~ ". " ~ "*" ~ $instruction.value.key ~ "*"
+                ~ " " ~ $instruction.value.value ~ "\n";
+  }
+  %>
+
+-----

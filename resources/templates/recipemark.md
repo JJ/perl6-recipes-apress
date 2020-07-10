@@ -13,7 +13,7 @@ for %ingredients.kv -> $product, %data {
                     ~ (" %data<options>" if %data<options> ) ~ "\n";   
 } %>
 
-## Preparation (<%= $recipemark.persons %>m)
+## Preparation (<%= $recipemark.preparation-minutes %>m)
 
 <% 
 for $recipemark.instruction-list[0][] -> $instruction {
