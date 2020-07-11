@@ -8,6 +8,15 @@ Scripts and modules for the book
 Every chapter has its own META6.json file. Download and build needed
 modules getting into each of them.
 
-## Work in progress
+    zef install --deps-only .
 
-For the time being, it's a work in progress.
+## Resources
+
+
+Programs used in every Chapter are in its own directory.
+
+The `Raku::Recipes` and `RecipeMark` distributions are contained in the [`lib`](lib/), with tests in the [`t`](dir). Once this is downloaded, install it with 
+
+    zef test .
+	
+
