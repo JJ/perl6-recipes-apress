@@ -1,10 +1,12 @@
 use Raku::Recipes::Grammarole::Measured-Ingredients;
 use Grammar::PrettyErrors;
+use Grammar::Common::Text;
 use X::RecipeMark;
 
 unit grammar RecipeMark::Grammar
         does Raku::Recipes::Grammarole::Measured-Ingredients
-        does Grammar::PrettyErrors;
+        does Grammar::PrettyErrors
+        does Grammar::Common::Text;
 
 token TOP {
     "#" \h+ <title>
@@ -70,7 +72,5 @@ token numbering {
 token action-verb { <.words>  }
 
 token sentence { <.words>+ % [[","|";"|":"]? \s+] "."}
-
-token words { <[\w \- \']>+ }
 
 token ws { <!ww> \v }
