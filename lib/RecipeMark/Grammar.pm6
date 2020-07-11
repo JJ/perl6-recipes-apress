@@ -55,7 +55,7 @@ token numbered-instruction {
     <numbering> \h+ <instruction>
 }
 
-token instruction { <action-verb> \h <sentence>}
+token instruction { <action-verb> \h <sub-sentence> <.stop>}
 
 token numbering {
     \d+ )> "." {
@@ -71,6 +71,6 @@ token numbering {
 
 token action-verb { <.words>  }
 
-token sentence { <.words>+ % [[","|";"|":"]? \s+] "."}
+# token sentence { <.words>+ % [[","|";"|":"]? \s+] "."}
 
 token ws { <!ww> \v }
