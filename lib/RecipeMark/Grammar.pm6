@@ -71,6 +71,4 @@ token numbering {
 
 token action-verb { <.words>  }
 
-# token sentence { <.words>+ % [[","|";"|":"]? \s+] "."}
-
 token ws { <!ww> \v }
