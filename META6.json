@@ -17,7 +17,8 @@
     "Redis",
     "Red",
     "Grammar::PrettyErrors",
-    "Grammar::Message"
+    "Grammar::Message",
+    "Grammar::Common"
   ],
   "provides": {
     "Raku::Recipes": "lib/Raku/Recipes.pm6",
