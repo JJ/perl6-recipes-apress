@@ -29,7 +29,7 @@ token title { <words>+ % \h }
 token description { [<.sentence> | <.sentence>+ % \s+] }
 
 token ingredient-list {
-    :my $*INGREDIENTS;
+    :my $*INGREDIENTS = ∅;
     <itemized-ingredient>+ % \v }
 
 token itemized-ingredient {
