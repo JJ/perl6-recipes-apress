@@ -28,17 +28,7 @@ my atomicint $serial = 1;
 
 my @promises = do for ^$threads {
     start react whenever $queue -> $recipe is copy {
-        my @real-ingredients = $recipe.ingredients.grep: /^^\w+/;
-        my @processed = gather for @real-ingredients -> $i is copy {
-            $i = $i ~~ Blob ?? $i.encode !! $i;
-            if $i ~~ m:i/ <|w> $<ingredient> = (@known) <|w>/ {
-                my $ing = ~$<ingredient>;
-                my $subst = "[$ing](/ingredient/" ~ uri_encode($ing.lc) ~ ")";
-                $i ~~ s:i!<|w> $ing <|w> ! $subst !;
-            }
-            take $i;
-        }
-        $recipe.ingredients = @processed;
+        $recipe.ingredients = process-ingredients( $recipe );
         "/tmp/recipe-$serial.html".IO.spurt(generate-page($recipe.title,
                 commonmark-to-html($recipe.gist)).eager.join);
         say "Writing /tmp/recipe-$serial.html";
@@ -70,4 +60,17 @@ sub template-file( $template-file-name ) {
     "resources/$template-file-name".IO.e
             ??"resources/$template-file-name".IO.slurp
             !!%?RESOURCES{$template-file-name}.slurp;
+}
+
+sub process-ingredients( $recipe ) {
+    my @real-ingredients = $recipe.ingredients.grep: /^^\w+/;
+    gather for @real-ingredients -> $i is copy {
+        $i = $i ~~ Blob ?? $i.encode !! $i;
+        if $i ~~ m:i/ <|w> $<ingredient> = (@known) <|w>/ {
+            my $ing = ~$<ingredient>;
+            my $subst = "[$ing](/ingredient/" ~ uri_encode($ing.lc) ~ ")";
+            $i ~~ s:i!<|w> $ing <|w> ! $subst !;
+        }
+        take $i;
+    }
 }
