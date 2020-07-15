@@ -25,10 +25,8 @@ my @known = %ingredients.keys.map: *.lc;
 my &generate-page = template :($title,$content),
         template-file( "templates/recipe-with-title.html" );
 
-my atomicint $serial = 1;
-
 my @promises = do for ^$threads {
-    start react whenever $queue -> $recipe is copy {
+    start react whenever $queue -> ($serial, $recipe) is copy {
         Recipr::Log::Timeline::Processing.log: -> {
             my @real-ingredients = $recipe.ingredients.grep: /^^\w+/;
             my @processed = gather for @real-ingredients -> $i is copy {
@@ -42,14 +40,17 @@ my @promises = do for ^$threads {
                 take $i;
             }
             $recipe.ingredients = @processed;
-            "/tmp/recipe-$serial.html".IO.spurt(generate-page($recipe.title,
-                    commonmark-to-html($recipe.gist)).eager.join);
+            "/tmp/recipe-$serial.html".IO.spurt(
+                    generate-page($recipe.title,
+                                  commonmark-to-html($recipe.gist)
+                                  ).eager.join
+                    );
             say "Writing /tmp/recipe-$serial.html";
-            $serial⚛++;
         }
     }
 }
 
+my $i = 1;
 await start for @recipes -> $r {
 # for @recipes -> $r {
     my $description = "Categories: " ~ $r.categories().join( " - ");
@@ -64,7 +65,7 @@ await start for @recipes -> $r {
         :$description,
         ingredients => $r.ingredients().map: {.product }
             );
-    $queue.send: $recipe;
+    $queue.send: ($i++, $recipe);
 }
 
 $queue.close;
